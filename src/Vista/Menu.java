@@ -72,15 +72,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -145,30 +139,6 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/local.png"))); // NOI18N
-        jMenu4.setText("Locales");
-        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-
-        jMenuItem5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem5.setText("Gestionar");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem5);
-
-        jMenuItem7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem7.setText("Lista");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem7);
-
-        jMenuBar1.add(jMenu4);
-
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Servicios.png"))); // NOI18N
         jMenu5.setText("Servicios");
         jMenu5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -192,30 +162,6 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.add(jMenuItem10);
 
         jMenuBar1.add(jMenu5);
-
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/CItas.png"))); // NOI18N
-        jMenu6.setText("Agenda");
-        jMenu6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-
-        jMenuItem9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem9.setText("Gestionar");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem9);
-
-        jMenuItem11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem11.setText("Lista");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem11);
-
-        jMenuBar1.add(jMenu6);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/prospectos.png"))); // NOI18N
         jMenu7.setText("Prospecto de Clientes");
@@ -323,20 +269,11 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        FrmCliente cliente = new FrmCliente();
-        jDesktopPane.add(cliente);
-        cliente.setVisible(true);
-        centrarVentana(cliente);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-
         FrmLocales frmLocales = new FrmLocales();
         jDesktopPane.add(frmLocales);
         frmLocales.setVisible(true);
         centrarVentana(frmLocales);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
@@ -348,20 +285,11 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
 
-        FrmListaCliente frmListaCliente = new FrmListaCliente();
-        jDesktopPane.add(frmListaCliente);
-        frmListaCliente.setVisible(true);
-        centrarVentana(frmListaCliente);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-
         FrmListaClienteLocal frmListaClienteLocal = new FrmListaClienteLocal();
         jDesktopPane.add(frmListaClienteLocal);
         frmListaClienteLocal.setVisible(true);
         centrarVentana(frmListaClienteLocal);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
@@ -372,15 +300,6 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(frmServicio);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-
-        /*FrmAgenda frmAgenda = new FrmAgenda();
-        jDesktopPane.add(frmAgenda);
-        frmAgenda.setVisible(true);
-        centrarVentana(frmAgenda);*/
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
 
@@ -389,16 +308,6 @@ public class Menu extends javax.swing.JFrame {
         frmListaServicios.setVisible(true);
         centrarVentana(frmListaServicios);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:
-
-        FrmListaAgenda frmListaAgenda = new FrmListaAgenda();
-        jDesktopPane.add(frmListaAgenda);
-        frmListaAgenda.setVisible(true);
-        centrarVentana(frmListaAgenda);
-
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
@@ -500,15 +409,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
@@ -518,10 +424,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

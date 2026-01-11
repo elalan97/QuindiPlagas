@@ -35,11 +35,13 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
     public FrmLocales() {
         initComponents();
-        this.setSize(new Dimension(690, 635));
-        this.setTitle("Gestionar Locales");
+        this.setSize(new Dimension(700, 650));
+        this.setTitle("Gestionar Cliente");
         ctlLocal = new CtlLocal();
         ctlCliente = new CtlCliente();
         llenarComboMunicipio();
+        cargarCombo();
+        buscarUltimoCodigo();
     }
 
     public void llenarComboMunicipio() {
@@ -60,6 +62,14 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
     }
 
+    public void cargarCombo() {
+
+        cbTipo.removeAllItems();
+        cbTipo.addItem("Seleccione");
+        cbTipo.addItem("Comercial");
+        cbTipo.addItem("Residencial");
+    }
+
     public void limpiarCampos() {
 
         txtNombreNegocio.setText("");
@@ -67,6 +77,13 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         txtNit.setText("");
         txtEncargado.setText("");
         llenarComboMunicipio();
+
+        txtApellido.setText("");
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtCelular.setText("");
+        txtCorreo.setText("");
+        cargarCombo();
 
     }
 
@@ -81,6 +98,33 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
             modelo.addRow(new Object[]{dTOLocal.getNombreNegocio(), dTOLocal.getDireccion(),
                 dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
+
+        }
+
+    }
+
+    public void buscarUltimoCodigo() {
+
+        int consecutivo;
+        String letra1, numero, codigoCadena;
+
+        Cliente cliente = ctlCliente.buscarUltimoRegistroCliente();
+
+        String[] separarTodo = cliente.getCodigo().split("C");
+
+        if (separarTodo.length > 1) {
+
+            letra1 = separarTodo[0];
+            numero = separarTodo[1];
+
+            consecutivo = Integer.parseInt(numero) + 1;
+
+            codigoCadena = "C" + consecutivo;
+            txtCodigo.setText(codigoCadena);
+
+        } else {
+
+            System.out.println("nada");
 
         }
 
@@ -102,7 +146,6 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtTipoCliente = new javax.swing.JTextField();
         txtCodigo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
@@ -126,13 +169,17 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        cbTipo = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Gestionar Locales");
+        jLabel1.setText("Gestionar Cliente");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 15, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -158,7 +205,6 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Celular");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 323, -1, -1));
-        getContentPane().add(txtTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 120, 150, -1));
 
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -178,7 +224,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 btnBuscarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 373, -1, -1));
+        getContentPane().add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 370, 130, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Nombre del Negocio");
@@ -237,7 +283,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbLocal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 640, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 640, 135));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Guardar");
@@ -255,7 +301,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 370, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setText("Eliminar");
@@ -264,7 +310,37 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, -1, -1));
+
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 120, 150, -1));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("Guardar Cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 130, -1));
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton5.setText("Editar Cliente");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 130, -1));
+
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton6.setText("Eliminar Cliente");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 420, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -318,7 +394,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 txtCelular.setText(c.getCelular());
                 txtCorreo.setText(c.getCorreo());
                 txtNombre.setText(c.getNombre());
-                txtTipoCliente.setText(c.getTipo());
+                cbTipo.setSelectedItem(c.getTipo());
 
                 listaLocales(codigo);
 
@@ -432,14 +508,14 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         txtEncargado.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 3)));
         ciudadEditar = String.valueOf(tbLocal.getValueAt(seleccionar, 5));
         direccionActual = String.valueOf(tbLocal.getValueAt(seleccionar, 1));
-        
+
         jcDepartamento.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 4)));
         jcCiudad.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 5)));
     }//GEN-LAST:event_tbLocalMouseClicked
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
         // TODO add your handling code here:
-        
+
         char enter = evt.getKeyChar();
 
         if (enter == KeyEvent.VK_ENTER) {
@@ -449,12 +525,104 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        String codigo, tipo, nombre, apellido, celular, correo;
+
+        codigo = txtCodigo.getText();
+        tipo = (String) cbTipo.getSelectedItem();
+        nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+        celular = txtCelular.getText();
+        correo = txtCorreo.getText();
+
+        if (codigo.isEmpty() || tipo.equals("Seleccione") || nombre.isEmpty()
+                || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "por favor llenar los datos");
+
+        } else {
+
+            try {
+
+                Cliente cliente = new Cliente(0, codigo, tipo, nombre, apellido, celular, correo);
+                ctlCliente.guardarCliente(cliente);
+                JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
+                limpiarCampos();
+                buscarUltimoCodigo();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+
+        String codigo, tipo, nombre, apellido, celular, correo;
+
+        codigo = txtCodigo.getText();
+        tipo = (String) cbTipo.getSelectedItem();
+        nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+        celular = txtCelular.getText();
+        correo = txtCorreo.getText();
+
+        if (codigo.isEmpty() || tipo.equals("Seleccione") || nombre.isEmpty()
+                || apellido.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "por favor llenar los datos");
+
+        } else {
+
+            try {
+
+                Cliente cliente = new Cliente(0, codigo, tipo, nombre, apellido, celular, correo);
+                ctlCliente.editarCliente(cliente);
+                JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+                limpiarCampos();
+                buscarUltimoCodigo();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        String codigo;
+
+        codigo = txtCodigo.getText();
+
+        if (codigo.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "por favor buscar al cliente y despues lo elimina");
+
+        } else {
+
+            ctlCliente.eliminarCliente(codigo);
+            JOptionPane.showMessageDialog(null, "se ha eliminado correctamente");
+            limpiarCampos();
+
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCliente;
+    private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -481,6 +649,5 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreNegocio;
-    private javax.swing.JTextField txtTipoCliente;
     // End of variables declaration//GEN-END:variables
 }

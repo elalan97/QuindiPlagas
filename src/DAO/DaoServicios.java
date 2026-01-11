@@ -224,11 +224,13 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.vendedor, s.observacion "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
+                + "a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "order by s.fecha asc;";
         //System.out.println(consulta);
@@ -259,6 +261,10 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setValor(resultadoDB.getString("s.valor"));
                 dtoServicio.setVendedor(resultadoDB.getString("s.vendedor"));
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
+                dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
+                dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
+
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {
@@ -273,11 +279,13 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.vendedor, s.observacion "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
+                + "a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where " + columna + " LIKE '" + dato + "%' order by s.fecha asc;";
         //System.out.println(consulta);
@@ -308,6 +316,9 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setValor(resultadoDB.getString("s.valor"));
                 dtoServicio.setVendedor(resultadoDB.getString("s.vendedor"));
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
+                dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
+                dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {
@@ -322,11 +333,13 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.vendedor, s.observacion "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
+                + "a.fecha"
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where s.vendedor = '" + vendedor + "' "
                 + "and s.fecha = '" + dato + "';";
@@ -358,6 +371,9 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setValor(resultadoDB.getString("s.valor"));
                 dtoServicio.setVendedor(resultadoDB.getString("s.vendedor"));
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
+                dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
+                dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {

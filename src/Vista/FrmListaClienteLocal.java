@@ -27,7 +27,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
 
     public FrmListaClienteLocal() {
         initComponents();
-        this.setSize(new Dimension(1250, 650));
+        this.setSize(new Dimension(1360, 650));
         this.setTitle("Lista Locales");
         ctlLocal = new CtlLocal();
         ctlServicio = new CtlServicio();
@@ -45,6 +45,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
 
             modelo.addRow(new Object[]{dtoClienteLocal.getCodigo(), dtoClienteLocal.getTipo(),
                 dtoClienteLocal.getNombre(), dtoClienteLocal.getApellido(),
+                dtoClienteLocal.getCelular(), dtoClienteLocal.getCorreo(),
                 dtoClienteLocal.getNombreNegocio(), dtoClienteLocal.getDireccion(),
                 dtoClienteLocal.getNit(), dtoClienteLocal.getEncargado(), dtoClienteLocal.getMunicipio(),
                 dtoClienteLocal.getCiudad()});
@@ -108,13 +109,13 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
 
         tbLocal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Tipo", "Nombre", "Apellido", "Nombre del negocio", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
+                "Codigo", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Nombre del negocio", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,7 +125,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbLocal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 123, 1200, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 123, 1320, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -182,7 +183,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
         seleccionar = tbLocal.rowAtPoint(evt.getPoint());
         
         codigo = String.valueOf(tbLocal.getValueAt(seleccionar, 0));
-        direccion = String.valueOf(tbLocal.getValueAt(seleccionar, 5));
+        direccion = String.valueOf(tbLocal.getValueAt(seleccionar, 7));
         
         ctlServicio.almacenarDatos(codigo, direccion);
         

@@ -32,7 +32,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
     public FrmListaServicios() {
         initComponents();
-        this.setSize(new Dimension(1350, 650));
+        this.setSize(new Dimension(1500, 650));
         this.setTitle("Lista Servicios");
         ctlServicio = new CtlServicio();
         ctlUsuario = new CtlUsuario();
@@ -54,6 +54,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
     public void inHabilitar() {
 
         jcFecha.setEnabled(false);
+        jcFechaAgendamiento.setEnabled(false);
     }
 
     public void listar() {
@@ -71,7 +72,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                 dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
                 dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
                 dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                dtoServicio.getVendedor(), dtoServicio.getObservacion()});
+                dtoServicio.getVendedor(), dtoServicio.getObservacion(),
+                dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
 
         }
     }
@@ -95,6 +97,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         btnFiltrar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcFecha = new com.toedter.calendar.JDateChooser();
+        jcFechaAgendamiento = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -108,7 +112,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jLabel2.setText("Lista Servicios");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
-        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion" }));
+        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion", "Fecha Agenda" }));
         cbColumna.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbColumnaItemStateChanged(evt);
@@ -129,13 +133,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         tbServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nro Factura", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Tipo de Servicio", "Refuerzo", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Valor", "Vendedor", "Observacion"
+                "Nro Servicio", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Tipo de Servicio", "Refuerzo", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Valor", "Vendedor", "Observacion", "Fecha Agenda", "Hora", "Confirmacion"
             }
         ));
         tbServicios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,7 +149,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbServicios);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1300, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1460, 480));
 
         btnFiltrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnFiltrar.setText("Filtrar");
@@ -154,14 +158,21 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                 btnFiltrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, -1, -1));
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 70, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Fecha");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 73, -1, -1));
 
-        jcFecha.setDateFormatString("yyyy-MM-dd");
+        jcFecha.setDateFormatString("yyyy-MM");
         getContentPane().add(jcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 150, -1));
+
+        jcFechaAgendamiento.setDateFormatString("yyyy-MM-dd");
+        getContentPane().add(jcFechaAgendamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(975, 70, 150, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Fecha Agendamiento");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 73, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -199,7 +210,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
                             dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
                             dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion()});
+                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
+                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
 
                     }
 
@@ -219,7 +231,29 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
                             dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
                             dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion()});
+                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
+                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
+
+                    }
+
+                } else if (columna.equals("Fecha Agenda")) {
+
+                    String fecha = ((JTextField) jcFechaAgendamiento.getDateEditor().getUiComponent()).getText();
+                    ArrayList<DtoServicio> lista = ctlServicio.listarServiciosPorFiltro(columna, fecha);
+
+                    DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
+                    modelo.setRowCount(0);
+
+                    for (DtoServicio dtoServicio : lista) {
+
+                        modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
+                            dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                            dtoServicio.getDireccion(), dtoServicio.getTipoServicio(),
+                            dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
+                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
+                            dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
+                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
+                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
 
                     }
 
@@ -238,7 +272,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
                             dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
                             dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion()});
+                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
+                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
 
                     }
 
@@ -293,16 +328,25 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
                 jcFecha.setEnabled(true);
                 txtDato.setEnabled(false);
+                jcFechaAgendamiento.setEnabled(false);
 
             } else if (datoSeleccionado.equals("Fecha")) {
 
                 jcFecha.setEnabled(true);
                 txtDato.setEnabled(false);
+                jcFechaAgendamiento.setEnabled(false);
+
+            } else if (datoSeleccionado.equals("Fecha Agenda")) {
+
+                jcFechaAgendamiento.setEnabled(true);
+                txtDato.setEnabled(false);
+                jcFecha.setEnabled(false);
 
             } else {
 
                 txtDato.setEnabled(true);
                 jcFecha.setEnabled(false);
+                jcFechaAgendamiento.setEnabled(false);
 
             }
         }
@@ -316,8 +360,10 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jcFecha;
+    private com.toedter.calendar.JDateChooser jcFechaAgendamiento;
     private javax.swing.JTable tbServicios;
     private javax.swing.JTextField txtDato;
     // End of variables declaration//GEN-END:variables

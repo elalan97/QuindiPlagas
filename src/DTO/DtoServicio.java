@@ -9,15 +9,15 @@ package DTO;
  * @author ALAN
  */
 public class DtoServicio {
-
+//a = agenda
     String codigo, tipo, nombre, apellido, celular, correo, nombreNegocio, direccion,
             nit, encargado, ciudad, municipio, nroFactura, tipoServicio, refuerzo, tecnico, fecha,
-            periocidad, proxFecha, pago, valor, vendedor, observacion;
+            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, aconfirmacion, afecha;
 
     public DtoServicio() {
     }
 
-    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion) {
+    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String aconfirmacion, String afecha) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -41,6 +41,9 @@ public class DtoServicio {
         this.valor = valor;
         this.vendedor = vendedor;
         this.observacion = observacion;
+        this.ahora = ahora;
+        this.aconfirmacion = aconfirmacion;
+        this.afecha = afecha;
     }
 
     public String getCodigo() {
@@ -226,5 +229,30 @@ public class DtoServicio {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
+
+    public String getAhora() {
+        return ahora;
+    }
+
+    public void setAhora(String ahora) {
+        this.ahora = ahora;
+    }
+
+    public String getAconfirmacion() {
+        return aconfirmacion;
+    }
+
+    public void setAconfirmacion(String aconfirmacion) {
+        this.aconfirmacion = aconfirmacion;
+    }
+
+    public String getAfecha() {
+        return afecha;
+    }
+
+    public void setAfecha(String afecha) {
+        this.afecha = afecha;
+    }
+
 
 }

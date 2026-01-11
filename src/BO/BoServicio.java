@@ -289,6 +289,10 @@ public class BoServicio {
 
                 return daoServicios.listarServiciosPorFiltro("c.nombre", dato);
 
+            case "Fecha Agenda":
+
+                return daoServicios.listarServiciosPorFiltro("a.fecha", dato);
+
         }
 
         return null;

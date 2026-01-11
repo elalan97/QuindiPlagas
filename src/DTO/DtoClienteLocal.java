@@ -10,17 +10,19 @@ package DTO;
  */
 public class DtoClienteLocal {
 
-    String codigo, tipo, nombre, apellido, nombreNegocio, direccion,
+    String codigo, tipo, nombre, apellido, celular, correo, nombreNegocio, direccion,
             nit, encargado, municipio, ciudad;
 
     public DtoClienteLocal() {
     }
 
-    public DtoClienteLocal(String codigo, String tipo, String nombre, String apellido, String nombreNegocio, String direccion, String nit, String encargado, String municipio, String ciudad) {
+    public DtoClienteLocal(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String municipio, String ciudad) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.celular = celular;
+        this.correo = correo;
         this.nombreNegocio = nombreNegocio;
         this.direccion = direccion;
         this.nit = nit;
@@ -59,6 +61,22 @@ public class DtoClienteLocal {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getNombreNegocio() {
@@ -108,5 +126,4 @@ public class DtoClienteLocal {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
-
 }

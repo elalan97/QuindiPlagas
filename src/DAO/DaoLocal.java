@@ -201,6 +201,7 @@ public class DaoLocal extends Conexion {
     public ArrayList<DtoClienteLocal> listaClienteLocal() {
         ArrayList<DtoClienteLocal> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, "
+                + "c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, mu.nombre, ci.nombre "
                 + "from Locales l "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -215,6 +216,8 @@ public class DaoLocal extends Conexion {
                 dtoClienteLocal.setTipo(resultadoDB.getString("c.tipo"));
                 dtoClienteLocal.setNombre(resultadoDB.getString("c.nombre"));
                 dtoClienteLocal.setApellido(resultadoDB.getString("c.apellido"));
+                dtoClienteLocal.setCelular(resultadoDB.getString("c.celular"));
+                dtoClienteLocal.setCorreo(resultadoDB.getString("c.correo"));
                 dtoClienteLocal.setNombreNegocio(resultadoDB.getString("l.nombreNegocio"));
                 dtoClienteLocal.setDireccion(resultadoDB.getString("l.direccion"));
                 dtoClienteLocal.setNit(resultadoDB.getString("l.nit"));
