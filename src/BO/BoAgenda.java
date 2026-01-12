@@ -76,7 +76,6 @@ public class BoAgenda {
         }
 
     }*/
-
     public void edtarAgenda(Agenda agenda, String factura) {
 
         Servicio servicio = daoServicios.buscarServicio(factura);
@@ -106,7 +105,7 @@ public class BoAgenda {
         }
 
     }
-    
+
     public void edtarAgendaRefuerzo(Agenda agenda, String factura, String fecha) {
 
         Servicio servicio = daoServicios.buscarServicio(factura);
@@ -153,8 +152,8 @@ public class BoAgenda {
         }
 
     }
-    
-public DtoAgenda buscarServicioAgenda(String nroFactura) {
+
+    public DtoAgenda buscarServicioAgenda(String nroFactura) {
 
         DtoAgenda dtoAgenda = daoAgenda.buscarServicioAgenda(nroFactura);
 
@@ -163,21 +162,31 @@ public DtoAgenda buscarServicioAgenda(String nroFactura) {
             throw new NoExisteAgenda();
 
         } else {
-            return dtoAgenda;
+
+            if (dtoAgenda.getsRefuerzo().equals("Si")) {
+
+                DtoAgenda dtoAgenda1 = daoAgenda.buscarServicioAgendaRefuerzo(nroFactura);
+
+                return dtoAgenda1;
+
+            } else {
+                return dtoAgenda;
+            }
+
         }
 
     }
-    
+
     public ArrayList<DtoAgenda> listarAgenda() {
         return daoAgenda.listarAgenda();
     }
-    
+
     public ArrayList<DtoAgenda> listarAgendaPorFiltro(String fecha) {
         return daoAgenda.listarAgendaPorFiltro(fecha);
     }
-    
+
     public void reporteAgenda(String fecha) throws JRException {
         daoReportesJasper.reporteAgenda(fecha);
-    } 
+    }
 
 }

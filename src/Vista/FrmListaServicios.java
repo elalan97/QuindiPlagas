@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.CtlAgenda;
 import Controlador.CtlServicio;
 import Controlador.CtlUsuario;
 import DTO.DtoServicio;
@@ -27,6 +28,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
      */
     CtlServicio ctlServicio;
     CtlUsuario ctlUsuario;
+    CtlAgenda ctlAgenda;
     public String usuarioIniciado;
     String vendedor;
 
@@ -36,6 +38,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         this.setTitle("Lista Servicios");
         ctlServicio = new CtlServicio();
         ctlUsuario = new CtlUsuario();
+        ctlAgenda = new CtlAgenda();
         Inicio usuarioInicio = new Inicio();
         usuarioIniciado = usuarioInicio.usuarioIniciado;
         buscarVendedor();
@@ -99,6 +102,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jcFecha = new com.toedter.calendar.JDateChooser();
         jcFechaAgendamiento = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -173,6 +177,15 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Fecha Agendamiento");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 73, -1, -1));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setText("Exportar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -352,10 +365,36 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbColumnaItemStateChanged
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        String fecha = ((JTextField) jcFechaAgendamiento.getDateEditor().getUiComponent()).getText();
+
+        if (fecha.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "porfavor llene los datos");
+
+        } else {
+
+            try {
+
+                ctlAgenda.reporteAgenda(fecha);
+                JOptionPane.showMessageDialog(null, "Agenda generada");
+
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(null, e.getMessage());
+
+            }
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JComboBox<String> cbColumna;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

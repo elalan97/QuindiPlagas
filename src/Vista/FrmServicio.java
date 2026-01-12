@@ -749,19 +749,11 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     fecha = format.parse(fecha1);
                     jcFechaRealizo.setDate(fecha);
 
-                    fechaRefuerzo1 = dtoAgenda.getaFecha();                  
-
-                    DateTimeFormatter format1 = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("yyyy-MM-d")).toFormatter();
-                    LocalDate fecha_I = LocalDate.parse(fechaRefuerzo1, format1);
-                    LocalDate fecha_Vieja = fecha_I.plusDays(20);
-                    fecha_I = fecha_I.plusDays(21);
-                    
-                    
-                    Instant instante = fecha_I.atStartOfDay(ZoneId.of("UTC")).toInstant();
-                    
-                    fechaRefuerzo = Date.from(instante);
+                    fecha2 = dtoAgenda.getaFecha();
+                    fechaRefuerzo = format.parse(fecha2);
                     jcRefuerzo.setDate(fechaRefuerzo);
-                    fechaRefuerzoVieja = fecha_Vieja + "";
+                    fechaRefuerzoVieja = fecha2;
+                    
 
                     cbPeriocidad.setSelectedItem(dtoAgenda.getsPeriocidad());
                     cbTipoServicio.setSelectedItem(dtoAgenda.getsTipoServicio());
