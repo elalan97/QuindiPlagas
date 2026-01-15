@@ -425,7 +425,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
         getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 470, 200, -1));
         getContentPane().add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 520, 200, -1));
 
-        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa" }));
+        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado" }));
         getContentPane().add(cbTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 200, -1));
 
         jcFechaRealizo.setDateFormatString("yyyy-MM-dd");

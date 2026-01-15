@@ -34,7 +34,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
     public FrmListaServicios() {
         initComponents();
-        this.setSize(new Dimension(1500, 650));
+        this.setSize(new Dimension(1520, 650));
         this.setTitle("Lista Servicios");
         ctlServicio = new CtlServicio();
         ctlUsuario = new CtlUsuario();
@@ -69,14 +69,21 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         for (DtoServicio dtoServicio : lista) {
 
-            modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
+            /*           modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
                 dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
                 dtoServicio.getDireccion(), dtoServicio.getTipoServicio(),
                 dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
                 dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
                 dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
                 dtoServicio.getVendedor(), dtoServicio.getObservacion(),
-                dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
+                dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});*/
+            modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion()});
 
         }
     }
@@ -137,13 +144,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         tbServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nro Servicio", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Tipo de Servicio", "Refuerzo", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Valor", "Vendedor", "Observacion", "Fecha Agenda", "Hora", "Confirmacion"
+                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion"
             }
         ));
         tbServicios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,7 +160,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbServicios);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1460, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1470, 480));
 
         btnFiltrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnFiltrar.setText("Filtrar");
@@ -217,14 +224,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
                     for (DtoServicio dtoServicio : lista) {
 
-                        modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
-                            dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
-                            dtoServicio.getDireccion(), dtoServicio.getTipoServicio(),
-                            dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
-                            dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
-                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                            dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                            dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                            dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion()});
 
                     }
 
@@ -238,14 +244,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
                     for (DtoServicio dtoServicio : lista) {
 
-                        modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
-                            dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
-                            dtoServicio.getDireccion(), dtoServicio.getTipoServicio(),
-                            dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
-                            dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
-                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                            dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                            dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                            dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion()});
 
                     }
 
@@ -259,14 +264,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
                     for (DtoServicio dtoServicio : lista) {
 
-                        modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
-                            dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
-                            dtoServicio.getDireccion(), dtoServicio.getTipoServicio(),
-                            dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
-                            dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
-                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                            dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                            dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                            dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion()});
 
                     }
 
@@ -279,14 +283,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
                     for (DtoServicio dtoServicio : lista) {
 
-                        modelo.addRow(new Object[]{dtoServicio.getNroFactura(),
-                            dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
-                            dtoServicio.getDireccion(), dtoServicio.getTipoServicio(),
-                            dtoServicio.getRefuerzo(), dtoServicio.getTecnico(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(),
-                            dtoServicio.getProxFecha(), dtoServicio.getPago(), dtoServicio.getValor(),
-                            dtoServicio.getVendedor(), dtoServicio.getObservacion(),
-                            dtoServicio.getAfecha(), dtoServicio.getAhora(), dtoServicio.getAconfirmacion()});
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                            dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                            dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                            dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion()});
 
                     }
 

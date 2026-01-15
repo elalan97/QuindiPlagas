@@ -165,6 +165,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
 
                 modelo.addRow(new Object[]{dtoClienteLocal.getCodigo(), dtoClienteLocal.getTipo(),
                     dtoClienteLocal.getNombre(), dtoClienteLocal.getApellido(),
+                    dtoClienteLocal.getCelular(), dtoClienteLocal.getCorreo(),
                     dtoClienteLocal.getNombreNegocio(), dtoClienteLocal.getDireccion(),
                     dtoClienteLocal.getNit(), dtoClienteLocal.getEncargado(), dtoClienteLocal.getMunicipio(),
                     dtoClienteLocal.getCiudad()});

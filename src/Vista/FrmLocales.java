@@ -70,13 +70,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         cbTipo.addItem("Residencial");
     }
 
-    public void limpiarCampos() {
-
-        txtNombreNegocio.setText("");
-        txtDireccion.setText("");
-        txtNit.setText("");
-        txtEncargado.setText("");
-        llenarComboMunicipio();
+    public void limpiarCamposCliente() {
 
         txtApellido.setText("");
         txtCodigo.setText("");
@@ -84,6 +78,16 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         txtCelular.setText("");
         txtCorreo.setText("");
         cargarCombo();
+
+    }
+
+    public void limpiarCampos() {
+
+        txtNombreNegocio.setText("");
+        txtDireccion.setText("");
+        txtNit.setText("");
+        txtEncargado.setText("");
+        llenarComboMunicipio();
 
     }
 
@@ -550,7 +554,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 ctlCliente.guardarCliente(cliente);
                 JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                 limpiarCampos();
-                buscarUltimoCodigo();
+                //buscarUltimoCodigo();
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -584,7 +588,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 ctlCliente.editarCliente(cliente);
                 JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                 limpiarCampos();
-                buscarUltimoCodigo();
+                //buscarUltimoCodigo();
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());

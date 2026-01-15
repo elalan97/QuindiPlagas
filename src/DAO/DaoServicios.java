@@ -252,8 +252,8 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setMunicipio(resultadoDB.getString("mu.nombre"));
                 dtoServicio.setNroFactura(resultadoDB.getString("s.nroFactura"));
                 dtoServicio.setTipoServicio(resultadoDB.getString("s.tipoServicio"));
-                dtoServicio.setRefuerzo(resultadoDB.getString("s.tecnico"));
-                dtoServicio.setTecnico(resultadoDB.getString("s.refuerzo"));
+                dtoServicio.setRefuerzo(resultadoDB.getString("s.refuerzo"));
+                dtoServicio.setTecnico(resultadoDB.getString("s.tecnico"));
                 dtoServicio.setFecha(resultadoDB.getString("s.fecha"));
                 dtoServicio.setPeriocidad(resultadoDB.getString("s.periocidad"));
                 dtoServicio.setProxFecha(resultadoDB.getString("s.proxFecha"));
