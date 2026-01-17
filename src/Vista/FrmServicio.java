@@ -858,7 +858,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
-                    JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
+                    JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCampos();
                     generarCodigo();
 
@@ -875,7 +875,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
-                    JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
+                    JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCampos();
                     generarCodigo();
                 }

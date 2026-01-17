@@ -5,12 +5,11 @@
 package Vista;
 
 import Controlador.CtlServicio;
-import DTO.DtoInformeServicio;
 import DTO.DtoServicio;
 import Modelo.Miles;
+import Modelo.Servicio;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,11 +24,39 @@ public class DetalleServicio extends javax.swing.JFrame {
 
     public DetalleServicio() {
         initComponents();
-        this.setSize(new Dimension(1035, 635));
+        this.setSize(new Dimension(1035, 740));
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         ctlServicio = new CtlServicio();
         cargarCampos();
+        inhabilitarCampos();
+    }
+
+    public void inhabilitarCampos() {
+
+        txtApellidoCliente.setEditable(false);
+        txtCelularCliente.setEditable(false);
+        txtCiudadNegocio.setEditable(false);
+        txtCodigoCliente.setEditable(false);
+        txtCorreoCliente.setEditable(false);
+        txtDepartamentoNegocio.setEditable(false);
+        txtDireccionNegocio.setEditable(false);
+        txtEncagadoNegocio.setEditable(false);
+        txtNitNegocio.setEditable(false);
+        txtNombreCliente.setEditable(false);
+        txtNombreNegocio.setEditable(false);
+        txtTipoCliente.setEditable(false);
+        txtServicio.setEditable(false);
+        txtTipoServicio.setEditable(false);
+        txtRefuerzo.setEditable(false);
+        txtFechaRealizo.setEditable(false);
+        txtPeriocidad.setEditable(false);
+        txtProximaFecha.setEditable(false);
+        txtPago.setEditable(false);
+        txtObservacion.setEditable(false);
+        txtHora.setEditable(false);
+        txtValor.setEditable(false);
+
     }
 
     public void cargarCampos() {
@@ -41,7 +68,6 @@ public class DetalleServicio extends javax.swing.JFrame {
         codigo = ctlServicio.facturaAlmacenada;
 
         DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(codigo);
-        ArrayList<DtoServicio> servicios = ctlServicio.listarServicios(dtoServicio.getCodigo());
 
         txtApellidoCliente.setText(dtoServicio.getApellido());
         txtCelularCliente.setText(dtoServicio.getCelular());
@@ -55,20 +81,21 @@ public class DetalleServicio extends javax.swing.JFrame {
         txtNombreCliente.setText(dtoServicio.getNombre());
         txtNombreNegocio.setText(dtoServicio.getNombreNegocio());
         txtTipoCliente.setText(dtoServicio.getTipo());
+        txtServicio.setText(dtoServicio.getNroFactura());
+        txtTipoServicio.setText(dtoServicio.getTipoServicio());
+        txtRefuerzo.setText(dtoServicio.getRefuerzo());
+        txtFechaRealizo.setText(dtoServicio.getFecha());
+        txtPeriocidad.setText(dtoServicio.getPeriocidad());
+        txtProximaFecha.setText(dtoServicio.getProxFecha());
+        txtPago.setText(dtoServicio.getPago());
+        txtObservacion.setText(dtoServicio.getObservacion());
+        txtHora.setText(dtoServicio.getAhora());
+        txtConfirmacion.setText(dtoServicio.getAconfirmacion());
+        txtTecnico.setText(dtoServicio.getTecnico());
 
-        DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
-        modelo.setRowCount(0);
+        valor = Integer.parseInt(dtoServicio.getValor());
 
-        for (DtoServicio servicio : servicios) {
-
-            valor = Integer.parseInt(servicio.getValor());
-
-            modelo.addRow(new Object[]{servicio.getNroFactura(), servicio.getTipoServicio(),
-                servicio.getRefuerzo(), servicio.getTecnico(), servicio.getFecha(), 
-                servicio.getPeriocidad(), servicio.getProxFecha(), servicio.getPago(), 
-                miles.separarMiles(valor), servicio.getObservacion()});
-
-        }
+        txtValor.setText(miles.separarMiles(valor));
 
     }
 
@@ -110,8 +137,32 @@ public class DetalleServicio extends javax.swing.JFrame {
         txtEncagadoNegocio = new javax.swing.JTextField();
         txtCiudadNegocio = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbServicios = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        txtServicio = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtTipoServicio = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtRefuerzo = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtFechaRealizo = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtPeriocidad = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        txtProximaFecha = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txtPago = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        txtValor = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        txtObservacion = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        txtHora = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        txtConfirmacion = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        txtTecnico = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -287,40 +338,217 @@ public class DetalleServicio extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        tbServicios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Nro Factura", "Tipo de servicio", "Refuerzo", "Tecnico", "Fecha de Realizo", "Periocidad", "Proxima fecha", "pago", "Valor", "observacion"
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel14.setText("Informacion del Servicio");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Nro Servicio");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Tipo De Servicio");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel18.setText("Refuerzo");
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setText("Fecha de Realizo");
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel20.setText("Periocidad");
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel21.setText("Proxima Fecha");
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel22.setText("Pago");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel23.setText("Valor");
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel24.setText("Observacion");
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel25.setText("Hora");
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel26.setText("Confirmacion");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("Editar tecnico");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tbServicios);
+        });
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel28.setText("Tecnico");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(372, 372, 372)
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtTipoServicio, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtServicio, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtRefuerzo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addComponent(txtFechaRealizo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPeriocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25))
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtProximaFecha)
+                                        .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                    .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtObservacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel28))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtConfirmacion)
+                            .addComponent(txtTecnico, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+                .addGap(31, 31, 31))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(txtServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtProximaFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26)
+                    .addComponent(txtConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtTipoServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22)
+                    .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtRefuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtFechaRealizo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
+                    .addComponent(txtObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtPeriocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 1000, 170));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 1000, 290));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        int valor;
+        String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
+                observacion, valorCadena, direccion, ciudad, hora, confirmacion;
+
+        valorCadena = txtValor.getText();
+        nroFactura = txtServicio.getText();
+        tipoServicio = txtServicio.getText();
+        refuerzo = txtRefuerzo.getText();
+        tecnico = txtTecnico.getText();
+        fecha = txtFechaRealizo.getText();
+        periocidad = txtPeriocidad.getText();
+        proxFecha = txtProximaFecha.getText();
+        pago = txtPago.getText();
+        observacion = txtObservacion.getText();
+        direccion = txtDireccionNegocio.getText();
+        ciudad = txtCiudadNegocio.getText();
+        hora = txtHora.getText();
+        confirmacion = txtConfirmacion.getText();
+
+        if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
+                || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
+                || proxFecha.isEmpty() || pago.isEmpty() || observacion.isEmpty() || direccion.isEmpty()
+                || ciudad.isEmpty() || refuerzo.equals("Seleccione")) {
+
+            JOptionPane.showMessageDialog(null, "porfavor llenar los "
+                    + "datos del servicio que quiere registrar");
+
+        } else {
+
+            try {
+
+                if (refuerzo.equals("Si")) {
+
+                    String num = valorCadena.replace(".", "");
+                    valor = Integer.parseInt(num);
+
+                    Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, "", observacion);
+
+                    ctlServicio.editarServicioTecnico(servicio, direccion, ciudad, nroFactura);
+                    JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+
+                } else {
+
+                    String num = valorCadena.replace(".", "");
+                    valor = Integer.parseInt(num);
+
+                    Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, "", observacion);
+
+                    ctlServicio.editarServicioTecnico(servicio, direccion, ciudad, nroFactura);
+                    JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,13 +586,27 @@ public class DetalleServicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -375,19 +617,29 @@ public class DetalleServicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbServicios;
     private javax.swing.JTextField txtApellidoCliente;
     private javax.swing.JTextField txtCelularCliente;
     private javax.swing.JTextField txtCiudadNegocio;
     private javax.swing.JTextField txtCodigoCliente;
+    private javax.swing.JTextField txtConfirmacion;
     private javax.swing.JTextField txtCorreoCliente;
     private javax.swing.JTextField txtDepartamentoNegocio;
     private javax.swing.JTextField txtDireccionNegocio;
     private javax.swing.JTextField txtEncagadoNegocio;
+    private javax.swing.JTextField txtFechaRealizo;
+    private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtNitNegocio;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreNegocio;
+    private javax.swing.JTextField txtObservacion;
+    private javax.swing.JTextField txtPago;
+    private javax.swing.JTextField txtPeriocidad;
+    private javax.swing.JTextField txtProximaFecha;
+    private javax.swing.JTextField txtRefuerzo;
+    private javax.swing.JTextField txtServicio;
+    private javax.swing.JTextField txtTecnico;
     private javax.swing.JTextField txtTipoCliente;
+    private javax.swing.JTextField txtTipoServicio;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

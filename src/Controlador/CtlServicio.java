@@ -37,6 +37,10 @@ public class CtlServicio {
     public void editarServicio(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
         boServicio.editarServicio(servicio, direccion, ciudad, codigoViejo);
     }
+    
+    public void editarServicioTecnico(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
+        boServicio.editarServicioTecnico(servicio, direccion, ciudad, codigoViejo);
+    }
 
     public void eliminarServicio(String nroFactura) {
         boServicio.eliminarServicio(nroFactura);

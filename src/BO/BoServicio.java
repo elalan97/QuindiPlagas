@@ -110,6 +110,37 @@ public class BoServicio {
         }
 
     }
+    
+    public void editarServicioTecnico(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
+
+        Ciudad c = daoLocal.buscarCiudad(ciudad);
+        Local local = daoLocal.buscarLocal(direccion, c.getIdCiudad());
+
+        if (local.getDireccion() == null) {
+
+            throw new NoExisteLocal();
+
+        } else {
+
+            Servicio s = daoServicios.buscarServicio(codigoViejo);
+
+            if (s.getNroFactura() != null) {
+
+                servicio.setVendedor(s.getVendedor());
+                servicio.setLocalFk(local.getIdLocales());
+                servicio.setIdServicio(s.getIdServicio());
+
+                daoServicios.editarServicio(servicio);
+
+            } else {
+
+                throw new NoExisteServicio();
+
+            }
+
+        }
+
+    }
 
     public void eliminarServicio(String nroFactura) {
 

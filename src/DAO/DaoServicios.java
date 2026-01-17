@@ -37,7 +37,7 @@ public class DaoServicios extends Conexion {
 
     public Servicio buscarServicio(String nroFactura) {
         String consulta = "select idServicio, nroFactura, tipoServicio, tecnico, "
-                + "fecha, periocidad, proxFecha, pago, valor, observacion, localFk "
+                + "fecha, periocidad, proxFecha, pago, valor, vendedor, observacion, localFk "
                 + "from Servicios "
                 + "where nroFactura ='" + nroFactura + "';";
         Servicio servicio = new Servicio();
@@ -56,6 +56,7 @@ public class DaoServicios extends Conexion {
                 servicio.setValor(resultadoDB.getInt("valor"));
                 servicio.setObservacion(resultadoDB.getString("observacion"));
                 servicio.setLocalFk(resultadoDB.getInt("localFk"));
+                servicio.setVendedor(resultadoDB.getString("vendedor"));
 
             }
         } catch (SQLException ex) {
@@ -92,11 +93,13 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, "
                 + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, "
                 + "l.encargado, ci.nombre, mu.nombre, s.nroFactura, s.refuerzo, s.tipoServicio, "
-                + "s.tecnico, s.fecha, s.periocidad, s.proxFecha, s.pago, s.valor, s.observacion "
+                + "s.tecnico, s.fecha, s.periocidad, s.proxFecha, s.pago, s.valor, s.observacion, "
+                + "a.hora, a.confirmacion, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where s.nroFactura = '" + nroFactura + "';";
         DtoServicio dtoServicio = new DtoServicio();
@@ -126,6 +129,9 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setPago(resultadoDB.getString("s.pago"));
                 dtoServicio.setValor(resultadoDB.getString("s.valor"));
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
+                dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
+                dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
 
             }
         } catch (SQLException ex) {
