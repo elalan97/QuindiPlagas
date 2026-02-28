@@ -189,8 +189,8 @@ public class BoServicio {
         }
     }
 
-    public ArrayList<DtoServicio> listarServicios(String codigo) {
-        return daoServicios.listarServicios(codigo);
+    public ArrayList<DtoServicio> listarServicios(String codigo, String direccion) {
+        return daoServicios.listarServicios(codigo, direccion);
     }
 
     public ArrayList<DtoServicio> listarServicios1() {

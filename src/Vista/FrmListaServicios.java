@@ -327,8 +327,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         ctlServicio.almacenarDatos1(factura);
 
-        DetalleServicio informe = new DetalleServicio();
-        informe.setVisible(true);
+        FrmMenuCliente gestionar = new FrmMenuCliente();
+        gestionar.setVisible(true);
     }//GEN-LAST:event_tbServiciosMouseClicked
 
     private void cbColumnaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbColumnaItemStateChanged

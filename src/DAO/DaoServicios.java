@@ -177,7 +177,7 @@ public class DaoServicios extends Conexion {
 
     }
 
-    public ArrayList<DtoServicio> listarServicios(String codigo) {
+    public ArrayList<DtoServicio> listarServicios(String codigo, String direccion) {
         ArrayList<DtoServicio> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
@@ -188,7 +188,9 @@ public class DaoServicios extends Conexion {
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
-                + "where c.codigo = '" + codigo + "' order by s.fecha asc;";
+                + "where c.codigo = '" + codigo + "' "
+                + "and l.direccion = '" + direccion + "' "
+                + "order by s.fecha asc;";
         //System.out.println(consulta);
         super.ejecutarRetorno(consulta);
         try {

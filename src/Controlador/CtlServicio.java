@@ -71,8 +71,8 @@ public class CtlServicio {
 
     }
 
-    public ArrayList<DtoServicio> listarServicios(String codigo) {
-        return boServicio.listarServicios(codigo);
+    public ArrayList<DtoServicio> listarServicios(String codigo, String direccion) {
+        return boServicio.listarServicios(codigo, direccion);
     }
 
     public ArrayList<DtoServicio> listarServicios1() {

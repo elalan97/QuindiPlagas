@@ -29,10 +29,10 @@ public class DetalleCliente extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         ctlServicio = new CtlServicio(); 
-       cargarCampos();
+        //cargarCampos();
     }
 
-    public void cargarCampos() {
+ /*   public void cargarCampos() {
 
         int valor = 0;
         String codigo, direccion;
@@ -71,7 +71,7 @@ public class DetalleCliente extends javax.swing.JFrame {
 
         }
 
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
