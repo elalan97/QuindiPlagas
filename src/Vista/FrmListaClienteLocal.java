@@ -188,7 +188,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
         
         ctlServicio.almacenarDatos(codigo, direccion);
         
-        DetalleCliente informe = new DetalleCliente();
+        FrmMenuCliente informe = new FrmMenuCliente();
         informe.setVisible(true);
         
     }//GEN-LAST:event_tbLocalMouseClicked

@@ -623,7 +623,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     Agenda agendaRefuerzo = new Agenda(0, 0,
                             hora, confirmacion, observacion, fechaRefuerzo);
 
-                    ctlServicio.guardarServicio(servicio, direccion, ciudad);
+                    //ctlServicio.guardarServicio(servicio, direccion, ciudad);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
                     ctlAgenda.guardarAgenda(agendaRefuerzo, nroFactura);
                     JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
@@ -641,7 +641,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
 
-                    ctlServicio.guardarServicio(servicio, direccion, ciudad);
+                    //ctlServicio.guardarServicio(servicio, direccion, ciudad);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
                     JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                     limpiarCampos();
@@ -856,7 +856,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fechaRefuerzo);
 
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
+                    //ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCampos();
@@ -873,7 +873,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
 
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
+                    //ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCampos();

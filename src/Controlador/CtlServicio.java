@@ -25,17 +25,17 @@ public class CtlServicio {
 
     }
 
-    public void guardarServicio(Servicio servicio, String direccion, String ciudad) {
+    public void guardarServicio(Servicio servicio, String direccion, String ciudad, String codigo) {
 
-        boServicio.guardarServicio(servicio, direccion, ciudad);
+        boServicio.guardarServicio(servicio, direccion, ciudad, codigo);
     }
 
     public Servicio buscarServicio(String nroFactura) {
         return boServicio.buscarServicio(nroFactura);
     }
 
-    public void editarServicio(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
-        boServicio.editarServicio(servicio, direccion, ciudad, codigoViejo);
+    public void editarServicio(Servicio servicio, String direccion, String ciudad, String codigoViejo, String codigo) {
+        boServicio.editarServicio(servicio, direccion, ciudad, codigoViejo, codigo);
     }
     
     public void editarServicioTecnico(Servicio servicio, String direccion, String ciudad, String codigoViejo) {

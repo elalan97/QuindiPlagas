@@ -77,8 +77,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         Image retImage = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("IMG/logo.jpg"));
         return retImage;
     }
-    
-    
+
     public void limpiarCamposServicio() {
 
         txtFactura.setText("");
@@ -229,29 +228,56 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     public void cargarCampos() {
 
         int valor = 0;
-        String codigo;
+        String codigo, direccion;
         Miles miles = new Miles();
 
         codigo = ctlServicio.facturaAlmacenada;
 
         DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(codigo);
 
-        //llenar los campos de texto y combobox
-        txtNombre.setText(dtoServicio.getNombre());
-        txtApellido.setText(dtoServicio.getApellido());
-        txtCelular.setText(dtoServicio.getCelular());
-        txtCodigo.setText(dtoServicio.getCodigo());
-        txtCorreo.setText(dtoServicio.getCorreo());
-        cbTipo.setSelectedItem(dtoServicio.getTipo());
+        if (dtoServicio.getNroFactura() == null) {
 
-        listaLocales(txtCodigo.getText());
+            codigo = ctlServicio.codigoAlmacenado;
 
-        txtCodigoCliente.setText(dtoServicio.getCodigo());
-        txtTipoCliente.setText(dtoServicio.getTipo());
-        txtNombreCliente.setText(dtoServicio.getNombre());
-        txtApellidoCliente.setText(dtoServicio.getApellido());
-        txtCorreoCliente.setText(dtoServicio.getCorreo());
-        txtCelularCliente.setText(dtoServicio.getCelular());
+            Cliente cliente = ctlCliente.buscarCliente(codigo);
+
+            //llenar los campos de texto y combobox
+            txtNombre.setText(cliente.getNombre());
+            txtApellido.setText(cliente.getApellido());
+            txtCelular.setText(cliente.getCelular());
+            txtCodigo.setText(cliente.getCodigo());
+            txtCorreo.setText(cliente.getCorreo());
+            cbTipo.setSelectedItem(cliente.getTipo());
+
+            listaLocales(txtCodigo.getText());
+
+            txtCodigoCliente.setText(cliente.getCodigo());
+            txtTipoCliente.setText(cliente.getTipo());
+            txtNombreCliente.setText(cliente.getNombre());
+            txtApellidoCliente.setText(cliente.getApellido());
+            txtCorreoCliente.setText(cliente.getCorreo());
+            txtCelularCliente.setText(cliente.getCelular());
+
+        } else {
+
+            //llenar los campos de texto y combobox
+            txtNombre.setText(dtoServicio.getNombre());
+            txtApellido.setText(dtoServicio.getApellido());
+            txtCelular.setText(dtoServicio.getCelular());
+            txtCodigo.setText(dtoServicio.getCodigo());
+            txtCorreo.setText(dtoServicio.getCorreo());
+            cbTipo.setSelectedItem(dtoServicio.getTipo());
+
+            listaLocales(txtCodigo.getText());
+
+            txtCodigoCliente.setText(dtoServicio.getCodigo());
+            txtTipoCliente.setText(dtoServicio.getTipo());
+            txtNombreCliente.setText(dtoServicio.getNombre());
+            txtApellidoCliente.setText(dtoServicio.getApellido());
+            txtCorreoCliente.setText(dtoServicio.getCorreo());
+            txtCelularCliente.setText(dtoServicio.getCelular());
+
+        }
 
     }
 
@@ -973,7 +999,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 1340, 580));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 90, 1340, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1302,7 +1328,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         int valor;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones;
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones, codigo;
 
         valorCadena = txtValor1.getText();
         nroFactura = txtFactura.getText();
@@ -1319,6 +1345,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         hora = txtHoraAgenda.getText();
         confirmacion = txtConfirmacionAgenda.getText();
         observaciones = txtObservacionesAgenda.getText();
+        codigo = txtCodigoCliente.getText();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
@@ -1350,7 +1377,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     Agenda agendaRefuerzo = new Agenda(0, 0,
                             hora, confirmacion, observacion, fechaRefuerzo);
 
-                    ctlServicio.guardarServicio(servicio, direccion, ciudad);
+                    ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
                     ctlAgenda.guardarAgenda(agendaRefuerzo, nroFactura);
                     JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
@@ -1368,7 +1395,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
 
-                    ctlServicio.guardarServicio(servicio, direccion, ciudad);
+                    ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
                     JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                     limpiarCamposServicio();
@@ -1498,7 +1525,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         int valor;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones;
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones, codigo;
 
         valorCadena = txtValor1.getText();
         nroFactura = txtFactura.getText();
@@ -1516,6 +1543,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         confirmacion = txtConfirmacionAgenda.getText();
         observaciones = txtObservacionesAgenda.getText();
         fechaRefuerzo = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
+        codigo = txtCodigoCliente.getText();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
@@ -1540,7 +1568,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fechaRefuerzo);
 
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
+                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();
@@ -1557,7 +1585,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
 
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
+                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();

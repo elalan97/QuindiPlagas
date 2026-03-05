@@ -268,4 +268,36 @@ public class DaoLocal extends Conexion {
         }
         return lista;
     }
+
+    public DTOLocal buscarlocalConCLiente(String codigo, String direccion, int idCiudad) {
+        String consulta = "select l.idLocales, l.nombreNegocio, l.direccion, l.nit, "
+                + "l.encargado, mu.nombre, ci.nombre "
+                + "from Locales l "
+                + "join Cliente c on l.clienteFk = c.idCliente "
+                + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
+                + "where l.direccion = '" + direccion + "' "
+                + "and l.ciudadFk = '" + idCiudad + "' "
+                + "and c.codigo = '" + codigo + "';";
+        DTOLocal dtoLocal = new DTOLocal();
+        super.ejecutarRetorno(consulta);
+        try {
+            if (resultadoDB.next()) {
+
+                dtoLocal.setIdLocal(resultadoDB.getInt("l.idLocales"));
+                dtoLocal.setNombreNegocio(resultadoDB.getString("l.nombreNegocio"));
+                dtoLocal.setDireccion(resultadoDB.getString("l.direccion"));
+                dtoLocal.setNit(resultadoDB.getString("l.nit"));
+                dtoLocal.setEncargado(resultadoDB.getString("l.encargado"));
+                dtoLocal.setMunicipio(resultadoDB.getString("mu.nombre"));
+                dtoLocal.setCiudad(resultadoDB.getString("ci.nombre"));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Fallo al consultar");
+            return null;
+        }
+        return dtoLocal;
+
+    }
 }

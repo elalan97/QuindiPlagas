@@ -6,6 +6,7 @@ package BO;
 
 import DAO.DaoLocal;
 import DAO.DaoServicios;
+import DTO.DTOLocal;
 import DTO.DtoInformeServicio;
 import DTO.DtoServicio;
 import Exepciones.NoExisteCliente;
@@ -36,10 +37,10 @@ public class BoServicio {
 
     }
 
-    public void guardarServicio(Servicio servicio, String direccion, String ciudad) {
+    public void guardarServicio(Servicio servicio, String direccion, String ciudad, String codigo) {
 
         Ciudad c = daoLocal.buscarCiudad(ciudad);
-        Local local = daoLocal.buscarLocal(direccion, c.getIdCiudad());
+        DTOLocal local = daoLocal.buscarlocalConCLiente(codigo, direccion, c.getIdCiudad());
 
         if (local.getDireccion() == null) {
 
@@ -51,7 +52,7 @@ public class BoServicio {
 
             if (s.getNroFactura() == null) {
 
-                servicio.setLocalFk(local.getIdLocales());
+                servicio.setLocalFk(local.getIdLocal());
 
                 daoServicios.guardarServicio(servicio);
 
@@ -81,10 +82,10 @@ public class BoServicio {
 
     }
 
-    public void editarServicio(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
+    public void editarServicio(Servicio servicio, String direccion, String ciudad, String codigoViejo, String codigo) {
 
         Ciudad c = daoLocal.buscarCiudad(ciudad);
-        Local local = daoLocal.buscarLocal(direccion, c.getIdCiudad());
+        DTOLocal local = daoLocal.buscarlocalConCLiente(codigoViejo, direccion, c.getIdCiudad());
 
         if (local.getDireccion() == null) {
 
@@ -96,7 +97,7 @@ public class BoServicio {
 
             if (s.getNroFactura() != null) {
 
-                servicio.setLocalFk(local.getIdLocales());
+                servicio.setLocalFk(local.getIdLocal());
                 servicio.setIdServicio(s.getIdServicio());
 
                 daoServicios.editarServicio(servicio);
@@ -162,15 +163,7 @@ public class BoServicio {
 
         DtoServicio dtoServicio = daoServicios.buscarDtoServicio(nroFactura);
 
-        if (dtoServicio.getNroFactura() == null) {
-
-            throw new NoExisteServicio();
-
-        } else {
-
-            return dtoServicio;
-
-        }
+        return dtoServicio;
 
     }
 
