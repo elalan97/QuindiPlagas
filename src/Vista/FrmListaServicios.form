@@ -57,7 +57,7 @@
           <StringArray count="14">
             <StringItem index="0" value="Seleccione"/>
             <StringItem index="1" value="Nombre del Cliente"/>
-            <StringItem index="2" value="Nombre del Negocio"/>
+            <StringItem index="2" value="Razon Social"/>
             <StringItem index="3" value="Direccion"/>
             <StringItem index="4" value="Nro Factura"/>
             <StringItem index="5" value="TipoServicio"/>
@@ -128,7 +128,7 @@
                 <Column editable="true" title="Hora" type="java.lang.Object"/>
                 <Column editable="true" title="Tipo de Servicio" type="java.lang.Object"/>
                 <Column editable="true" title="Nombre del Cliente" type="java.lang.Object"/>
-                <Column editable="true" title="Nombre del Negocio" type="java.lang.Object"/>
+                <Column editable="true" title="Razon Social" type="java.lang.Object"/>
                 <Column editable="true" title="Direccion" type="java.lang.Object"/>
                 <Column editable="true" title="Telefono" type="java.lang.Object"/>
                 <Column editable="true" title="Valor" type="java.lang.Object"/>

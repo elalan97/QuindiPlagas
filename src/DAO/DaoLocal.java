@@ -139,6 +139,11 @@ public class DaoLocal extends Conexion {
         return super.ejecutar(consulta);
     }
 
+    public boolean eliminarLocal(int id) {
+        String consulta = "DELETE FROM Locales where clienteFk = " + id + ";";
+        return super.ejecutar(consulta);
+    }
+
     public ArrayList<DTOLocal> listarLocalPorCliente(String codigo) {
         ArrayList<DTOLocal> lista = new ArrayList<>();
         String consulta = "select l.nombreNegocio, l.direccion, l.nit, "

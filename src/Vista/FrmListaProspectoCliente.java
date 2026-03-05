@@ -95,7 +95,7 @@ public class FrmListaProspectoCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 73, -1, -1));
         getContentPane().add(txtDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 150, -1));
 
-        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Nombre del Negocio", "Direccion", "Nit" }));
+        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Correo", "Razon Social", "Direccion", "Nit", "Telefono" }));
         cbColumna.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbColumnaItemStateChanged(evt);
@@ -115,7 +115,7 @@ public class FrmListaProspectoCliente extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Nombre del Negocio", "Direccion", "Nit", "Encargado", "Vendedor", "Servicio Ofrecido", "Valor", "Departamento", "Ciudad"
+                "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Telefono", "Correo", "Razon Social", "Direccion", "Nit", "Encargado", "Vendedor", "Servicio Ofrecido", "Valor", "Departamento", "Ciudad"
             }
         ));
         jScrollPane1.setViewportView(tbProspectoCliente);

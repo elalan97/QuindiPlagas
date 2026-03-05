@@ -123,7 +123,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jLabel2.setText("Lista Servicios");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
-        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion", "Fecha Agenda" }));
+        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre del Cliente", "Razon Social", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion", "Fecha Agenda" }));
         cbColumna.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbColumnaItemStateChanged(evt);
@@ -150,7 +150,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Nombre del Negocio", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion"
+                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Razon Social", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion"
             }
         ));
         tbServicios.addMouseListener(new java.awt.event.MouseAdapter() {

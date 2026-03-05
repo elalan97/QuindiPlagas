@@ -111,33 +111,22 @@ public class BoServicio {
         }
 
     }
-    
-    public void editarServicioTecnico(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
 
-        Ciudad c = daoLocal.buscarCiudad(ciudad);
-        Local local = daoLocal.buscarLocal(direccion, c.getIdCiudad());
+    public void editarServicioHistorial(Servicio servicio, String codigoViejo) {
 
-        if (local.getDireccion() == null) {
+        Servicio s = daoServicios.buscarServicio(codigoViejo);
 
-            throw new NoExisteLocal();
+        if (s.getNroFactura() != null) {
+
+            servicio.setVendedor(s.getVendedor());
+            servicio.setLocalFk(s.getLocalFk());
+            servicio.setIdServicio(s.getIdServicio());
+
+            daoServicios.editarServicio(servicio);
 
         } else {
 
-            Servicio s = daoServicios.buscarServicio(codigoViejo);
-
-            if (s.getNroFactura() != null) {
-
-                servicio.setVendedor(s.getVendedor());
-                servicio.setLocalFk(local.getIdLocales());
-                servicio.setIdServicio(s.getIdServicio());
-
-                daoServicios.editarServicio(servicio);
-
-            } else {
-
-                throw new NoExisteServicio();
-
-            }
+            throw new NoExisteServicio();
 
         }
 
@@ -269,7 +258,7 @@ public class BoServicio {
     public ArrayList<DtoServicio> listarServiciosPorFiltro(String columna, String dato) {
 
         switch (columna) {
-            case "Nombre del Negocio":
+            case "Razon Social":
 
                 return daoServicios.listarServiciosPorFiltro("l.nombreNegocio", dato);
 

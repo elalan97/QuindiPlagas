@@ -12,12 +12,12 @@ public class DtoServicio {
 //a = agenda
     String codigo, tipo, nombre, apellido, celular, correo, nombreNegocio, direccion,
             nit, encargado, ciudad, municipio, nroFactura, tipoServicio, refuerzo, tecnico, fecha,
-            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, aconfirmacion, afecha;
+            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, aconfirmacion, afecha, aobservacion;
 
     public DtoServicio() {
     }
 
-    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String aconfirmacion, String afecha) {
+    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String aconfirmacion, String afecha, String aobservacion) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -44,6 +44,7 @@ public class DtoServicio {
         this.ahora = ahora;
         this.aconfirmacion = aconfirmacion;
         this.afecha = afecha;
+        this.aobservacion = aobservacion;
     }
 
     public String getCodigo() {
@@ -254,5 +255,12 @@ public class DtoServicio {
         this.afecha = afecha;
     }
 
+    public String getAobservacion() {
+        return aobservacion;
+    }
+
+    public void setAobservacion(String aobservacion) {
+        this.aobservacion = aobservacion;
+    }
 
 }

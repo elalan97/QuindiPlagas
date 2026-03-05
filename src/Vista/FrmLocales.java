@@ -170,9 +170,6 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jcCiudad = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbLocal = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         cbTipo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -231,7 +228,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         getContentPane().add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 370, 130, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Nombre del Negocio");
+        jLabel8.setText("Razon Social");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 73, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -277,7 +274,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -288,33 +285,6 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tbLocal);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 640, 135));
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 370, -1, -1));
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 370, -1, -1));
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, -1, -1));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 120, 150, -1));
@@ -411,94 +381,6 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
-        String nombreNegocio, direccion, nit, encargado, codigo, ciudad;
-
-        nombreNegocio = txtNombreNegocio.getText();
-        direccion = txtDireccion.getText();
-        nit = txtNit.getText();
-        encargado = txtEncargado.getText();
-        codigo = txtCodigo.getText();
-        ciudad = (String) jcCiudad.getSelectedItem();
-
-        if (nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
-                || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")) {
-
-            JOptionPane.showMessageDialog(null, "porfavor llenar los "
-                    + "datos del local que quiere registrar");
-        } else {
-
-            try {
-
-                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado);
-                ctlLocal.guardarLocal(local, ciudad, codigo);
-                JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
-                listaLocales(codigo);
-                limpiarCampos();
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-
-        String nombreNegocio, direccion, nit, encargado, codigo, ciudad;
-
-        nombreNegocio = txtNombreNegocio.getText();
-        direccion = txtDireccion.getText();
-        nit = txtNit.getText();
-        encargado = txtEncargado.getText();
-        codigo = txtCodigo.getText();
-        ciudad = (String) jcCiudad.getSelectedItem();
-
-        if (nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
-                || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")) {
-
-            JOptionPane.showMessageDialog(null, "porfavor llenar los "
-                    + "datos del local que quiere registrar");
-        } else {
-
-            try {
-
-                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado);
-                ctlLocal.editarLocal(local, ciudad, codigo, ciudadEditar, direccionActual);
-                JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-                listaLocales(codigo);
-                limpiarCampos();
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-
-        String direccion, ciudad, codigo;
-
-        direccion = txtDireccion.getText();
-        codigo = txtCodigo.getText();
-
-        if (direccion.isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "porfavor llenar los "
-                    + "datos del local que quiere registrar");
-        } else {
-
-            ctlLocal.eliminarLocal(direccion, ciudadEditar);
-            JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-            listaLocales(codigo);
-            limpiarCampos();
-
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void tbLocalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLocalMouseClicked
         // TODO add your handling code here:
 
@@ -532,7 +414,8 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        String codigo, tipo, nombre, apellido, celular, correo;
+        String codigo, tipo, nombre, apellido, celular, correo, 
+                nombreNegocio, direccion, nit, encargado, ciudad;
 
         codigo = txtCodigo.getText();
         tipo = (String) cbTipo.getSelectedItem();
@@ -540,9 +423,16 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         apellido = txtApellido.getText();
         celular = txtCelular.getText();
         correo = txtCorreo.getText();
+        nombreNegocio = txtNombreNegocio.getText();
+        direccion = txtDireccion.getText();
+        nit = txtNit.getText();
+        encargado = txtEncargado.getText();
+        ciudad = (String) jcCiudad.getSelectedItem();
 
         if (codigo.isEmpty() || tipo.equals("Seleccione") || nombre.isEmpty()
-                || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()) {
+                || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()
+                || nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
+                || encargado.isEmpty() || ciudad.equals("Seleccione")) {
 
             JOptionPane.showMessageDialog(null, "por favor llenar los datos");
 
@@ -552,9 +442,13 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
                 Cliente cliente = new Cliente(0, codigo, tipo, nombre, apellido, celular, correo);
                 ctlCliente.guardarCliente(cliente);
+                
+                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado);
+                ctlLocal.guardarLocal(local, ciudad, codigo);
                 JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
+                listaLocales(codigo);
                 limpiarCampos();
-                //buscarUltimoCodigo();
+                buscarUltimoCodigo();
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -622,9 +516,6 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

@@ -94,7 +94,7 @@ public class DaoServicios extends Conexion {
                 + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, "
                 + "l.encargado, ci.nombre, mu.nombre, s.nroFactura, s.refuerzo, s.tipoServicio, "
                 + "s.tecnico, s.fecha, s.periocidad, s.proxFecha, s.pago, s.valor, s.observacion, "
-                + "a.hora, a.confirmacion, a.fecha "
+                + "a.hora, a.confirmacion, a.fecha, a.observacion "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -132,6 +132,7 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
                 dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
+                dtoServicio.setAobservacion(resultadoDB.getString("a.observacion"));
 
             }
         } catch (SQLException ex) {

@@ -60,7 +60,7 @@
             <StringItem index="2" value="Tipo"/>
             <StringItem index="3" value="Nombre"/>
             <StringItem index="4" value="Apellido"/>
-            <StringItem index="5" value="Nombre de Negocio"/>
+            <StringItem index="5" value="Razon Social"/>
             <StringItem index="6" value="Direccion"/>
             <StringItem index="7" value="Nit"/>
             <StringItem index="8" value="Encargado"/>
@@ -139,7 +139,7 @@
                 <Column editable="true" title="Apellido" type="java.lang.Object"/>
                 <Column editable="true" title="Celular" type="java.lang.Object"/>
                 <Column editable="true" title="Correo" type="java.lang.Object"/>
-                <Column editable="true" title="Nombre del negocio" type="java.lang.Object"/>
+                <Column editable="true" title="Razon Social" type="java.lang.Object"/>
                 <Column editable="true" title="Direccion" type="java.lang.Object"/>
                 <Column editable="true" title="Nit" type="java.lang.Object"/>
                 <Column editable="true" title="Encargado" type="java.lang.Object"/>

@@ -38,8 +38,8 @@ public class CtlServicio {
         boServicio.editarServicio(servicio, direccion, ciudad, codigoViejo, codigo);
     }
     
-    public void editarServicioTecnico(Servicio servicio, String direccion, String ciudad, String codigoViejo) {
-        boServicio.editarServicioTecnico(servicio, direccion, ciudad, codigoViejo);
+    public void editarServicioHistorial(Servicio servicio, String codigoViejo) {
+        boServicio.editarServicioHistorial(servicio, codigoViejo);
     }
 
     public void eliminarServicio(String nroFactura) {

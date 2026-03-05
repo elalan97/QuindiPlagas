@@ -130,7 +130,7 @@ public class BoLocal {
 
                 return daoLocal.listaClienteLocalporFiltro("c.apellido", dato);
 
-            case "Nombre de Negocio":
+            case "Razon Social":
 
                 return daoLocal.listaClienteLocalporFiltro("l.nombreNegocio", dato);
 

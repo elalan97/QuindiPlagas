@@ -77,7 +77,6 @@ public class BoProspectoCliente {
 
         } else {
 
-            
             prospectoCliente.setIdProspecto(pc.getIdProspecto());
             prospectoCliente.setCiudadFk(c.getIdCiudad());
             daoProspectoCliente.editarProspectoCliente(prospectoCliente);
@@ -105,7 +104,7 @@ public class BoProspectoCliente {
     public ArrayList<DtoProspectoCliente> listarProspectoCliente() {
         return daoProspectoCliente.listarProspectoCliente();
     }
-    
+
     public ArrayList<DtoProspectoCliente> listaProspectoCliente(String fecha) {
         return daoProspectoCliente.listaProspectoCliente(fecha);
     }
@@ -133,7 +132,7 @@ public class BoProspectoCliente {
 
                 return daoProspectoCliente.listarPorFiltro("pc.apellido", dato);
 
-            case "Nombre del Negocio":
+            case "Razon Social":
 
                 return daoProspectoCliente.listarPorFiltro("pc.nombreNegocio", dato);
 
@@ -148,6 +147,10 @@ public class BoProspectoCliente {
             case "Correo":
 
                 return daoProspectoCliente.listarPorFiltro("pc.correo", dato);
+
+            case "Telefono":
+
+                return daoProspectoCliente.listarPorFiltro("pc.celular", dato);
 
         }
 

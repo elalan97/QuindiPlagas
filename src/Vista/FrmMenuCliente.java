@@ -25,12 +25,15 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -52,7 +55,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     CtlUsuario ctlUsuario;
 
     public String usuarioIniciado;
-    String vendedor, codigoEditar, fechaRefuerzoVieja;
+    String vendedor, codigoEditar, fechaRefuerzoVieja, codigoViejo;
 
     public FrmMenuCliente() {
         initComponents();
@@ -374,7 +377,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         tbLocal1 = new javax.swing.JTable();
         txtValor = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        txtRefuerzo = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -384,18 +386,22 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtTecnico = new javax.swing.JTextField();
         txtObservacion = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        txtFechaRealizo = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         txtProximaFecha = new javax.swing.JTextField();
-        txtPeriocidad = new javax.swing.JTextField();
-        txtTipoServicio = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        txtPago = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         txtServicio = new javax.swing.JTextField();
+        jButton11 = new javax.swing.JButton();
+        cbTipoServicio1 = new javax.swing.JComboBox<>();
+        cbRefuerzo1 = new javax.swing.JComboBox<>();
+        jcFechaRealizo1 = new com.toedter.calendar.JDateChooser();
+        cbPeriocidad1 = new javax.swing.JComboBox<>();
+        cbPago1 = new javax.swing.JComboBox<>();
+        jLabel52 = new javax.swing.JLabel();
+        txtObsevacionAgenda = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -561,7 +567,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel3.add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 70, 150, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setText("Nombre del Negocio");
+        jLabel15.setText("Razon Social");
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 23, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -616,7 +622,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -687,7 +693,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
             }
         ));
         tbLocal1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -703,7 +709,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setText("Refuerzo");
         jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 423, -1, -1));
-        jPanel4.add(txtRefuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 180, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Observacion");
@@ -716,7 +721,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("Proxima Fecha");
         jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 323, -1, -1));
-        jPanel4.add(txtConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 180, -1));
+        jPanel4.add(txtConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, 180, -1));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Nro Servicio");
@@ -725,26 +730,22 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setText("Tipo De Servicio");
         jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 373, -1, -1));
-        jPanel4.add(txtTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 180, -1));
+        jPanel4.add(txtTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 370, 180, -1));
         jPanel4.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, 180, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setText("Valor");
         jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 423, -1, -1));
-        jPanel4.add(txtFechaRealizo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 180, -1));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setText("Tecnico");
         jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 373, -1, -1));
         jPanel4.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 520, 180, -1));
         jPanel4.add(txtProximaFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 180, -1));
-        jPanel4.add(txtPeriocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 520, 180, -1));
-        jPanel4.add(txtTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 180, -1));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Hora");
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 523, -1, -1));
-        jPanel4.add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 180, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel30.setText("Fecha de Realizo");
@@ -758,6 +759,40 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel32.setText("Periocidad");
         jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 523, -1, -1));
         jPanel4.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 180, -1));
+
+        jButton11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton11.setText("Editar");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 470, -1, -1));
+
+        cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado" }));
+        jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 180, -1));
+
+        cbRefuerzo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
+        jPanel4.add(cbRefuerzo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 180, -1));
+
+        jcFechaRealizo1.setDateFormatString("yyyy-MM-dd");
+        jPanel4.add(jcFechaRealizo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 180, -1));
+
+        cbPeriocidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Unica vez" }));
+        cbPeriocidad1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPeriocidad1ItemStateChanged(evt);
+            }
+        });
+        jPanel4.add(cbPeriocidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 520, 180, -1));
+
+        cbPago1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Pago", "Pendiente" }));
+        jPanel4.add(cbPago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 180, -1));
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel52.setText("Observacion(Agenda)");
+        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 420, -1, -1));
+        jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 420, 180, -1));
 
         jTabbedPane1.addTab("", jPanel4);
 
@@ -825,7 +860,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel5.add(txtCiudadNegocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 270, 150, -1));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel37.setText("Nombre Del Negocio");
+        jLabel37.setText("Razon Social");
         jPanel5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 23, -1, -1));
         jPanel5.add(txtNombreNegocio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 20, 150, -1));
 
@@ -837,7 +872,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre del Negocio", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
             }
         ));
         tbLocal2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1225,8 +1260,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int seleccionar, valor;
-        String nroServicio;
+        String nroServicio, fecha1, fecha;
         Miles miles = new Miles();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         seleccionar = tbServicios.rowAtPoint(evt.getPoint());
 
@@ -1234,17 +1270,26 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(nroServicio);
 
+        codigoViejo = dtoServicio.getNroFactura();
+        
         txtServicio.setText(dtoServicio.getNroFactura());
-        txtTipoServicio.setText(dtoServicio.getTipoServicio());
-        txtRefuerzo.setText(dtoServicio.getRefuerzo());
-        txtFechaRealizo.setText(dtoServicio.getFecha());
-        txtPeriocidad.setText(dtoServicio.getPeriocidad());
+        cbTipoServicio1.setSelectedItem(dtoServicio.getTipoServicio());
+        cbRefuerzo1.setSelectedItem(dtoServicio.getRefuerzo());
+        cbPeriocidad1.setSelectedItem(dtoServicio.getPeriocidad());
         txtProximaFecha.setText(dtoServicio.getProxFecha());
-        txtPago.setText(dtoServicio.getPago());
+        cbPago1.setSelectedItem(dtoServicio.getPago());
         txtObservacion.setText(dtoServicio.getObservacion());
         txtHora.setText(dtoServicio.getAhora());
         txtConfirmacion.setText(dtoServicio.getAconfirmacion());
         txtTecnico.setText(dtoServicio.getTecnico());
+        txtObsevacionAgenda.setText(dtoServicio.getAobservacion());
+
+        fecha1 = dtoServicio.getFecha();
+        try {
+            jcFechaRealizo1.setDate(format.parse(fecha1));
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
 
         valor = Integer.parseInt(dtoServicio.getValor());
 
@@ -1641,6 +1686,84 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+
+        int valor;
+        String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
+                observacion, valorCadena, hora, confirmacion, observaciones;
+
+        valorCadena = txtValor.getText();
+        nroFactura = txtServicio.getText();
+        tipoServicio = (String) cbTipoServicio1.getSelectedItem();
+        refuerzo = (String) cbRefuerzo1.getSelectedItem();
+        tecnico = txtTecnico.getText();
+        fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+        periocidad = (String) cbPeriocidad1.getSelectedItem();
+        proxFecha = txtProximaFecha.getText();
+        pago = (String) cbPago1.getSelectedItem();
+        observacion = txtObservacion.getText();
+        hora = txtHora.getText();
+        confirmacion = txtConfirmacion.getText();
+        observaciones = txtObsevacionAgenda.getText();
+
+        if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
+                || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
+                || periocidad.equals("Selecione") || proxFecha.isEmpty() 
+                || pago.equals("Seleccione") || observacion.isEmpty() 
+                || confirmacion.isEmpty() || observaciones.isEmpty()) {
+
+            System.out.println(valorCadena + ", " + nroFactura + ", " + tipoServicio + ", " + refuerzo
+                    + ", " + tecnico + ", " + fecha + ", " + periocidad + ", " + proxFecha + ", "
+                    + ", " + pago + ", " + observacion + ", " + confirmacion + ", " + observaciones);
+            JOptionPane.showMessageDialog(null, "por favor llene los campos");
+
+        } else {
+
+            String num = valorCadena.replace(".", "");
+            valor = Integer.parseInt(num);
+
+            Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
+                    refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+
+            Agenda agenda = new Agenda(0, 0,
+                    hora, confirmacion, observaciones, fecha);
+
+            ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+            ctlAgenda.edtarAgenda(agenda, nroFactura);
+            JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+            limpiarCamposServicio();
+            generarCodigo();
+
+        }
+
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void cbPeriocidad1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPeriocidad1ItemStateChanged
+        // TODO add your handling code here:
+
+        String datoSeleccionado, fecha, proxFecha;
+
+        fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            datoSeleccionado = (String) evt.getItem();
+
+            if (datoSeleccionado.equals("Seleccione") || fecha.isEmpty()) {
+
+            } else {
+
+                proxFecha = ctlServicio.proximaFecha(datoSeleccionado, fecha);
+
+                txtProximaFecha.setText(proxFecha);
+
+            }
+        }
+
+    }//GEN-LAST:event_cbPeriocidad1ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1679,12 +1802,17 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JComboBox<String> cbPago;
+    private javax.swing.JComboBox<String> cbPago1;
     private javax.swing.JComboBox<String> cbPeriocidad;
+    private javax.swing.JComboBox<String> cbPeriocidad1;
     private javax.swing.JComboBox<String> cbRefuerzo;
+    private javax.swing.JComboBox<String> cbRefuerzo1;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JComboBox<String> cbTipoServicio;
+    private javax.swing.JComboBox<String> cbTipoServicio1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1740,6 +1868,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1757,6 +1886,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcCiudad;
     private javax.swing.JComboBox<String> jcDepartamento;
     private com.toedter.calendar.JDateChooser jcFechaRealizo;
+    private com.toedter.calendar.JDateChooser jcFechaRealizo1;
     private com.toedter.calendar.JDateChooser jcRefuerzo;
     private javax.swing.JTable tbLocal;
     private javax.swing.JTable tbLocal1;
@@ -1778,7 +1908,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtEncargado;
     private javax.swing.JTextField txtEncargadoNegocio;
     private javax.swing.JTextField txtFactura;
-    private javax.swing.JTextField txtFechaRealizo;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtHoraAgenda;
     private javax.swing.JTextField txtMunicipioNegocio;
@@ -1791,16 +1920,13 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtObservacion;
     private javax.swing.JTextField txtObservacion1;
     private javax.swing.JTextField txtObservacionesAgenda;
-    private javax.swing.JTextField txtPago;
-    private javax.swing.JTextField txtPeriocidad;
+    private javax.swing.JTextField txtObsevacionAgenda;
     private javax.swing.JTextField txtProximaFecha;
     private javax.swing.JTextField txtProximaFecha1;
-    private javax.swing.JTextField txtRefuerzo;
     private javax.swing.JTextField txtServicio;
     private javax.swing.JTextField txtTecnico;
     private javax.swing.JTextField txtTecnico1;
     private javax.swing.JTextField txtTipoCliente;
-    private javax.swing.JTextField txtTipoServicio;
     private javax.swing.JTextField txtValor;
     private javax.swing.JTextField txtValor1;
     // End of variables declaration//GEN-END:variables

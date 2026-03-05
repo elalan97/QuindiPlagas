@@ -5,6 +5,7 @@
 package BO;
 
 import DAO.DaoCliente;
+import DAO.DaoLocal;
 import Exepciones.NoExisteCliente;
 import Exepciones.YaExisteCliente;
 import Modelo.Cliente;
@@ -17,10 +18,12 @@ import java.util.ArrayList;
 public class BoCliente {
 
     DaoCliente daoCliente;
+    DaoLocal daoLocal;
 
     public BoCliente() {
 
         daoCliente = new DaoCliente();
+        daoLocal = new DaoLocal();
 
     }
 
@@ -72,7 +75,8 @@ public class BoCliente {
             throw new NoExisteCliente();
 
         } else {
-
+            
+            daoLocal.eliminarLocal(c.getIdCliente());
             daoCliente.eliminarCliente(c.getIdCliente());
 
         }

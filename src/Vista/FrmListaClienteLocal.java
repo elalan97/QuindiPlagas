@@ -84,7 +84,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
         jLabel2.setText("Columna");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 73, -1, -1));
 
-        jcColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Codigo", "Tipo", "Nombre", "Apellido", "Nombre de Negocio", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad" }));
+        jcColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Codigo", "Tipo", "Nombre", "Apellido", "Razon Social", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad" }));
         getContentPane().add(jcColumna, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 150, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -115,7 +115,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Nombre del negocio", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
+                "Codigo", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Razon Social", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
