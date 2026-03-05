@@ -22,14 +22,16 @@ public class DaoServicios extends Conexion {
 
     public boolean guardarServicio(Servicio servicio) {
         String consulta = "INSERT INTO Servicios (nroFactura, tipoServicio, refuerzo, tecnico, "
-                + "fecha, periocidad, proxFecha, pago, valor, vendedor,observacion, localFk)"
+                + "fecha, periocidad, proxFecha, pago, valor, vendedor,observacion, localFk, calidadLlamada, "
+                + "tiempoServicio)"
                 + "VALUES ('" + servicio.getNroFactura() + "', '" + servicio.getTipoServicio() + "', '"
                 + servicio.getRefuerzo() + "', '" + servicio.getTecnico() + "', '"
                 + servicio.getFecha() + "', '" + servicio.getPeriocidad() + "', '"
                 + servicio.getProxFecha() + "', '" + servicio.getPago() + "', '"
                 + servicio.getValor() + "', '" + servicio.getVendedor() + "', '"
-                + servicio.getObservacion() + "', '"
-                + servicio.getLocalFk() + "' "
+                + servicio.getObservacion() + "', '" + servicio.getLocalFk() + "', '"
+                + servicio.getCalidadLlamada() + "', '"
+                + servicio.getTiempoServicio() + "' "
                 + ");";
         return super.ejecutar(consulta);
 
@@ -78,7 +80,9 @@ public class DaoServicios extends Conexion {
                 + " valor='" + servicio.getValor() + "', "
                 + " vendedor='" + servicio.getVendedor() + "', "
                 + " observacion='" + servicio.getObservacion() + "', "
-                + " localFk='" + servicio.getLocalFk() + "' "
+                + " localFk='" + servicio.getLocalFk() + "', "
+                + " calidadLlamada='" + servicio.getCalidadLlamada()+ "', "
+                + " tiempoServicio='" + servicio.getTiempoServicio()+ "' "
                 + " WHERE idServicio='" + servicio.getIdServicio() + "'";
         return super.ejecutar(consulta);
 
@@ -94,6 +98,7 @@ public class DaoServicios extends Conexion {
                 + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, "
                 + "l.encargado, ci.nombre, mu.nombre, s.nroFactura, s.refuerzo, s.tipoServicio, "
                 + "s.tecnico, s.fecha, s.periocidad, s.proxFecha, s.pago, s.valor, s.observacion, "
+                + "s.calidadLlamada, s.tiempoServicio, "
                 + "a.hora, a.confirmacion, a.fecha, a.observacion "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
@@ -133,6 +138,8 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
                 dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoServicio.setAobservacion(resultadoDB.getString("a.observacion"));
+                dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
+                dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
 
             }
         } catch (SQLException ex) {
@@ -233,6 +240,7 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
+                + "s.calidadLlamada, s.tiempoServicio, "
                 + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
                 + "a.fecha "
                 + "from Servicios s "
@@ -273,6 +281,8 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
                 dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
+                dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
+                dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
 
                 lista.add(dtoServicio);
             }
@@ -288,6 +298,7 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
+                + "s.calidadLlamada, s.tiempoServicio, "
                 + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
                 + "a.fecha "
                 + "from Servicios s "
@@ -328,6 +339,8 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
                 dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
+                dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
+                dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {
@@ -342,8 +355,8 @@ public class DaoServicios extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
-                + "a.fecha"
+                + "s.calidadLlamada, s.tiempoServicio, "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -383,6 +396,8 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
                 dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
+                dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
+                dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {

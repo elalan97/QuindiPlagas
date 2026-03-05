@@ -67,12 +67,14 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         ctlCliente = new CtlCliente();
         ctlServicio = new CtlServicio();
         ctlAgenda = new CtlAgenda();
+        ctlUsuario = new CtlUsuario();
         Inicio usuarioInicio = new Inicio();
         usuarioIniciado = usuarioInicio.usuarioIniciado;
         cargarCampos();
         llenarComboMunicipio();
         cargarCombo();
         generarCodigo();
+        buscarVendedor();
     }
 
     @Override
@@ -80,6 +82,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         Image retImage = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("IMG/logo.jpg"));
         return retImage;
     }
+    
 
     public void limpiarCamposServicio() {
 
@@ -402,6 +405,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         cbPago1 = new javax.swing.JComboBox<>();
         jLabel52 = new javax.swing.JLabel();
         txtObsevacionAgenda = new javax.swing.JTextField();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        txtLlamadaCalidad = new javax.swing.JTextField();
+        txtTiempoServicio = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -767,7 +774,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 470, -1, -1));
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 320, -1, -1));
 
         cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado" }));
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 180, -1));
@@ -791,8 +798,18 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel52.setText("Observacion(Agenda)");
-        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 420, -1, -1));
+        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 423, -1, -1));
         jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 420, 180, -1));
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel53.setText("Llamada de calidad");
+        jPanel4.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 473, -1, -1));
+
+        jLabel54.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel54.setText("Tiempo de Servicio");
+        jPanel4.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 523, -1, -1));
+        jPanel4.add(txtLlamadaCalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 470, 180, -1));
+        jPanel4.add(txtTiempoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 520, 180, -1));
 
         jTabbedPane1.addTab("", jPanel4);
 
@@ -1271,7 +1288,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(nroServicio);
 
         codigoViejo = dtoServicio.getNroFactura();
-        
+
         txtServicio.setText(dtoServicio.getNroFactura());
         cbTipoServicio1.setSelectedItem(dtoServicio.getTipoServicio());
         cbRefuerzo1.setSelectedItem(dtoServicio.getRefuerzo());
@@ -1283,6 +1300,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtConfirmacion.setText(dtoServicio.getAconfirmacion());
         txtTecnico.setText(dtoServicio.getTecnico());
         txtObsevacionAgenda.setText(dtoServicio.getAobservacion());
+        txtTiempoServicio.setText(dtoServicio.getTiempoServicio());
+        txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
 
         fecha1 = dtoServicio.getFecha();
         try {
@@ -1414,7 +1433,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     fechaRefuerzo = fecha_I.plusDays(20) + "";
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -1435,7 +1455,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     valor = Integer.parseInt(num);
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -1608,7 +1629,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     valor = Integer.parseInt(num);
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fechaRefuerzo);
@@ -1625,7 +1647,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     valor = Integer.parseInt(num);
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -1691,7 +1714,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         int valor;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, hora, confirmacion, observaciones;
+                observacion, valorCadena, hora, confirmacion, observaciones, calidadLlamada, tiempoServicio;
 
         valorCadena = txtValor.getText();
         nroFactura = txtServicio.getText();
@@ -1706,16 +1729,16 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         hora = txtHora.getText();
         confirmacion = txtConfirmacion.getText();
         observaciones = txtObsevacionAgenda.getText();
+        calidadLlamada = txtLlamadaCalidad.getText();
+        tiempoServicio = txtTiempoServicio.getText();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
-                || periocidad.equals("Selecione") || proxFecha.isEmpty() 
-                || pago.equals("Seleccione") || observacion.isEmpty() 
-                || confirmacion.isEmpty() || observaciones.isEmpty()) {
+                || periocidad.equals("Selecione") || proxFecha.isEmpty()
+                || pago.equals("Seleccione") || observacion.isEmpty()
+                || confirmacion.isEmpty() || observaciones.isEmpty() || calidadLlamada.isEmpty()
+                || tiempoServicio.isEmpty()) {
 
-            System.out.println(valorCadena + ", " + nroFactura + ", " + tipoServicio + ", " + refuerzo
-                    + ", " + tecnico + ", " + fecha + ", " + periocidad + ", " + proxFecha + ", "
-                    + ", " + pago + ", " + observacion + ", " + confirmacion + ", " + observaciones);
             JOptionPane.showMessageDialog(null, "por favor llene los campos");
 
         } else {
@@ -1724,7 +1747,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             valor = Integer.parseInt(num);
 
             Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                    refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                    refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                    calidadLlamada, tiempoServicio);
 
             Agenda agenda = new Agenda(0, 0,
                     hora, confirmacion, observaciones, fecha);
@@ -1869,6 +1893,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1910,6 +1936,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtFactura;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtHoraAgenda;
+    private javax.swing.JTextField txtLlamadaCalidad;
     private javax.swing.JTextField txtMunicipioNegocio;
     private javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNitNegocio;
@@ -1926,6 +1953,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtServicio;
     private javax.swing.JTextField txtTecnico;
     private javax.swing.JTextField txtTecnico1;
+    private javax.swing.JTextField txtTiempoServicio;
     private javax.swing.JTextField txtTipoCliente;
     private javax.swing.JTextField txtValor;
     private javax.swing.JTextField txtValor1;

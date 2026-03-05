@@ -615,7 +615,8 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     fechaRefuerzo = fecha_I.plusDays(20) + "";
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -636,7 +637,8 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     valor = Integer.parseInt(num);
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -753,7 +755,6 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     fechaRefuerzo = format.parse(fecha2);
                     jcRefuerzo.setDate(fechaRefuerzo);
                     fechaRefuerzoVieja = fecha2;
-                    
 
                     cbPeriocidad.setSelectedItem(dtoAgenda.getsPeriocidad());
                     cbTipoServicio.setSelectedItem(dtoAgenda.getsTipoServicio());
@@ -851,7 +852,8 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     valor = Integer.parseInt(num);
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fechaRefuerzo);
@@ -868,7 +870,8 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     valor = Integer.parseInt(num);
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion);
+                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                            "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);

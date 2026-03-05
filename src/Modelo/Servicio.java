@@ -12,12 +12,12 @@ public class Servicio {
 
     int idServicio, localFk, valor;
     String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad,
-            proxFecha, pago, vendedor, observacion;
+            proxFecha, pago, vendedor, observacion, calidadLlamada, tiempoServicio;
 
     public Servicio() {
     }
 
-    public Servicio(int idServicio, int localFk, int valor, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String vendedor, String observacion) {
+    public Servicio(int idServicio, int localFk, int valor, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String vendedor, String observacion, String calidadLlamada, String tiempoServicio) {
         this.idServicio = idServicio;
         this.localFk = localFk;
         this.valor = valor;
@@ -31,6 +31,8 @@ public class Servicio {
         this.pago = pago;
         this.vendedor = vendedor;
         this.observacion = observacion;
+        this.calidadLlamada = calidadLlamada;
+        this.tiempoServicio = tiempoServicio;
     }
 
     public int getIdServicio() {
@@ -135,6 +137,22 @@ public class Servicio {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getCalidadLlamada() {
+        return calidadLlamada;
+    }
+
+    public void setCalidadLlamada(String calidadLlamada) {
+        this.calidadLlamada = calidadLlamada;
+    }
+
+    public String getTiempoServicio() {
+        return tiempoServicio;
+    }
+
+    public void setTiempoServicio(String tiempoServicio) {
+        this.tiempoServicio = tiempoServicio;
     }
 
 }
