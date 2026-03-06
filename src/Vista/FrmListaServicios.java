@@ -322,7 +322,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         factura = String.valueOf(tbServicios.getValueAt(seleccionar, 10));
 
-        ctlServicio.almacenarDatos1(factura);
+        ctlServicio.almacenarDatos1(factura, "servicio");
 
         FrmMenuCliente gestionar = new FrmMenuCliente();
         gestionar.setVisible(true);

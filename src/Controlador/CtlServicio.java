@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CtlServicio {
 
     BoServicio boServicio;
-    public static String codigoAlmacenado, direccionAlmacenado, facturaAlmacenada;
+    public static String codigoAlmacenado, direccionAlmacenado, facturaAlmacenada, ventanaEjecutada;
 
     public CtlServicio() {
 
@@ -58,16 +58,19 @@ public class CtlServicio {
         return boServicio.buscarDtoInformeServicio(codigoCliente, direccion);
     }
 
-    public void almacenarDatos(String codigo, String direccion) {
+    public void almacenarDatos(String codigo, String direccion, String ventana) {
 
         codigoAlmacenado = codigo;
         direccionAlmacenado = direccion;
+        ventanaEjecutada = ventana;
+        System.out.println(ventana);
 
     }
 
-    public void almacenarDatos1(String factura) {
+    public void almacenarDatos1(String factura, String ventana) {
 
         facturaAlmacenada = factura;
+        ventanaEjecutada = ventana;
 
     }
 

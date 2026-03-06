@@ -186,7 +186,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
         codigo = String.valueOf(tbLocal.getValueAt(seleccionar, 0));
         direccion = String.valueOf(tbLocal.getValueAt(seleccionar, 7));
         
-        ctlServicio.almacenarDatos(codigo, direccion);
+        ctlServicio.almacenarDatos(codigo, direccion, "cliente");
         
         FrmMenuCliente informe = new FrmMenuCliente();
         informe.setVisible(true);

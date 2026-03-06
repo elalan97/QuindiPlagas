@@ -234,14 +234,15 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     public void cargarCampos() {
 
         int valor = 0;
-        String codigo, direccion;
+        String codigo, direccion, ventanaEjecutada;
         Miles miles = new Miles();
 
-        codigo = ctlServicio.facturaAlmacenada;
+        
+        ventanaEjecutada = ctlServicio.ventanaEjecutada;
 
-        DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(codigo);
+        
 
-        if (dtoServicio.getNroFactura() == null) {
+        if (ventanaEjecutada.equals("cliente")) {
 
             codigo = ctlServicio.codigoAlmacenado;
 
@@ -265,7 +266,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             txtCelularCliente.setText(cliente.getCelular());
 
         } else {
-
+            
+            codigo = ctlServicio.facturaAlmacenada;
+            DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(codigo);
+            
             //llenar los campos de texto y combobox
             txtNombre.setText(dtoServicio.getNombre());
             txtApellido.setText(dtoServicio.getApellido());
@@ -1537,7 +1541,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     cbPago.setSelectedItem(dtoAgenda.getsPago());
                     cbRefuerzo.setSelectedItem(dtoAgenda.getsRefuerzo());
 
-                    codigoEditar = dtoAgenda.getsNroFactura();
+                    codigoEditar = dtoAgenda.getcCodigo();
 
                 } else {
 
@@ -1575,7 +1579,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     cbPago.setSelectedItem(dtoAgenda.getsPago());
                     cbRefuerzo.setSelectedItem(dtoAgenda.getsRefuerzo());
 
-                    codigoEditar = dtoAgenda.getsNroFactura();
+                    codigoEditar = dtoAgenda.getcCodigo();
 
                 }
 

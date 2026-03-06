@@ -93,7 +93,7 @@ public class BoServicio {
 
         } else {
 
-            Servicio s = daoServicios.buscarServicio(codigoViejo);
+            Servicio s = daoServicios.buscarServicio(servicio.getNroFactura());
 
             if (s.getNroFactura() != null) {
 
