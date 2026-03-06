@@ -575,7 +575,8 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
         int valor;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones;
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, 
+                observaciones;
 
         valorCadena = txtValor.getText();
         nroFactura = txtFactura.getText();
@@ -616,7 +617,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                             refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                            "NA", "NA");
+                            "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -638,7 +639,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                             refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                            "NA", "NA");
+                            "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);
@@ -853,7 +854,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                             refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                            "NA", "NA");
+                            "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fechaRefuerzo);
@@ -871,7 +872,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                             refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                            "NA", "NA");
+                            "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
                             hora, confirmacion, observaciones, fecha);

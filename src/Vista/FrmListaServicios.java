@@ -34,7 +34,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
     public FrmListaServicios() {
         initComponents();
-        this.setSize(new Dimension(1600, 650));
+        this.setSize(new Dimension(1620, 650));
         this.setTitle("Lista Servicios");
         ctlServicio = new CtlServicio();
         ctlUsuario = new CtlUsuario();
@@ -76,7 +76,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                 dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                 dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
                 dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
-                dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
+                dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada(),
+                dtoServicio.getGestionLlamada()});
 
         }
     }
@@ -137,13 +138,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         tbServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Razon Social", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion", "Tiempo del servicio", "Llamada de Calidad"
+                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Razon Social", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion", "Tiempo del servicio", "Llamada de Calidad", "Gestion de Llamada"
             }
         ));
         tbServicios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,7 +154,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbServicios);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1550, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1570, 480));
 
         btnFiltrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnFiltrar.setText("Filtrar");
@@ -224,7 +225,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                             dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
                             dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
-                            dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
+                            dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada(),
+                            dtoServicio.getGestionLlamada()});
 
                     }
 

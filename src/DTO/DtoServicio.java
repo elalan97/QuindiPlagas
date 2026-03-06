@@ -14,12 +14,12 @@ public class DtoServicio {
     String codigo, tipo, nombre, apellido, celular, correo, nombreNegocio, direccion,
             nit, encargado, ciudad, municipio, nroFactura, tipoServicio, refuerzo, tecnico, fecha,
             periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, aconfirmacion, afecha, aobservacion,
-            calidadLlamada, tiempoServicio;
+            calidadLlamada, tiempoServicio, gestionLlamada;
 
     public DtoServicio() {
     }
 
-    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String aconfirmacion, String afecha, String aobservacion, String calidadLlamada, String tiempoServicio) {
+    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String aconfirmacion, String afecha, String aobservacion, String calidadLlamada, String tiempoServicio, String gestionLlamada) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -49,6 +49,7 @@ public class DtoServicio {
         this.aobservacion = aobservacion;
         this.calidadLlamada = calidadLlamada;
         this.tiempoServicio = tiempoServicio;
+        this.gestionLlamada = gestionLlamada;
     }
 
     public String getCodigo() {
@@ -281,6 +282,14 @@ public class DtoServicio {
 
     public void setTiempoServicio(String tiempoServicio) {
         this.tiempoServicio = tiempoServicio;
+    }
+
+    public String getGestionLlamada() {
+        return gestionLlamada;
+    }
+
+    public void setGestionLlamada(String gestionLlamada) {
+        this.gestionLlamada = gestionLlamada;
     }
 
 }
