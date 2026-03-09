@@ -55,7 +55,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     CtlUsuario ctlUsuario;
 
     public String usuarioIniciado;
-    String vendedor, codigoEditar, fechaRefuerzoVieja, codigoViejo;
+    String vendedor, codigoEditar, fechaRefuerzoVieja, codigoViejo, fechaRealizoPeriocidad;
 
     public FrmMenuCliente() {
         initComponents();
@@ -82,7 +82,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         Image retImage = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("IMG/logo.jpg"));
         return retImage;
     }
-    
 
     public void limpiarCamposServicio() {
 
@@ -231,16 +230,36 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
     }
 
+    public void refrescarDatos(String codigo) {
+
+        Cliente cliente = ctlCliente.buscarCliente(codigo);
+
+        //llenar los campos de texto y combobox
+        txtNombre.setText(cliente.getNombre());
+        txtApellido.setText(cliente.getApellido());
+        txtCelular.setText(cliente.getCelular());
+        txtCodigo.setText(cliente.getCodigo());
+        txtCorreo.setText(cliente.getCorreo());
+        cbTipo.setSelectedItem(cliente.getTipo());
+
+        listaLocales(txtCodigo.getText());
+
+        txtCodigoCliente.setText(cliente.getCodigo());
+        txtTipoCliente.setText(cliente.getTipo());
+        txtNombreCliente.setText(cliente.getNombre());
+        txtApellidoCliente.setText(cliente.getApellido());
+        txtCorreoCliente.setText(cliente.getCorreo());
+        txtCelularCliente.setText(cliente.getCelular());
+
+    }
+
     public void cargarCampos() {
 
         int valor = 0;
         String codigo, direccion, ventanaEjecutada;
         Miles miles = new Miles();
 
-        
         ventanaEjecutada = ctlServicio.ventanaEjecutada;
-
-        
 
         if (ventanaEjecutada.equals("cliente")) {
 
@@ -266,10 +285,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             txtCelularCliente.setText(cliente.getCelular());
 
         } else {
-            
+
             codigo = ctlServicio.facturaAlmacenada;
             DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(codigo);
-            
+
             //llenar los campos de texto y combobox
             txtNombre.setText(dtoServicio.getNombre());
             txtApellido.setText(dtoServicio.getApellido());
@@ -648,7 +667,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 1300, 240));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setText("Guardar");
+        jButton4.setText("Guardar Local");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -657,22 +676,22 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton6.setText("Editar");
+        jButton6.setText("Editar Local");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, -1));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 70, -1, -1));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton7.setText("Eliminar");
+        jButton7.setText("Eliminar Local");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, -1, -1));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 70, -1, -1));
 
         jTabbedPane1.addTab("", jPanel3);
 
@@ -927,7 +946,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel39.setText("Tipo de Servicio");
         jPanel5.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
 
-        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion" }));
+        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo" }));
         jPanel5.add(cbTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 160, -1));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -947,13 +966,25 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel5.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, -1, -1));
 
         jcFechaRealizo.setDateFormatString("yyyy-MM-dd");
+        jcFechaRealizo.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jcFechaRealizoInputMethodTextChanged(evt);
+            }
+        });
+        jcFechaRealizo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcFechaRealizoPropertyChange(evt);
+            }
+        });
         jPanel5.add(jcFechaRealizo, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 160, -1));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Periocidad");
         jPanel5.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, -1));
 
-        cbPeriocidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Anual", "Unica vez" }));
+        cbPeriocidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Quincenal", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Anual", "Unica vez" }));
         cbPeriocidad.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbPeriocidadItemStateChanged(evt);
@@ -1140,6 +1171,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 ctlCliente.editarCliente(cliente);
                 JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                 limpiarCampos();
+                refrescarDatos(codigo);
                 //buscarUltimoCodigo();
 
             } catch (Exception e) {
@@ -1361,19 +1393,17 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void cbPeriocidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPeriocidadItemStateChanged
         // TODO add your handling code here:
 
-        String datoSeleccionado, fecha, proxFecha;
-
-        fecha = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
+        String datoSeleccionado, proxFecha;
 
         if (evt.getStateChange() == ItemEvent.SELECTED) {
 
             datoSeleccionado = (String) evt.getItem();
 
-            if (datoSeleccionado.equals("Seleccione") || fecha.isEmpty()) {
+            if (datoSeleccionado.equals("Seleccione") || fechaRealizoPeriocidad.isEmpty()) {
 
             } else {
 
-                proxFecha = ctlServicio.proximaFecha(datoSeleccionado, fecha);
+                proxFecha = ctlServicio.proximaFecha(datoSeleccionado, fechaRealizoPeriocidad);
 
                 txtProximaFecha1.setText(proxFecha);
 
@@ -1422,6 +1452,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         confirmacion = txtConfirmacionAgenda.getText();
         observaciones = txtObservacionesAgenda.getText();
         codigo = txtCodigoCliente.getText();
+        fechaRefuerzo = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
@@ -1439,10 +1470,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                     String num = valorCadena.replace(".", "");
                     valor = Integer.parseInt(num);
-
-                    DateTimeFormatter format = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("yyyy-MM-d")).toFormatter();
-                    LocalDate fecha_I = LocalDate.parse(fecha, format);
-                    fechaRefuerzo = fecha_I.plusDays(20) + "";
 
                     Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                             refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
@@ -1726,7 +1753,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         int valor;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, hora, confirmacion, observaciones, calidadLlamada, 
+                observacion, valorCadena, hora, confirmacion, observaciones, calidadLlamada,
                 tiempoServicio, gestionLlamada;
 
         valorCadena = txtValor.getText();
@@ -1801,6 +1828,81 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cbPeriocidad1ItemStateChanged
+
+    private void jcFechaRealizoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcFechaRealizoPropertyChange
+        // TODO add your handling code here:
+
+        Date enviarFecha;
+        String fecha, refuerzo, periocidad;
+
+        if (evt.getNewValue() != null) {
+
+            fecha = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
+
+            if (fecha.isEmpty()) {
+
+            } else {
+
+                refuerzo = (String) cbRefuerzo.getSelectedItem();
+
+                if (refuerzo.equals("Si")) {
+
+                    fechaRealizoPeriocidad = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
+
+                    DateTimeFormatter format = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toFormatter();
+
+                    LocalDate fecha_I = LocalDate.parse(fecha, format);
+
+                    fecha_I = fecha_I.plusDays(20);
+
+                    refuerzo = fecha_I + "";
+
+                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+                    try {
+
+                        enviarFecha = format1.parse(refuerzo);
+                        jcRefuerzo.setDate(enviarFecha);
+
+                        periocidad = (String) cbPeriocidad.getSelectedItem();
+
+                        if (periocidad.equals("Seleccione")) {
+
+                        } else {
+
+                            txtProximaFecha1.setText(ctlServicio.proximaFecha(periocidad, fechaRealizoPeriocidad));
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+
+                    fechaRealizoPeriocidad = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
+
+                    periocidad = (String) cbPeriocidad.getSelectedItem();
+
+                    if (periocidad.equals("Seleccione")) {
+
+                    } else {
+
+                        txtProximaFecha1.setText(ctlServicio.proximaFecha(periocidad, fechaRealizoPeriocidad));
+                    }
+
+                    fechaRealizoPeriocidad = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
+                    jcRefuerzo.setDate(null);
+
+                }
+
+            }
+        }
+    }//GEN-LAST:event_jcFechaRealizoPropertyChange
+
+    private void jcFechaRealizoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jcFechaRealizoInputMethodTextChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jcFechaRealizoInputMethodTextChanged
 
     /**
      * @param args the command line arguments

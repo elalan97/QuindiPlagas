@@ -127,8 +127,8 @@
                 <Column editable="true" title="Tecnico" type="java.lang.Object"/>
                 <Column editable="true" title="Hora" type="java.lang.Object"/>
                 <Column editable="true" title="Tipo de Servicio" type="java.lang.Object"/>
-                <Column editable="true" title="Nombre del Cliente" type="java.lang.Object"/>
                 <Column editable="true" title="Razon Social" type="java.lang.Object"/>
+                <Column editable="true" title="Nombre del Cliente" type="java.lang.Object"/>
                 <Column editable="true" title="Direccion" type="java.lang.Object"/>
                 <Column editable="true" title="Telefono" type="java.lang.Object"/>
                 <Column editable="true" title="Valor" type="java.lang.Object"/>

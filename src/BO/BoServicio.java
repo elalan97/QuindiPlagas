@@ -247,6 +247,14 @@ public class BoServicio {
                 resultado = fecha_I + "";
 
                 return resultado;
+                
+            case "Quincenal":
+
+                fecha_I = fecha_I.plusDays(14);
+                
+                resultado = fecha_I + "";
+
+                return resultado;
 
             case "Unica vez":
 
