@@ -927,7 +927,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel39.setText("Tipo de Servicio");
         jPanel5.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
 
-        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado" }));
+        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion" }));
         jPanel5.add(cbTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 160, -1));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -953,7 +953,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel43.setText("Periocidad");
         jPanel5.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, -1));
 
-        cbPeriocidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Unica vez" }));
+        cbPeriocidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Anual", "Unica vez" }));
         cbPeriocidad.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbPeriocidadItemStateChanged(evt);

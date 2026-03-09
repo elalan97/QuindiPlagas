@@ -74,8 +74,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                 dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
                 dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
                 dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
-                dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
-                dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
+                dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(), dtoServicio.getPago(),
+                dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
                 dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada(),
                 dtoServicio.getGestionLlamada()});
 
@@ -117,7 +117,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jLabel2.setText("Lista Servicios");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
-        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre del Cliente", "Razon Social", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion", "Fecha Agenda" }));
+        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre del Cliente", "Razon Social", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Telefono", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion", "Fecha Agenda" }));
         cbColumna.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbColumnaItemStateChanged(evt);
@@ -138,13 +138,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         tbServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Razon Social", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Fecha", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion", "Tiempo del servicio", "Llamada de Calidad", "Gestion de Llamada"
+                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Nombre del Cliente", "Razon Social", "Direccion", "Telefono", "Valor", "Observacion", "Nro Servicio", "Refuerzo", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Confirmacion", "Tiempo del servicio", "Llamada de Calidad", "Gestion de Llamada"
             }
         ));
         tbServicios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -230,45 +230,51 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
                     }
 
-                } else if (columna.equals("Fecha")) {
-
-                    String fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
-                    ArrayList<DtoServicio> lista = ctlServicio.listarServiciosPorFiltro(columna, fecha);
-
-                    DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
-                    modelo.setRowCount(0);
-
-                    for (DtoServicio dtoServicio : lista) {
-
-                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
-                            dtoServicio.getTecnico(), dtoServicio.getAhora(),
-                            dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
-                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
-                            dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
-                            dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
-                            dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
-
-                    }
-
                 } else if (columna.equals("Fecha Agenda")) {
 
                     String fecha = ((JTextField) jcFechaAgendamiento.getDateEditor().getUiComponent()).getText();
-                    ArrayList<DtoServicio> lista = ctlServicio.listarServiciosPorFiltro(columna, fecha);
 
-                    DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
-                    modelo.setRowCount(0);
+                    if (fecha.isEmpty()) {
 
-                    for (DtoServicio dtoServicio : lista) {
+                        String fecha1 = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
 
-                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
-                            dtoServicio.getTecnico(), dtoServicio.getAhora(),
-                            dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
-                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
-                            dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
-                            dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
-                            dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
+                        ArrayList<DtoServicio> lista = ctlServicio.listarServiciosPorFiltro(columna, fecha1);
+
+                        DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
+                        modelo.setRowCount(0);
+
+                        for (DtoServicio dtoServicio : lista) {
+
+                            modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                                dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                                dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                                dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                                dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                                dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                                dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
+                                dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
+
+                        }
+
+                    } else {
+
+                        ArrayList<DtoServicio> lista = ctlServicio.listarServiciosPorFiltro(columna, fecha);
+
+                        DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
+                        modelo.setRowCount(0);
+
+                        for (DtoServicio dtoServicio : lista) {
+
+                            modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                                dtoServicio.getTecnico(), dtoServicio.getAhora(),
+                                dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
+                                dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
+                                dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
+                                dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                                dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
+                                dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
+
+                        }
 
                     }
 
@@ -286,7 +292,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             dtoServicio.getTipoServicio(), dtoServicio.getNombre(), dtoServicio.getNombreNegocio(),
                             dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getValor(),
                             dtoServicio.getObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
-                            dtoServicio.getFecha(), dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
+                            dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(),
                             dtoServicio.getPago(), dtoServicio.getVendedor(), dtoServicio.getAconfirmacion(),
                             dtoServicio.getTiempoServicio(), dtoServicio.getCalidadLlamada()});
 
@@ -345,17 +351,11 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                 txtDato.setEnabled(false);
                 jcFechaAgendamiento.setEnabled(false);
 
-            } else if (datoSeleccionado.equals("Fecha")) {
-
-                jcFecha.setEnabled(true);
-                txtDato.setEnabled(false);
-                jcFechaAgendamiento.setEnabled(false);
-
             } else if (datoSeleccionado.equals("Fecha Agenda")) {
 
                 jcFechaAgendamiento.setEnabled(true);
                 txtDato.setEnabled(false);
-                jcFecha.setEnabled(false);
+                jcFecha.setEnabled(true);
 
             } else {
 

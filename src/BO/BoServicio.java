@@ -240,6 +240,14 @@ public class BoServicio {
 
                 return resultado;
 
+            case "Anual":
+
+                fecha_I = fecha_I.plusMonths(12);
+                
+                resultado = fecha_I + "";
+
+                return resultado;
+
             case "Unica vez":
 
                 resultado = fecha_I + "";
@@ -278,9 +286,9 @@ public class BoServicio {
 
                 return daoServicios.listarServiciosPorFiltro("s.tecnico", dato);
 
-            case "Fecha":
+            case "Telefono":
 
-                return daoServicios.listarServiciosPorFiltro("s.fecha", dato);
+                return daoServicios.listarServiciosPorFiltro("c.celular", dato);
 
             case "Periocidad":
 

@@ -62,7 +62,7 @@
             <StringItem index="4" value="Nro Factura"/>
             <StringItem index="5" value="TipoServicio"/>
             <StringItem index="6" value="Tecnico"/>
-            <StringItem index="7" value="Fecha"/>
+            <StringItem index="7" value="Telefono"/>
             <StringItem index="8" value="Periocidad"/>
             <StringItem index="9" value="Proxima Fecha"/>
             <StringItem index="10" value="Pago"/>
@@ -122,7 +122,7 @@
         <Component class="javax.swing.JTable" name="tbServicios">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="21" rowCount="4">
+              <Table columnCount="20" rowCount="4">
                 <Column editable="true" title="Fecha Agenda" type="java.lang.Object"/>
                 <Column editable="true" title="Tecnico" type="java.lang.Object"/>
                 <Column editable="true" title="Hora" type="java.lang.Object"/>
@@ -135,7 +135,6 @@
                 <Column editable="true" title="Observacion" type="java.lang.Object"/>
                 <Column editable="true" title="Nro Servicio" type="java.lang.Object"/>
                 <Column editable="true" title="Refuerzo" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha" type="java.lang.Object"/>
                 <Column editable="true" title="Periocidad" type="java.lang.Object"/>
                 <Column editable="true" title="Proxima Fecha" type="java.lang.Object"/>
                 <Column editable="true" title="Pago" type="java.lang.Object"/>
@@ -148,11 +147,6 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
