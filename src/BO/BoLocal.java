@@ -71,10 +71,11 @@ public class BoLocal {
     public void editarLocal(Local local, String ciudad, String codigo, String ciudadEditar, String direcionActual) {
 
         Ciudad c = daoLocal.buscarCiudad(ciudadEditar);
-        Local l = daoLocal.buscarLocal(direcionActual, c.getIdCiudad());
+        DTOLocal dtolocal = daoLocal.buscarlocalConCLiente(codigo, direcionActual, c.getIdCiudad());
+        //Local l = daoLocal.buscarLocal(direcionActual, c.getIdCiudad());
         Cliente cliente = daoCliente.buscarCliente(codigo);
 
-        if (l.getDireccion() == null || cliente.getCodigo() == null) {
+        if (dtolocal.getDireccion() == null || cliente.getCodigo() == null) {
 
             throw new NoExisteLocal();
 
@@ -82,7 +83,7 @@ public class BoLocal {
 
             Ciudad c1 = daoLocal.buscarCiudad(ciudad);
 
-            local.setIdLocales(l.getIdLocales());
+            local.setIdLocales(dtolocal.getIdLocal());
             local.setCiudadFk(c1.getIdCiudad());
             local.setClienteFk(cliente.getIdCliente());
 

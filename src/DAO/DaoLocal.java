@@ -124,12 +124,14 @@ public class DaoLocal extends Conexion {
 
     public boolean editarLocal(Local local) {
         String consulta = "UPDATE Locales SET nombreNegocio='" + local.getNombreNegocio() + "', "
-                + " direccion='" + local.getDireccion() + "', "
-                + " nit='" + local.getNit() + "', "
-                + " encargado='" + local.getEncargado() + "', "
-                + " ciudadFk='" + local.getCiudadFk() + "', "
-                + " clienteFk='" + local.getClienteFk() + "' "
-                + " WHERE idLocales='" + local.getIdLocales() + "'";
+                + "direccion='" + local.getDireccion() + "', "
+                + "nit='" + local.getNit() + "', "
+                + "encargado='" + local.getEncargado() + "', "
+                + "ciudadFk='" + local.getCiudadFk() + "', "
+                + "clienteFk='" + local.getClienteFk() + "' "
+                + "WHERE idLocales='" + local.getIdLocales() + "' "
+                + "AND clienteFk='" + local.getClienteFk() + "';";
+        System.out.println(consulta);
         return super.ejecutar(consulta);
 
     }
