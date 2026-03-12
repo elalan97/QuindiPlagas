@@ -801,16 +801,21 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         });
         jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, -1, -1));
 
-        cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado" }));
+        cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo" }));
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 170, -1));
 
         cbRefuerzo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
         jPanel4.add(cbRefuerzo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 170, -1));
 
         jcFechaRealizo1.setDateFormatString("yyyy-MM-dd");
+        jcFechaRealizo1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcFechaRealizo1PropertyChange(evt);
+            }
+        });
         jPanel4.add(jcFechaRealizo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, -1));
 
-        cbPeriocidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Unica vez" }));
+        cbPeriocidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Quincenal", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Anual", "Unica vez" }));
         cbPeriocidad1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbPeriocidad1ItemStateChanged(evt);
@@ -1903,6 +1908,63 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jcFechaRealizoInputMethodTextChanged
+
+    private void jcFechaRealizo1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcFechaRealizo1PropertyChange
+        // TODO add your handling code here:
+
+        Date enviarFecha;
+        String fecha, refuerzo, periocidad;
+
+        if (evt.getNewValue() != null) {
+
+            fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+            if (fecha.isEmpty()) {
+
+            } else {
+
+                refuerzo = (String) cbRefuerzo1.getSelectedItem();
+
+                if (refuerzo.equals("Si")) {
+
+                    fechaRealizoPeriocidad = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+                    try {
+
+                        periocidad = (String) cbPeriocidad1.getSelectedItem();
+
+                        if (periocidad.equals("Seleccione")) {
+
+                        } else {
+
+                            txtProximaFecha.setText(ctlServicio.proximaFecha(periocidad, fechaRealizoPeriocidad));
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+
+                    fechaRealizoPeriocidad = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+                    periocidad = (String) cbPeriocidad1.getSelectedItem();
+
+                    if (periocidad.equals("Seleccione")) {
+
+                    } else {
+
+                        txtProximaFecha.setText(ctlServicio.proximaFecha(periocidad, fechaRealizoPeriocidad));
+                    }
+
+                    fechaRealizoPeriocidad = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+                    jcRefuerzo.setDate(null);
+
+                }
+
+            }
+        }
+    }//GEN-LAST:event_jcFechaRealizo1PropertyChange
 
     /**
      * @param args the command line arguments

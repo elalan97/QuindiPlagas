@@ -243,15 +243,15 @@ public class BoServicio {
             case "Anual":
 
                 fecha_I = fecha_I.plusMonths(12);
-                
+
                 resultado = fecha_I + "";
 
                 return resultado;
-                
+
             case "Quincenal":
 
                 fecha_I = fecha_I.plusDays(14);
-                
+
                 resultado = fecha_I + "";
 
                 return resultado;
@@ -314,9 +314,13 @@ public class BoServicio {
 
                 return daoServicios.listarServiciosPorFiltro("s.observacion", dato);
 
-            case "Nombre del Cliente":
+            case "Nombre":
 
                 return daoServicios.listarServiciosPorFiltro("c.nombre", dato);
+
+            case "Apellido":
+
+                return daoServicios.listarServiciosPorFiltro("c.apellido", dato);
 
             case "Fecha Agenda":
 

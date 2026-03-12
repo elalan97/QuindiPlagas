@@ -983,7 +983,7 @@
                 <Component class="javax.swing.JComboBox" name="cbTipoServicio1">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="11">
+                      <StringArray count="15">
                         <StringItem index="0" value="Seleccione"/>
                         <StringItem index="1" value="Control Integral"/>
                         <StringItem index="2" value="Desratizacion"/>
@@ -995,6 +995,10 @@
                         <StringItem index="8" value="Trampa pegante"/>
                         <StringItem index="9" value="Trampa de grasa"/>
                         <StringItem index="10" value="Estaciones de Cebado"/>
+                        <StringItem index="11" value="Desinfeccion"/>
+                        <StringItem index="12" value="Inmunizacion"/>
+                        <StringItem index="13" value="Termonebulizacion"/>
+                        <StringItem index="14" value="Control + Termo"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -1030,6 +1034,9 @@
                   <Properties>
                     <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jcFechaRealizo1PropertyChange"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="170" y="470" width="170" height="-1"/>
@@ -1039,15 +1046,17 @@
                 <Component class="javax.swing.JComboBox" name="cbPeriocidad1">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="8">
+                      <StringArray count="10">
                         <StringItem index="0" value="Seleccione"/>
-                        <StringItem index="1" value="Mensual"/>
-                        <StringItem index="2" value="Bimensual"/>
-                        <StringItem index="3" value="Trimestral"/>
-                        <StringItem index="4" value="Cuatrimestral"/>
-                        <StringItem index="5" value="Quinquemestral"/>
-                        <StringItem index="6" value="Semestral"/>
-                        <StringItem index="7" value="Unica vez"/>
+                        <StringItem index="1" value="Quincenal"/>
+                        <StringItem index="2" value="Mensual"/>
+                        <StringItem index="3" value="Bimensual"/>
+                        <StringItem index="4" value="Trimestral"/>
+                        <StringItem index="5" value="Cuatrimestral"/>
+                        <StringItem index="6" value="Quinquemestral"/>
+                        <StringItem index="7" value="Semestral"/>
+                        <StringItem index="8" value="Anual"/>
+                        <StringItem index="9" value="Unica vez"/>
                       </StringArray>
                     </Property>
                   </Properties>
