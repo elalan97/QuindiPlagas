@@ -77,6 +77,8 @@ public class Menu extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -176,6 +178,21 @@ public class Menu extends javax.swing.JFrame {
         jMenu7.add(jMenuItem13);
 
         jMenuBar1.add(jMenu7);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/report.png"))); // NOI18N
+        jMenu4.setText("Reportes");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jMenuItem5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuItem5.setText("Informe");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/inventario.jpg"))); // NOI18N
         jMenu8.setText("Inventario");
@@ -351,6 +368,13 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(frmInventarioSalidas);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        FrmReportes frmReportes = new FrmReportes();
+        jDesktopPane.add(frmReportes);
+        frmReportes.setVisible(true);
+        centrarVentana(frmReportes);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -390,6 +414,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
@@ -405,6 +430,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
