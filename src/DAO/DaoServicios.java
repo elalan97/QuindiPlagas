@@ -446,5 +446,63 @@ public class DaoServicios extends Conexion {
         return servicio;
 
     }
+    
+    public ArrayList<DtoServicio> listarServiciosPorIngresarFiltro(String filtro) {
+        ArrayList<DtoServicio> lista = new ArrayList<>();
+        String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
+                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
+                + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
+                + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
+                + "a.fecha "
+                + "from Servicios s "
+                + "join Locales l on s.localFk = l.idLocales "
+                + "join Cliente c on l.clienteFk = c.idCliente "
+                + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Agenda a on s.idServicio = a.servicioFk "
+                + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
+                + filtro;
+        System.out.println(consulta);
+        super.ejecutarRetorno(consulta);
+        try {
+            while (resultadoDB.next()) {
+                DtoServicio dtoServicio = new DtoServicio();
+                dtoServicio.setCodigo(resultadoDB.getString("c.codigo"));
+                dtoServicio.setTipo(resultadoDB.getString("c.tipo"));
+                dtoServicio.setNombre(resultadoDB.getString("c.nombre"));
+                dtoServicio.setApellido(resultadoDB.getString("c.apellido"));
+                dtoServicio.setCelular(resultadoDB.getString("c.celular"));
+                dtoServicio.setCorreo(resultadoDB.getString("c.correo"));
+                dtoServicio.setNombreNegocio(resultadoDB.getString("l.nombreNegocio"));
+                dtoServicio.setDireccion(resultadoDB.getString("l.direccion"));
+                dtoServicio.setNit(resultadoDB.getString("l.nit"));
+                dtoServicio.setEncargado(resultadoDB.getString("l.encargado"));
+                dtoServicio.setCiudad(resultadoDB.getString("ci.nombre"));
+                dtoServicio.setMunicipio(resultadoDB.getString("mu.nombre"));
+                dtoServicio.setNroFactura(resultadoDB.getString("s.nroFactura"));
+                dtoServicio.setTipoServicio(resultadoDB.getString("s.tipoServicio"));
+                dtoServicio.setRefuerzo(resultadoDB.getString("s.refuerzo"));
+                dtoServicio.setTecnico(resultadoDB.getString("s.tecnico"));
+                dtoServicio.setFecha(resultadoDB.getString("s.fecha"));
+                dtoServicio.setPeriocidad(resultadoDB.getString("s.periocidad"));
+                dtoServicio.setProxFecha(resultadoDB.getString("s.proxFecha"));
+                dtoServicio.setPago(resultadoDB.getString("s.pago"));
+                dtoServicio.setValor(resultadoDB.getString("s.valor"));
+                dtoServicio.setVendedor(resultadoDB.getString("s.vendedor"));
+                dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
+                dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
+                dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
+                dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
+                dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
+                dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
+                lista.add(dtoServicio);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return lista;
+    }
 
 }

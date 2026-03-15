@@ -6,9 +6,11 @@ package Vista;
 
 import Controlador.CtlLocal;
 import Controlador.CtlReportes;
+import Controlador.CtlUsuario;
 import DTO.DtoServicio;
 import Modelo.Ciudad;
 import Modelo.Municipio;
+import Modelo.Usuario;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
      */
     CtlLocal ctlLocal;
     CtlReportes ctlReportes;
+    CtlUsuario ctlUsuario;
     public String usuarioIniciado;
     String vendedor;
 
@@ -35,11 +38,13 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         this.setSize(new Dimension(1620, 650));
         this.setTitle("Reportes");
         ctlLocal = new CtlLocal();
-        ctlLocal = new CtlLocal();
+        ctlReportes = new CtlReportes();
+        ctlUsuario = new CtlUsuario();
         Inicio usuarioInicio = new Inicio();
         usuarioIniciado = usuarioInicio.usuarioIniciado;
         llenarComboMunicipio();
         inHabilitar();
+        buscarVendedor();
     }
 
     public void llenarComboMunicipio() {
@@ -66,6 +71,13 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         cbDepartamento.setEnabled(false);
         txtDato.setEnabled(false);
         jcFecha.setEnabled(false);
+
+    }
+
+    public void buscarVendedor() {
+
+        Usuario usuario = ctlUsuario.buscarUsuario(usuarioIniciado);
+        vendedor = usuario.getNombre();
 
     }
 
@@ -302,10 +314,71 @@ public class FrmReportes extends javax.swing.JInternalFrame {
 
                     }
 
-                }else if (columna.equals("Departamento")) {
-                    
-                    
-                    
+                } else if (columna.equals("Departamento, Ciudad")) {
+
+                    String departamento = (String) cbDepartamento.getSelectedItem();
+                    String ciudad = (String) jcCiudad.getSelectedItem();
+
+                    ArrayList<DtoServicio> lista = ctlReportes.listaServicioDepartamentoCiudad(columna, departamento, ciudad);
+
+                    DefaultTableModel modelo = (DefaultTableModel) tbReporte.getModel();
+                    modelo.setRowCount(0);
+
+                    for (DtoServicio dtoServicio : lista) {
+
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(), dtoServicio.getTiempoServicio(),
+                            dtoServicio.getNombreNegocio(), dtoServicio.getNombre(), dtoServicio.getApellido(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getNroFactura(),
+                            dtoServicio.getPago(), dtoServicio.getValor(), dtoServicio.getVendedor(),
+                            dtoServicio.getMunicipio(), dtoServicio.getCiudad()});
+
+                    }
+
+                } else if (columna.equals("Departamento, Ciudad, Fecha")) {
+
+                    String departamento = (String) cbDepartamento.getSelectedItem();
+                    String ciudad = (String) jcCiudad.getSelectedItem();
+                    String fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
+
+                    ArrayList<DtoServicio> lista = ctlReportes.listaServicioDepartamentoCiudadFecha(columna, departamento, ciudad, fecha);
+
+                    DefaultTableModel modelo = (DefaultTableModel) tbReporte.getModel();
+                    modelo.setRowCount(0);
+
+                    for (DtoServicio dtoServicio : lista) {
+
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(), dtoServicio.getTiempoServicio(),
+                            dtoServicio.getNombreNegocio(), dtoServicio.getNombre(), dtoServicio.getApellido(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getNroFactura(),
+                            dtoServicio.getPago(), dtoServicio.getValor(), dtoServicio.getVendedor(),
+                            dtoServicio.getMunicipio(), dtoServicio.getCiudad()});
+
+                    }
+
+                } else {
+
+                    String departamento = (String) cbDepartamento.getSelectedItem();
+                    String ciudad = (String) jcCiudad.getSelectedItem();
+                    String fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
+
+                    ArrayList<DtoServicio> lista = ctlReportes.listaServicioFiltro(columna, departamento, ciudad, fecha, dato);
+
+                    DefaultTableModel modelo = (DefaultTableModel) tbReporte.getModel();
+                    modelo.setRowCount(0);
+
+                    for (DtoServicio dtoServicio : lista) {
+
+                        modelo.addRow(new Object[]{dtoServicio.getAfecha(),
+                            dtoServicio.getTecnico(), dtoServicio.getAhora(), dtoServicio.getTiempoServicio(),
+                            dtoServicio.getNombreNegocio(), dtoServicio.getNombre(), dtoServicio.getApellido(),
+                            dtoServicio.getDireccion(), dtoServicio.getCelular(), dtoServicio.getNroFactura(),
+                            dtoServicio.getPago(), dtoServicio.getValor(), dtoServicio.getVendedor(),
+                            dtoServicio.getMunicipio(), dtoServicio.getCiudad()});
+
+                    }
+
                 }
 
             } catch (Exception e) {

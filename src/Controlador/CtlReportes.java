@@ -26,4 +26,22 @@ public class CtlReportes {
         return boReportes.listarServiciosPorFiltroVendedor(dato, vendedor);
     }
 
+    public ArrayList<DtoServicio> listaServicioDepartamentoCiudad(String columna, String departamento, String ciudad) {
+
+        return null;
+
+    }
+
+    public ArrayList<DtoServicio> listaServicioDepartamentoCiudadFecha(String columna, String departamento, String ciudad, String fecha) {
+
+        return null;
+
+    }
+
+    public ArrayList<DtoServicio> listaServicioFiltro(String columna, String departamento, String ciudad, String fecha, String dato) {
+
+        return boReportes.listaServicioDepartamentoCiudadFecha(columna, departamento, ciudad, fecha);
+
+    }
+
 }
