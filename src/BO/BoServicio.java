@@ -326,6 +326,10 @@ public class BoServicio {
 
                 return daoServicios.listarServiciosPorFiltro("a.fecha", dato);
 
+            case "Telefono Encargado":
+
+                return daoServicios.listarServiciosPorFiltro("l.telefonoEncargado", dato);
+
         }
 
         return null;

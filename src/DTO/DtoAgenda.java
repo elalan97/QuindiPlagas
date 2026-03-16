@@ -15,12 +15,12 @@ public class DtoAgenda {
     String cCodigo, cTipo, cNombre, cApellido, cCelular, cCorreo,
             lNombreNegocio, lDireccion, lNit, lEncargado, ciNombre, muNombre,
             sNroFactura, sTipoServicio, sRefuerzo, sTecnico, sFecha, sPeriocidad, sProxFecha,
-            sPago, sValor, sObservacion, aHora, aConfirmacion, aObservacion, aFecha;
+            sPago, sValor, sObservacion, aHora, aObservacion, aFecha;
 
     public DtoAgenda() {
     }
 
-    public DtoAgenda(int aIdAgenda, String cCodigo, String cTipo, String cNombre, String cApellido, String cCelular, String cCorreo, String lNombreNegocio, String lDireccion, String lNit, String lEncargado, String ciNombre, String muNombre, String sNroFactura, String sTipoServicio, String sRefuerzo, String sTecnico, String sFecha, String sPeriocidad, String sProxFecha, String sPago, String sValor, String sObservacion, String aHora, String aConfirmacion, String aObservacion, String aFecha) {
+    public DtoAgenda(int aIdAgenda, String cCodigo, String cTipo, String cNombre, String cApellido, String cCelular, String cCorreo, String lNombreNegocio, String lDireccion, String lNit, String lEncargado, String ciNombre, String muNombre, String sNroFactura, String sTipoServicio, String sRefuerzo, String sTecnico, String sFecha, String sPeriocidad, String sProxFecha, String sPago, String sValor, String sObservacion, String aHora, String aObservacion, String aFecha) {
         this.aIdAgenda = aIdAgenda;
         this.cCodigo = cCodigo;
         this.cTipo = cTipo;
@@ -45,7 +45,6 @@ public class DtoAgenda {
         this.sValor = sValor;
         this.sObservacion = sObservacion;
         this.aHora = aHora;
-        this.aConfirmacion = aConfirmacion;
         this.aObservacion = aObservacion;
         this.aFecha = aFecha;
     }
@@ -240,14 +239,6 @@ public class DtoAgenda {
 
     public void setaHora(String aHora) {
         this.aHora = aHora;
-    }
-
-    public String getaConfirmacion() {
-        return aConfirmacion;
-    }
-
-    public void setaConfirmacion(String aConfirmacion) {
-        this.aConfirmacion = aConfirmacion;
     }
 
     public String getaObservacion() {

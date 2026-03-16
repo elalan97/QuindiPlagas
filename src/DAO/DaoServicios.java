@@ -97,10 +97,10 @@ public class DaoServicios extends Conexion {
     public DtoServicio buscarDtoServicio(String nroFactura) {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, "
                 + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, "
-                + "l.encargado, ci.nombre, mu.nombre, s.nroFactura, s.refuerzo, s.tipoServicio, "
+                + "l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, s.nroFactura, s.refuerzo, s.tipoServicio, "
                 + "s.tecnico, s.fecha, s.periocidad, s.proxFecha, s.pago, s.valor, s.observacion, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "a.hora, a.confirmacion, a.fecha, a.observacion "
+                + "a.hora, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -137,11 +137,10 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
-                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
-                dtoServicio.setAobservacion(resultadoDB.getString("a.observacion"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
+                dtoServicio.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
 
             }
         } catch (SQLException ex) {
@@ -240,11 +239,10 @@ public class DaoServicios extends Conexion {
     public ArrayList<DtoServicio> listarServicios1() {
         ArrayList<DtoServicio> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
-                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
+                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
-                + "a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -282,10 +280,10 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
-                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
+                dtoServicio.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
 
                 lista.add(dtoServicio);
             }
@@ -299,11 +297,10 @@ public class DaoServicios extends Conexion {
     public ArrayList<DtoServicio> listarServiciosPorFiltro(String columna, String dato) {
         ArrayList<DtoServicio> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
-                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
+                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
-                + "a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -341,10 +338,10 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
-                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
+                dtoServicio.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {
@@ -357,10 +354,10 @@ public class DaoServicios extends Conexion {
     public ArrayList<DtoServicio> listarServiciosPorFiltroVendedor(String dato, String vendedor) {
         ArrayList<DtoServicio> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
-                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
+                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -400,10 +397,10 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
-                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
+                dtoServicio.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {
@@ -450,11 +447,10 @@ public class DaoServicios extends Conexion {
     public ArrayList<DtoServicio> listarServiciosPorIngresarFiltro(String filtro) {
         ArrayList<DtoServicio> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
-                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
+                + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.confirmacion, "
-                + "a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -492,10 +488,10 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
-                dtoServicio.setAconfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
+                dtoServicio.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
                 lista.add(dtoServicio);
             }
         } catch (SQLException ex) {

@@ -20,9 +20,9 @@ public class DaoAgenda extends Conexion {
     }
 
     public boolean guardarAgenda(Agenda agenda) {
-        String consulta = "INSERT INTO Agenda (hora, confirmacion, "
+        String consulta = "INSERT INTO Agenda (hora, "
                 + "observacion, servicioFk, fecha)"
-                + "VALUES ('" + agenda.getHora() + "', '" + agenda.getConfirmacion() + "', '"
+                + "VALUES ('" + agenda.getHora() + "', '"
                 + agenda.getObservacion() + "', '"
                 + agenda.getServicioFk() + "', '"
                 + agenda.getFecha() + "' "
@@ -35,7 +35,7 @@ public class DaoAgenda extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.confirmacion, a.observacion, "
+                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.observacion, "
                 + "a.fecha "
                 + "from Agenda a "
                 + "join Servicios s on a.servicioFk = s.idServicio "
@@ -73,7 +73,6 @@ public class DaoAgenda extends Conexion {
                 dtoAgenda.setsObservacion(resultadoDB.getString("s.observacion"));
                 dtoAgenda.setaIdAgenda(resultadoDB.getInt("a.idAgenda"));
                 dtoAgenda.setaHora(resultadoDB.getString("a.hora"));
-                dtoAgenda.setaConfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoAgenda.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoAgenda.setaFecha(resultadoDB.getString("a.fecha"));
 
@@ -87,7 +86,6 @@ public class DaoAgenda extends Conexion {
 
     public boolean editarAgenda(Agenda agenda) {
         String consulta = "UPDATE Agenda SET hora='" + agenda.getHora() + "', "
-                + " confirmacion='" + agenda.getConfirmacion() + "', "
                 + " observacion='" + agenda.getObservacion() + "', "
                 + " servicioFk='" + agenda.getServicioFk() + "', "
                 + " fecha='" + agenda.getFecha() + "' "
@@ -106,7 +104,7 @@ public class DaoAgenda extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.confirmacion, a.observacion, "
+                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.observacion, "
                 + "a.fecha "
                 + "from Agenda a "
                 + "join Servicios s on a.servicioFk = s.idServicio "
@@ -142,7 +140,6 @@ public class DaoAgenda extends Conexion {
                 dtoAgenda.setsObservacion(resultadoDB.getString("s.observacion"));
                 dtoAgenda.setaIdAgenda(resultadoDB.getInt("a.idAgenda"));
                 dtoAgenda.setaHora(resultadoDB.getString("a.hora"));
-                dtoAgenda.setaConfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoAgenda.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoAgenda.setaFecha(resultadoDB.getString("a.fecha"));
                 lista.add(dtoAgenda);
@@ -159,7 +156,7 @@ public class DaoAgenda extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.confirmacion, a.observacion, "
+                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.observacion, "
                 + "a.fecha "
                 + "from Agenda a "
                 + "join Servicios s on a.servicioFk = s.idServicio "
@@ -197,7 +194,6 @@ public class DaoAgenda extends Conexion {
                 dtoAgenda.setsObservacion(resultadoDB.getString("s.observacion"));
                 dtoAgenda.setaIdAgenda(resultadoDB.getInt("a.idAgenda"));
                 dtoAgenda.setaHora(resultadoDB.getString("a.hora"));
-                dtoAgenda.setaConfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoAgenda.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoAgenda.setaFecha(resultadoDB.getString("a.fecha"));
                 lista.add(dtoAgenda);
@@ -213,7 +209,7 @@ public class DaoAgenda extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.confirmacion, a.observacion, "
+                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.observacion, "
                 + "a.fecha "
                 + "from Agenda a "
                 + "join Servicios s on a.servicioFk = s.idServicio "
@@ -251,7 +247,6 @@ public class DaoAgenda extends Conexion {
                 dtoAgenda.setsObservacion(resultadoDB.getString("s.observacion"));
                 dtoAgenda.setaIdAgenda(resultadoDB.getInt("a.idAgenda"));
                 dtoAgenda.setaHora(resultadoDB.getString("a.hora"));
-                dtoAgenda.setaConfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoAgenda.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoAgenda.setaFecha(resultadoDB.getString("a.fecha"));
 
@@ -267,7 +262,7 @@ public class DaoAgenda extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.confirmacion, a.observacion, "
+                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.observacion, "
                 + "a.fecha "
                 + "from Agenda a "
                 + "join Servicios s on a.servicioFk = s.idServicio "
@@ -306,7 +301,6 @@ public class DaoAgenda extends Conexion {
                 dtoAgenda.setsObservacion(resultadoDB.getString("s.observacion"));
                 dtoAgenda.setaIdAgenda(resultadoDB.getInt("a.idAgenda"));
                 dtoAgenda.setaHora(resultadoDB.getString("a.hora"));
-                dtoAgenda.setaConfirmacion(resultadoDB.getString("a.confirmacion"));
                 dtoAgenda.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoAgenda.setaFecha(resultadoDB.getString("a.fecha"));
 

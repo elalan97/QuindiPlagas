@@ -54,7 +54,7 @@
     <Component class="javax.swing.JComboBox" name="cbColumna">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="15">
+          <StringArray count="16">
             <StringItem index="0" value="Seleccione"/>
             <StringItem index="1" value="Nombre"/>
             <StringItem index="2" value="Apellido"/>
@@ -64,12 +64,13 @@
             <StringItem index="6" value="TipoServicio"/>
             <StringItem index="7" value="Tecnico"/>
             <StringItem index="8" value="Telefono"/>
-            <StringItem index="9" value="Periocidad"/>
-            <StringItem index="10" value="Proxima Fecha"/>
-            <StringItem index="11" value="Pago"/>
-            <StringItem index="12" value="Vendedor y Fecha"/>
-            <StringItem index="13" value="Observacion"/>
-            <StringItem index="14" value="Fecha Agenda"/>
+            <StringItem index="9" value="Telefono Encargado"/>
+            <StringItem index="10" value="Periocidad"/>
+            <StringItem index="11" value="Proxima Fecha"/>
+            <StringItem index="12" value="Pago"/>
+            <StringItem index="13" value="Vendedor y Fecha"/>
+            <StringItem index="14" value="Observacion"/>
+            <StringItem index="15" value="Fecha Agenda"/>
           </StringArray>
         </Property>
       </Properties>
@@ -123,7 +124,7 @@
         <Component class="javax.swing.JTable" name="tbServicios">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="21" rowCount="4">
+              <Table columnCount="22" rowCount="4">
                 <Column editable="true" title="Fecha Agenda" type="java.lang.Object"/>
                 <Column editable="true" title="Tecnico" type="java.lang.Object"/>
                 <Column editable="true" title="Hora" type="java.lang.Object"/>
@@ -133,6 +134,8 @@
                 <Column editable="true" title="Apellido" type="java.lang.Object"/>
                 <Column editable="true" title="Direccion" type="java.lang.Object"/>
                 <Column editable="true" title="Telefono" type="java.lang.Object"/>
+                <Column editable="true" title="Encargado" type="java.lang.Object"/>
+                <Column editable="true" title="Telefono Encargado" type="java.lang.Object"/>
                 <Column editable="true" title="Valor" type="java.lang.Object"/>
                 <Column editable="true" title="Observacion" type="java.lang.Object"/>
                 <Column editable="true" title="Nro Servicio" type="java.lang.Object"/>
@@ -141,7 +144,6 @@
                 <Column editable="true" title="Proxima Fecha" type="java.lang.Object"/>
                 <Column editable="true" title="Pago" type="java.lang.Object"/>
                 <Column editable="true" title="Vendedor" type="java.lang.Object"/>
-                <Column editable="true" title="Confirmacion" type="java.lang.Object"/>
                 <Column editable="true" title="Tiempo del servicio" type="java.lang.Object"/>
                 <Column editable="true" title="Llamada de Calidad" type="java.lang.Object"/>
                 <Column editable="true" title="Gestion de Llamada" type="java.lang.Object"/>
@@ -180,6 +182,11 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

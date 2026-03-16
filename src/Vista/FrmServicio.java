@@ -620,10 +620,10 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fecha);
+                            hora, observaciones, fecha);
 
                     Agenda agendaRefuerzo = new Agenda(0, 0,
-                            hora, confirmacion, observacion, fechaRefuerzo);
+                            hora, observacion, fechaRefuerzo);
 
                     //ctlServicio.guardarServicio(servicio, direccion, ciudad);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
@@ -642,7 +642,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fecha);
+                            hora, observaciones, fecha);
 
                     //ctlServicio.guardarServicio(servicio, direccion, ciudad);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
@@ -745,7 +745,6 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     txtObservacion.setText(dtoAgenda.getsObservacion());
                     txtTipoCliente.setText(dtoAgenda.getcTipo());
                     txtHoraAgenda.setText(dtoAgenda.getaHora());
-                    txtConfirmacionAgenda.setText(dtoAgenda.getaConfirmacion());
                     txtObservacionesAgenda.setText(dtoAgenda.getaObservacion());
 
                     fecha1 = dtoAgenda.getsFecha();
@@ -788,7 +787,6 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                     txtObservacion.setText(dtoAgenda.getsObservacion());
                     txtTipoCliente.setText(dtoAgenda.getcTipo());
                     txtHoraAgenda.setText(dtoAgenda.getaHora());
-                    txtConfirmacionAgenda.setText(dtoAgenda.getaConfirmacion());
                     txtObservacionesAgenda.setText(dtoAgenda.getaObservacion());
 
                     fecha1 = dtoAgenda.getsFecha();
@@ -857,7 +855,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fechaRefuerzo);
+                            hora, observaciones, fechaRefuerzo);
 
                     //ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
@@ -875,7 +873,7 @@ public class FrmServicio extends javax.swing.JInternalFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fecha);
+                            hora, observaciones, fecha);
 
                     //ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar);
                     ctlAgenda.edtarAgenda(agenda, nroFactura);

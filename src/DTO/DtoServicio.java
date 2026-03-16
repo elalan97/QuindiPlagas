@@ -13,13 +13,13 @@ public class DtoServicio {
 
     String codigo, tipo, nombre, apellido, celular, correo, nombreNegocio, direccion,
             nit, encargado, ciudad, municipio, nroFactura, tipoServicio, refuerzo, tecnico, fecha,
-            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, aconfirmacion, afecha, aobservacion,
-            calidadLlamada, tiempoServicio, gestionLlamada;
+            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, afecha,
+            calidadLlamada, tiempoServicio, gestionLlamada, celEncargado;
 
     public DtoServicio() {
     }
 
-    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String aconfirmacion, String afecha, String aobservacion, String calidadLlamada, String tiempoServicio, String gestionLlamada) {
+    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String afecha, String calidadLlamada, String tiempoServicio, String gestionLlamada, String celEncargado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -44,12 +44,11 @@ public class DtoServicio {
         this.vendedor = vendedor;
         this.observacion = observacion;
         this.ahora = ahora;
-        this.aconfirmacion = aconfirmacion;
         this.afecha = afecha;
-        this.aobservacion = aobservacion;
         this.calidadLlamada = calidadLlamada;
         this.tiempoServicio = tiempoServicio;
         this.gestionLlamada = gestionLlamada;
+        this.celEncargado = celEncargado;
     }
 
     public String getCodigo() {
@@ -244,28 +243,12 @@ public class DtoServicio {
         this.ahora = ahora;
     }
 
-    public String getAconfirmacion() {
-        return aconfirmacion;
-    }
-
-    public void setAconfirmacion(String aconfirmacion) {
-        this.aconfirmacion = aconfirmacion;
-    }
-
     public String getAfecha() {
         return afecha;
     }
 
     public void setAfecha(String afecha) {
         this.afecha = afecha;
-    }
-
-    public String getAobservacion() {
-        return aobservacion;
-    }
-
-    public void setAobservacion(String aobservacion) {
-        this.aobservacion = aobservacion;
     }
 
     public String getCalidadLlamada() {
@@ -290,6 +273,14 @@ public class DtoServicio {
 
     public void setGestionLlamada(String gestionLlamada) {
         this.gestionLlamada = gestionLlamada;
+    }
+
+    public String getCelEncargado() {
+        return celEncargado;
+    }
+
+    public void setCelEncargado(String celEncargado) {
+        this.celEncargado = celEncargado;
     }
 
 }

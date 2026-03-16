@@ -11,16 +11,15 @@ package Modelo;
 public class Agenda {
 
     int idAgenda, servicioFk;
-    String hora, confirmacion, observacion, fecha;
+    String hora, observacion, fecha;
 
     public Agenda() {
     }
 
-    public Agenda(int idAgenda, int servicioFk, String hora, String confirmacion, String observacion, String fecha) {
+    public Agenda(int idAgenda, int servicioFk, String hora, String observacion, String fecha) {
         this.idAgenda = idAgenda;
         this.servicioFk = servicioFk;
         this.hora = hora;
-        this.confirmacion = confirmacion;
         this.observacion = observacion;
         this.fecha = fecha;
     }
@@ -49,14 +48,6 @@ public class Agenda {
         this.hora = hora;
     }
 
-    public String getConfirmacion() {
-        return confirmacion;
-    }
-
-    public void setConfirmacion(String confirmacion) {
-        this.confirmacion = confirmacion;
-    }
-
     public String getObservacion() {
         return observacion;
     }
@@ -72,5 +63,7 @@ public class Agenda {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+
 
 }

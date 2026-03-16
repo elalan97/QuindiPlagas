@@ -44,7 +44,7 @@ public class FrmListaAgenda extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{dtoAgenda.getsNroFactura(), dtoAgenda.getlNombreNegocio(),
                 dtoAgenda.getlDireccion(), dtoAgenda.getcCelular(), dtoAgenda.getCiNombre(),
                 dtoAgenda.getMuNombre(), dtoAgenda.getaFecha(), dtoAgenda.getaHora(),
-                dtoAgenda.getaConfirmacion(), dtoAgenda.getaObservacion(), dtoAgenda.getsTecnico()});
+                dtoAgenda.getaObservacion(), dtoAgenda.getsTecnico()});
 
         }
 
@@ -140,7 +140,7 @@ public class FrmListaAgenda extends javax.swing.JInternalFrame {
                     dtoAgenda.getlDireccion(), dtoAgenda.getcCelular(), 
                     dtoAgenda.getCiNombre(), dtoAgenda.getMuNombre(),
                     dtoAgenda.getaFecha(), dtoAgenda.getaHora(),
-                    dtoAgenda.getaConfirmacion(), dtoAgenda.getaObservacion(), dtoAgenda.getsTecnico()});
+                    dtoAgenda.getaObservacion(), dtoAgenda.getsTecnico()});
 
             }
 

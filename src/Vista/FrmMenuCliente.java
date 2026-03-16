@@ -34,8 +34,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -83,6 +86,19 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         return retImage;
     }
 
+    public void limiteSpinner() {
+
+        int valor = 1;
+        SpinnerNumberModel modelo = new SpinnerNumberModel();
+
+        modelo.setMaximum(12);
+        modelo.setMinimum(1);
+
+        jsHora.setModel(modelo);
+        jsHora.setValue(valor);
+
+    }
+
     public void limpiarCamposServicio() {
 
         txtFactura.setText("");
@@ -95,8 +111,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         llenarCombo2();
         llenarCombo3();
         llenarCombo4();
-        txtHoraAgenda.setText("");
-        txtConfirmacionAgenda.setText("");
+        //txtHoraAgenda.setText("");
         txtObservacionesAgenda.setText("");
         jcRefuerzo.setCalendar(null);
 
@@ -115,6 +130,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         cbTipoServicio.addItem("Seguimiento");
         cbTipoServicio.addItem("Trampa pegante");
         cbTipoServicio.addItem("Trampa de grasa");
+        cbTipoServicio.addItem("Inmunizacion");
+        cbTipoServicio.addItem("Termonebulizacion");
+        cbTipoServicio.addItem("Control + Termo");
 
     }
 
@@ -122,12 +140,14 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         cbPeriocidad.removeAllItems();
         cbPeriocidad.addItem("Seleccione");
+        cbPeriocidad.addItem("Quincenal");
         cbPeriocidad.addItem("Mensual");
         cbPeriocidad.addItem("Bimensual");
         cbPeriocidad.addItem("Trimestral");
         cbPeriocidad.addItem("Cuatrimestral");
         cbPeriocidad.addItem("Quinquemestral");
         cbPeriocidad.addItem("Semestral");
+        cbPeriocidad.addItem("Anual");
         cbPeriocidad.addItem("Unica vez");
 
     }
@@ -226,6 +246,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtDireccion.setText("");
         txtNit.setText("");
         txtEncargado.setText("");
+        txtTelefonoEncargado.setText("");
         llenarComboMunicipio();
 
     }
@@ -256,8 +277,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     public void cargarCampos() {
 
         int valor = 0;
-        String codigo, direccion, ventanaEjecutada;
+        String codigo, ventanaEjecutada, fecha;
         Miles miles = new Miles();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         ventanaEjecutada = ctlServicio.ventanaEjecutada;
 
@@ -306,6 +328,58 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             txtCorreoCliente.setText(dtoServicio.getCorreo());
             txtCelularCliente.setText(dtoServicio.getCelular());
 
+            txtServicio.setText(dtoServicio.getNroFactura());
+            cbTipoServicio1.setSelectedItem(dtoServicio.getTipoServicio());
+            cbRefuerzo1.setSelectedItem(dtoServicio.getRefuerzo());
+            txtProximaFecha.setText(dtoServicio.getProxFecha());
+            cbPago1.setSelectedItem(dtoServicio.getPago());
+            txtValor.setText(dtoServicio.getValor());
+            txtObservacion.setText(dtoServicio.getObservacion());
+            txtTecnico.setText(dtoServicio.getTecnico());
+            txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
+            txtGestionLlamada.setText(dtoServicio.getGestionLlamada());
+            cbPeriocidad1.setSelectedItem(dtoServicio.getPeriocidad());
+
+            fecha = dtoServicio.getFecha();
+            try {
+                jcFechaRealizo1.setDate(format.parse(fecha));
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            String[] separarTodo = dtoServicio.getAhora().split(":");
+
+            if (separarTodo.length > 1) {
+                String letra1, letra2, formato;
+                letra1 = separarTodo[0];
+                letra2 = separarTodo[1];
+
+                int hora, min;
+
+                hora = Integer.parseInt(letra1);
+
+                jsHora1.setValue(hora);
+
+                String[] separar = letra2.split(" ");
+
+                if (separar.length > 1) {
+
+                    min = Integer.parseInt(separar[0]);
+                    formato = separar[1];
+
+                    jsMinutos1.setValue(min);
+                    jcFormato13.setSelectedItem(formato);
+
+                } else {
+                    System.out.println("nada");
+                }
+
+            } else {
+
+                System.out.println("nada");
+
+            }
+
         }
 
     }
@@ -321,7 +395,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         for (DTOLocal dTOLocal : lista) {
 
             modelo.addRow(new Object[]{dTOLocal.getNombreNegocio(), dTOLocal.getDireccion(),
-                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
+                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getCelEncargado(),
+                dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
 
         }
 
@@ -332,7 +407,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         for (DTOLocal dTOLocal : lista) {
 
             modelo1.addRow(new Object[]{dTOLocal.getNombreNegocio(), dTOLocal.getDireccion(),
-                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
+                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getCelEncargado(),
+                dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
 
         }
 
@@ -396,6 +472,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel56 = new javax.swing.JLabel();
+        txtTelefonoEncargado = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbServicios = new javax.swing.JTable();
@@ -406,18 +484,15 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        txtConfirmacion = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         txtTecnico = new javax.swing.JTextField();
         txtObservacion = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        txtHora = new javax.swing.JTextField();
         txtProximaFecha = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         txtServicio = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
@@ -434,6 +509,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtTiempoServicio = new javax.swing.JTextField();
         jLabel55 = new javax.swing.JLabel();
         txtGestionLlamada = new javax.swing.JTextField();
+        jsHora1 = new javax.swing.JSpinner();
+        jsMinutos1 = new javax.swing.JSpinner();
+        jcFormato13 = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -482,17 +560,18 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel47 = new javax.swing.JLabel();
         txtObservacion1 = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         txtObservacionesAgenda = new javax.swing.JTextField();
         jLabel50 = new javax.swing.JLabel();
-        txtConfirmacionAgenda = new javax.swing.JTextField();
         jcRefuerzo = new com.toedter.calendar.JDateChooser();
-        txtHoraAgenda = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         BtnBuscar = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jsHora = new javax.swing.JSpinner();
+        jsMinutos = new javax.swing.JSpinner();
+        jLabel31 = new javax.swing.JLabel();
+        jcFormato12 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -616,11 +695,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setText("Departamento");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 223, -1, -1));
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 273, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setText("Ciudad");
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 273, -1, -1));
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 23, -1, -1));
         jPanel3.add(txtNombreNegocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 150, -1));
         jPanel3.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 150, -1));
         jPanel3.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 150, -1));
@@ -632,10 +711,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jcDepartamentoItemStateChanged(evt);
             }
         });
-        jPanel3.add(jcDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, -1));
+        jPanel3.add(jcDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 150, -1));
 
         jcCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jcCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 150, -1));
+        jPanel3.add(jcCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(765, 20, 150, -1));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton5.setText("Editar Cliente");
@@ -644,17 +723,17 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 130, -1));
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 130, -1));
 
         tbLocal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Telefono Encargado", "Municipio", "Ciudad"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -673,7 +752,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, -1, -1));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton6.setText("Editar Local");
@@ -682,7 +761,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 70, -1, -1));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 120, -1, -1));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton7.setText("Eliminar Local");
@@ -691,7 +770,12 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 70, -1, -1));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 120, -1, -1));
+
+        jLabel56.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel56.setText("Telefono Encargado");
+        jPanel3.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 223, -1, -1));
+        jPanel3.add(txtTelefonoEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, -1));
 
         jTabbedPane1.addTab("", jPanel3);
 
@@ -719,13 +803,13 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         tbLocal1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Telefono Encargado", "Municipio", "Ciudad"
             }
         ));
         tbLocal1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -753,7 +837,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("Proxima Fecha");
         jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 323, -1, -1));
-        jPanel4.add(txtConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 170, -1));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Nro Servicio");
@@ -762,7 +845,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setText("Tipo De Servicio");
         jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 373, -1, -1));
-        jPanel4.add(txtTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 170, -1));
+        jPanel4.add(txtTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 170, -1));
         jPanel4.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 470, 170, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -771,8 +854,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setText("Tecnico");
-        jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 373, -1, -1));
-        jPanel4.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 170, -1));
+        jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 323, -1, -1));
         jPanel4.add(txtProximaFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 170, -1));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -782,10 +864,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel30.setText("Fecha de Realizo");
         jPanel4.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 473, -1, -1));
-
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel31.setText("Confirmacion");
-        jPanel4.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 323, -1, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel32.setText("Periocidad");
@@ -799,7 +877,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, -1, -1));
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 320, -1, -1));
 
         cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo" }));
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 170, -1));
@@ -828,23 +906,40 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel52.setText("Observacion(Agenda)");
-        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 423, -1, -1));
-        jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 170, -1));
+        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 373, -1, -1));
+        jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 170, -1));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel53.setText("Llamada de calidad");
-        jPanel4.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 473, -1, -1));
+        jPanel4.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 423, -1, -1));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel54.setText("Tiempo de Servicio");
-        jPanel4.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 523, -1, -1));
-        jPanel4.add(txtLlamadaCalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 170, -1));
-        jPanel4.add(txtTiempoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, 170, -1));
+        jPanel4.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 473, -1, -1));
+        jPanel4.add(txtLlamadaCalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 170, -1));
+        jPanel4.add(txtTiempoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 170, -1));
 
         jLabel55.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel55.setText("Gestion Llamada");
-        jPanel4.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 323, -1, -1));
-        jPanel4.add(txtGestionLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 320, 150, -1));
+        jPanel4.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 523, -1, -1));
+        jPanel4.add(txtGestionLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, 170, -1));
+
+        jsHora1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsHora1StateChanged(evt);
+            }
+        });
+        jPanel4.add(jsHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 50, -1));
+
+        jsMinutos1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsMinutos1StateChanged(evt);
+            }
+        });
+        jPanel4.add(jsMinutos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 520, 50, -1));
+
+        jcFormato13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+        jPanel4.add(jcFormato13, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, -1, -1));
 
         jTabbedPane1.addTab("", jPanel4);
 
@@ -1027,25 +1122,19 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel51.setText("Fecha refuerzo");
-        jPanel5.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 173, -1, -1));
-
-        jLabel49.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel49.setText("Confirmacion");
-        jPanel5.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 73, -1, -1));
+        jPanel5.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 123, -1, -1));
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel48.setText("Hora");
         jPanel5.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 23, -1, -1));
-        jPanel5.add(txtObservacionesAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 120, 160, -1));
+        jPanel5.add(txtObservacionesAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 70, 160, -1));
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel50.setText("Observaciones");
-        jPanel5.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 123, -1, -1));
-        jPanel5.add(txtConfirmacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 70, 160, -1));
+        jPanel5.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 73, -1, -1));
 
         jcRefuerzo.setDateFormatString("yyyy-MM-dd");
-        jPanel5.add(jcRefuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 170, 160, -1));
-        jPanel5.add(txtHoraAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 20, 160, -1));
+        jPanel5.add(jcRefuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 120, 160, -1));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton8.setText("Guardar");
@@ -1054,7 +1143,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 223, -1, -1));
+        jPanel5.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 173, -1, -1));
 
         BtnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BtnBuscar.setText("Buscar");
@@ -1063,7 +1152,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 BtnBuscarActionPerformed(evt);
             }
         });
-        jPanel5.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 223, -1, -1));
+        jPanel5.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 173, -1, -1));
 
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton9.setText("Editar");
@@ -1072,7 +1161,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 223, -1, -1));
+        jPanel5.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 173, -1, -1));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton10.setText("Eliminar");
@@ -1081,7 +1170,28 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 273, -1, -1));
+        jPanel5.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 223, -1, -1));
+
+        jsHora.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsHoraStateChanged(evt);
+            }
+        });
+        jPanel5.add(jsHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 20, 50, -1));
+
+        jsMinutos.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsMinutosStateChanged(evt);
+            }
+        });
+        jPanel5.add(jsMinutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 50, -1));
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel31.setText(":");
+        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(1205, 23, -1, -1));
+
+        jcFormato12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+        jPanel5.add(jcFormato12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 20, -1, -1));
 
         jTabbedPane1.addTab("", jPanel5);
 
@@ -1197,17 +1307,18 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtDireccion.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 1)));
         txtNit.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 2)));
         txtEncargado.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 3)));
-        ciudadEditar = String.valueOf(tbLocal.getValueAt(seleccionar, 5));
+        txtTelefonoEncargado.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 4)));
+        ciudadEditar = String.valueOf(tbLocal.getValueAt(seleccionar, 6));
         direccionActual = String.valueOf(tbLocal.getValueAt(seleccionar, 1));
 
-        jcDepartamento.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 4)));
-        jcCiudad.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 5)));
+        jcDepartamento.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 5)));
+        jcCiudad.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 6)));
     }//GEN-LAST:event_tbLocalMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
 
-        String nombreNegocio, direccion, nit, encargado, codigo, ciudad;
+        String nombreNegocio, direccion, nit, encargado, codigo, ciudad, celEncargado;
 
         nombreNegocio = txtNombreNegocio.getText();
         direccion = txtDireccion.getText();
@@ -1215,9 +1326,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         encargado = txtEncargado.getText();
         codigo = txtCodigo.getText();
         ciudad = (String) jcCiudad.getSelectedItem();
+        celEncargado = txtTelefonoEncargado.getText();
 
         if (nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
-                || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")) {
+                || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")
+                || celEncargado.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "porfavor llenar los "
                     + "datos del local que quiere registrar");
@@ -1225,7 +1338,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             try {
 
-                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado);
+                Local local = new Local(0, 0, 0, nombreNegocio,
+                        direccion, nit, encargado, celEncargado);
                 ctlLocal.guardarLocal(local, ciudad, codigo);
                 JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                 listaLocales(codigo);
@@ -1240,7 +1354,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
-        String nombreNegocio, direccion, nit, encargado, codigo, ciudad;
+        String nombreNegocio, direccion, nit, encargado, codigo, ciudad, celEncargado;
 
         nombreNegocio = txtNombreNegocio.getText();
         direccion = txtDireccion.getText();
@@ -1248,6 +1362,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         encargado = txtEncargado.getText();
         codigo = txtCodigo.getText();
         ciudad = (String) jcCiudad.getSelectedItem();
+        celEncargado = txtTelefonoEncargado.getText();
 
         if (nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
                 || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")) {
@@ -1258,7 +1373,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             try {
 
-                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado);
+                Local local = new Local(0, 0, 0, nombreNegocio, direccion,
+                        nit, encargado, celEncargado);
                 ctlLocal.editarLocal(local, ciudad, codigo, ciudadEditar, direccionActual);
                 JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                 listaLocales(codigo);
@@ -1291,78 +1407,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void tbLocal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLocal1MouseClicked
-        // TODO add your handling code here:
-
-        int seleccionar, valor;
-        String direccion;
-        Miles miles = new Miles();
-
-        seleccionar = tbLocal.rowAtPoint(evt.getPoint());
-
-        direccion = String.valueOf(tbLocal1.getValueAt(seleccionar, 1));
-
-        ArrayList<DtoServicio> servicios = ctlServicio.listarServicios(txtCodigo.getText(), direccion);
-
-        DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
-        modelo.setRowCount(0);
-
-        for (DtoServicio servicio : servicios) {
-
-            valor = Integer.parseInt(servicio.getValor());
-
-            modelo.addRow(new Object[]{servicio.getNroFactura(), servicio.getTipoServicio(),
-                servicio.getRefuerzo(), servicio.getTecnico(), servicio.getFecha(),
-                servicio.getPeriocidad(), servicio.getProxFecha(), servicio.getPago(),
-                miles.separarMiles(valor), servicio.getObservacion()});
-
-        }
-
-    }//GEN-LAST:event_tbLocal1MouseClicked
-
-    private void tbServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbServiciosMouseClicked
-        // TODO add your handling code here:
-
-        int seleccionar, valor;
-        String nroServicio, fecha1, fecha;
-        Miles miles = new Miles();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-        seleccionar = tbServicios.rowAtPoint(evt.getPoint());
-
-        nroServicio = String.valueOf(tbServicios.getValueAt(seleccionar, 0));
-
-        DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(nroServicio);
-
-        codigoViejo = dtoServicio.getNroFactura();
-
-        txtServicio.setText(dtoServicio.getNroFactura());
-        cbTipoServicio1.setSelectedItem(dtoServicio.getTipoServicio());
-        cbRefuerzo1.setSelectedItem(dtoServicio.getRefuerzo());
-        cbPeriocidad1.setSelectedItem(dtoServicio.getPeriocidad());
-        txtProximaFecha.setText(dtoServicio.getProxFecha());
-        cbPago1.setSelectedItem(dtoServicio.getPago());
-        txtObservacion.setText(dtoServicio.getObservacion());
-        txtHora.setText(dtoServicio.getAhora());
-        txtConfirmacion.setText(dtoServicio.getAconfirmacion());
-        txtTecnico.setText(dtoServicio.getTecnico());
-        txtObsevacionAgenda.setText(dtoServicio.getAobservacion());
-        txtTiempoServicio.setText(dtoServicio.getTiempoServicio());
-        txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
-        txtGestionLlamada.setText(dtoServicio.getGestionLlamada());
-
-        fecha1 = dtoServicio.getFecha();
-        try {
-            jcFechaRealizo1.setDate(format.parse(fecha1));
-        } catch (ParseException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        valor = Integer.parseInt(dtoServicio.getValor());
-
-        txtValor.setText(miles.separarMiles(valor));
-    }//GEN-LAST:event_tbServiciosMouseClicked
 
     private void txtCodigoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoClienteKeyTyped
         // TODO add your handling code here:
@@ -1437,9 +1481,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
 
-        int valor;
+        int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones, codigo;
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, observaciones, codigo,
+                formato;
 
         valorCadena = txtValor1.getText();
         nroFactura = txtFactura.getText();
@@ -1453,11 +1498,12 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         observacion = txtObservacion1.getText();
         direccion = txtDireccionNegocio.getText();
         ciudad = txtCiudadNegocio.getText();
-        hora = txtHoraAgenda.getText();
-        confirmacion = txtConfirmacionAgenda.getText();
         observaciones = txtObservacionesAgenda.getText();
         codigo = txtCodigoCliente.getText();
         fechaRefuerzo = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
+        h = (int) jsHora.getValue();
+        m = (int) jsMinutos.getValue();
+        formato = (String) jcFormato12.getSelectedItem();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
@@ -1473,6 +1519,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                 if (refuerzo.equals("Si")) {
 
+                    hora = h + ":" + m + " " + formato;
                     String num = valorCadena.replace(".", "");
                     valor = Integer.parseInt(num);
 
@@ -1481,10 +1528,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fecha);
+                            hora, observaciones, fecha);
 
                     Agenda agendaRefuerzo = new Agenda(0, 0,
-                            hora, confirmacion, observacion, fechaRefuerzo);
+                            hora, observacion, fechaRefuerzo);
 
                     ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
@@ -1495,6 +1542,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                 } else {
 
+                    hora = h + ":" + m + " " + formato;
                     String num = valorCadena.replace(".", "");
                     valor = Integer.parseInt(num);
 
@@ -1503,7 +1551,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fecha);
+                            hora, observaciones, fecha);
 
                     ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
@@ -1563,9 +1611,40 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     txtNombreNegocio1.setText(dtoAgenda.getlNombreNegocio());
                     txtObservacion1.setText(dtoAgenda.getsObservacion());
                     txtTipoCliente.setText(dtoAgenda.getcTipo());
-                    txtHoraAgenda.setText(dtoAgenda.getaHora());
-                    txtConfirmacionAgenda.setText(dtoAgenda.getaConfirmacion());
                     txtObservacionesAgenda.setText(dtoAgenda.getaObservacion());
+
+                    String[] separarTodo = dtoAgenda.getaHora().split(":");
+
+                    if (separarTodo.length > 1) {
+                        String letra1, letra2, formato;
+                        letra1 = separarTodo[0];
+                        letra2 = separarTodo[1];
+
+                        int hora, min;
+
+                        hora = Integer.parseInt(letra1);
+
+                        jsHora.setValue(hora);
+
+                        String[] separar = letra2.split(" ");
+
+                        if (separar.length > 1) {
+
+                            min = Integer.parseInt(separar[0]);
+                            formato = separar[1];
+
+                            jsMinutos.setValue(min);
+                            jcFormato12.setSelectedItem(formato);
+
+                        } else {
+                            System.out.println("nada");
+                        }
+
+                    } else {
+
+                        System.out.println("nada");
+
+                    }
 
                     fecha1 = dtoAgenda.getsFecha();
                     fecha = format.parse(fecha1);
@@ -1606,8 +1685,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     txtNombreNegocio1.setText(dtoAgenda.getlNombreNegocio());
                     txtObservacion1.setText(dtoAgenda.getsObservacion());
                     txtTipoCliente.setText(dtoAgenda.getcTipo());
-                    txtHoraAgenda.setText(dtoAgenda.getaHora());
-                    txtConfirmacionAgenda.setText(dtoAgenda.getaConfirmacion());
+                    //txtHoraAgenda.setText(dtoAgenda.getaHora());
                     txtObservacionesAgenda.setText(dtoAgenda.getaObservacion());
 
                     fecha1 = dtoAgenda.getsFecha();
@@ -1633,9 +1711,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
 
-        int valor;
+        int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, confirmacion, observaciones, codigo;
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, observaciones, codigo,
+                formato;
 
         valorCadena = txtValor1.getText();
         nroFactura = txtFactura.getText();
@@ -1649,11 +1728,12 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         observacion = txtObservacion1.getText();
         direccion = txtDireccionNegocio.getText();
         ciudad = txtCiudadNegocio.getText();
-        hora = txtHoraAgenda.getText();
-        confirmacion = txtConfirmacionAgenda.getText();
         observaciones = txtObservacionesAgenda.getText();
         fechaRefuerzo = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
         codigo = txtCodigoCliente.getText();
+        h = (int) jsHora.getValue();
+        m = (int) jsMinutos.getValue();
+        formato = (String) jcFormato12.getSelectedItem();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
@@ -1669,6 +1749,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                 if (refuerzo.equals("Si")) {
 
+                    hora = h + ":" + m + " " + formato;
                     String num = valorCadena.replace(".", "");
                     valor = Integer.parseInt(num);
 
@@ -1677,7 +1758,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fechaRefuerzo);
+                            hora, observaciones, fechaRefuerzo);
 
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
@@ -1687,6 +1768,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                 } else {
 
+                    hora = h + ":" + m + " " + formato;
                     String num = valorCadena.replace(".", "");
                     valor = Integer.parseInt(num);
 
@@ -1695,7 +1777,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, confirmacion, observaciones, fecha);
+                            hora, observaciones, fecha);
 
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
@@ -1752,87 +1834,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-
-        int valor;
-        String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, hora, confirmacion, observaciones, calidadLlamada,
-                tiempoServicio, gestionLlamada;
-
-        valorCadena = txtValor.getText();
-        nroFactura = txtServicio.getText();
-        tipoServicio = (String) cbTipoServicio1.getSelectedItem();
-        refuerzo = (String) cbRefuerzo1.getSelectedItem();
-        tecnico = txtTecnico.getText();
-        fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
-        periocidad = (String) cbPeriocidad1.getSelectedItem();
-        proxFecha = txtProximaFecha.getText();
-        pago = (String) cbPago1.getSelectedItem();
-        observacion = txtObservacion.getText();
-        hora = txtHora.getText();
-        confirmacion = txtConfirmacion.getText();
-        observaciones = txtObsevacionAgenda.getText();
-        calidadLlamada = txtLlamadaCalidad.getText();
-        tiempoServicio = txtTiempoServicio.getText();
-        gestionLlamada = txtGestionLlamada.getText();
-
-        if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
-                || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
-                || periocidad.equals("Selecione") || proxFecha.isEmpty()
-                || pago.equals("Seleccione") || observacion.isEmpty()
-                || confirmacion.isEmpty() || observaciones.isEmpty() || calidadLlamada.isEmpty()
-                || tiempoServicio.isEmpty() || gestionLlamada.isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "por favor llene los campos");
-
-        } else {
-
-            String num = valorCadena.replace(".", "");
-            valor = Integer.parseInt(num);
-
-            Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                    refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                    calidadLlamada, tiempoServicio, gestionLlamada);
-
-            Agenda agenda = new Agenda(0, 0,
-                    hora, confirmacion, observaciones, fecha);
-
-            ctlServicio.editarServicioHistorial(servicio, codigoViejo);
-            ctlAgenda.edtarAgenda(agenda, nroFactura);
-            JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-            limpiarCamposServicio();
-            generarCodigo();
-
-        }
-
-
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void cbPeriocidad1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPeriocidad1ItemStateChanged
-        // TODO add your handling code here:
-
-        String datoSeleccionado, fecha, proxFecha;
-
-        fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
-
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-
-            datoSeleccionado = (String) evt.getItem();
-
-            if (datoSeleccionado.equals("Seleccione") || fecha.isEmpty()) {
-
-            } else {
-
-                proxFecha = ctlServicio.proximaFecha(datoSeleccionado, fecha);
-
-                txtProximaFecha.setText(proxFecha);
-
-            }
-        }
-
-    }//GEN-LAST:event_cbPeriocidad1ItemStateChanged
 
     private void jcFechaRealizoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcFechaRealizoPropertyChange
         // TODO add your handling code here:
@@ -1909,6 +1910,29 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jcFechaRealizoInputMethodTextChanged
 
+    private void cbPeriocidad1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPeriocidad1ItemStateChanged
+        // TODO add your handling code here:
+
+        String datoSeleccionado, fecha, proxFecha;
+
+        fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            datoSeleccionado = (String) evt.getItem();
+
+            if (datoSeleccionado.equals("Seleccione") || fecha.isEmpty()) {
+
+            } else {
+
+                proxFecha = ctlServicio.proximaFecha(datoSeleccionado, fecha);
+
+                txtProximaFecha.setText(proxFecha);
+
+            }
+        }
+    }//GEN-LAST:event_cbPeriocidad1ItemStateChanged
+
     private void jcFechaRealizo1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcFechaRealizo1PropertyChange
         // TODO add your handling code here:
 
@@ -1965,6 +1989,205 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jcFechaRealizo1PropertyChange
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+
+        int valor, h, m;
+        String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
+                observacion, valorCadena, hora, observaciones, calidadLlamada,
+                tiempoServicio, gestionLlamada, formato;
+
+        valorCadena = txtValor.getText();
+        nroFactura = txtServicio.getText();
+        tipoServicio = (String) cbTipoServicio1.getSelectedItem();
+        refuerzo = (String) cbRefuerzo1.getSelectedItem();
+        tecnico = txtTecnico.getText();
+        fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+        periocidad = (String) cbPeriocidad1.getSelectedItem();
+        proxFecha = txtProximaFecha.getText();
+        pago = (String) cbPago1.getSelectedItem();
+        observacion = txtObservacion.getText();
+        observaciones = txtObsevacionAgenda.getText();
+        calidadLlamada = txtLlamadaCalidad.getText();
+        tiempoServicio = txtTiempoServicio.getText();
+        gestionLlamada = txtGestionLlamada.getText();
+        h = (int) jsHora.getValue();
+        m = (int) jsMinutos.getValue();
+        formato = (String) jcFormato12.getSelectedItem();
+
+        if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
+                || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
+                || periocidad.equals("Selecione") || proxFecha.isEmpty()
+                || pago.equals("Seleccione") || observacion.isEmpty()
+                || observaciones.isEmpty() || calidadLlamada.isEmpty()
+                || tiempoServicio.isEmpty() || gestionLlamada.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "por favor llene los campos");
+
+        } else {
+
+            hora = h + ":" + m + " " + formato;
+            String num = valorCadena.replace(".", "");
+            valor = Integer.parseInt(num);
+
+            Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
+                    refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                    calidadLlamada, tiempoServicio, gestionLlamada);
+
+            Agenda agenda = new Agenda(0, 0,
+                    hora, observaciones, fecha);
+
+            ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+            ctlAgenda.edtarAgenda(agenda, nroFactura);
+            JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+            limpiarCamposServicio();
+            generarCodigo();
+
+        }
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void tbLocal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLocal1MouseClicked
+        // TODO add your handling code here:
+
+        int seleccionar, valor;
+        String direccion;
+        Miles miles = new Miles();
+
+        seleccionar = tbLocal.rowAtPoint(evt.getPoint());
+
+        direccion = String.valueOf(tbLocal1.getValueAt(seleccionar, 1));
+
+        ArrayList<DtoServicio> servicios = ctlServicio.listarServicios(txtCodigo.getText(), direccion);
+
+        DefaultTableModel modelo = (DefaultTableModel) tbServicios.getModel();
+        modelo.setRowCount(0);
+
+        for (DtoServicio servicio : servicios) {
+
+            valor = Integer.parseInt(servicio.getValor());
+
+            modelo.addRow(new Object[]{servicio.getNroFactura(), servicio.getTipoServicio(),
+                servicio.getRefuerzo(), servicio.getTecnico(), servicio.getFecha(),
+                servicio.getPeriocidad(), servicio.getProxFecha(), servicio.getPago(),
+                miles.separarMiles(valor), servicio.getObservacion()});
+
+        }
+    }//GEN-LAST:event_tbLocal1MouseClicked
+
+    private void tbServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbServiciosMouseClicked
+        // TODO add your handling code here:
+
+        int seleccionar, valor;
+        String nroServicio, fecha1, fecha;
+        Miles miles = new Miles();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        seleccionar = tbServicios.rowAtPoint(evt.getPoint());
+
+        nroServicio = String.valueOf(tbServicios.getValueAt(seleccionar, 0));
+
+        DtoServicio dtoServicio = ctlServicio.buscarDtoServicio(nroServicio);
+
+        codigoViejo = dtoServicio.getNroFactura();
+
+        txtServicio.setText(dtoServicio.getNroFactura());
+        cbTipoServicio1.setSelectedItem(dtoServicio.getTipoServicio());
+        cbRefuerzo1.setSelectedItem(dtoServicio.getRefuerzo());
+        cbPeriocidad1.setSelectedItem(dtoServicio.getPeriocidad());
+        txtProximaFecha.setText(dtoServicio.getProxFecha());
+        cbPago1.setSelectedItem(dtoServicio.getPago());
+        txtObservacion.setText(dtoServicio.getObservacion());
+        txtTecnico.setText(dtoServicio.getTecnico());
+        txtTiempoServicio.setText(dtoServicio.getTiempoServicio());
+        txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
+        txtGestionLlamada.setText(dtoServicio.getGestionLlamada());
+        txtCelularCliente.setText(dtoServicio.getCelEncargado());
+
+        fecha1 = dtoServicio.getFecha();
+        try {
+            jcFechaRealizo1.setDate(format.parse(fecha1));
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        valor = Integer.parseInt(dtoServicio.getValor());
+
+        txtValor.setText(miles.separarMiles(valor));
+        String[] separarTodo = dtoServicio.getAhora().split(":");
+
+        if (separarTodo.length > 1) {
+            String letra1, letra2, formato;
+            letra1 = separarTodo[0];
+            letra2 = separarTodo[1];
+
+            int hora, min;
+
+            hora = Integer.parseInt(letra1);
+
+            jsHora1.setValue(hora);
+
+            String[] separar = letra2.split(" ");
+
+            if (separar.length > 1) {
+
+                min = Integer.parseInt(separar[0]);
+                formato = separar[1];
+
+                jsMinutos1.setValue(min);
+                jcFormato13.setSelectedItem(formato);
+
+            } else {
+                System.out.println("nada");
+            }
+
+        } else {
+
+            System.out.println("nada");
+
+        }
+    }//GEN-LAST:event_tbServiciosMouseClicked
+
+    private void jsHoraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsHoraStateChanged
+        // TODO add your handling code here:
+
+        int valor = (int) jsHora.getValue();
+
+        if (valor < 1) {
+            jsHora.setValue(1);
+
+        }
+
+        if (valor > 12) {
+            jsHora.setValue(12);
+
+        }
+    }//GEN-LAST:event_jsHoraStateChanged
+
+    private void jsMinutosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMinutosStateChanged
+        // TODO add your handling code here:
+
+        int valor = (int) jsMinutos.getValue();
+
+        if (valor < 0) {
+            jsMinutos.setValue(0);
+
+        }
+
+        if (valor > 59) {
+            jsMinutos.setValue(59);
+
+        }
+    }//GEN-LAST:event_jsMinutosStateChanged
+
+    private void jsHora1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsHora1StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jsHora1StateChanged
+
+    private void jsMinutos1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMinutos1StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jsMinutos1StateChanged
 
     /**
      * @param args the command line arguments
@@ -2066,7 +2289,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -2074,6 +2296,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2092,7 +2315,13 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcDepartamento;
     private com.toedter.calendar.JDateChooser jcFechaRealizo;
     private com.toedter.calendar.JDateChooser jcFechaRealizo1;
+    private javax.swing.JComboBox<String> jcFormato12;
+    private javax.swing.JComboBox<String> jcFormato13;
     private com.toedter.calendar.JDateChooser jcRefuerzo;
+    private javax.swing.JSpinner jsHora;
+    private javax.swing.JSpinner jsHora1;
+    private javax.swing.JSpinner jsMinutos;
+    private javax.swing.JSpinner jsMinutos1;
     private javax.swing.JTable tbLocal;
     private javax.swing.JTable tbLocal1;
     private javax.swing.JTable tbLocal2;
@@ -2104,8 +2333,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCiudadNegocio;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCodigoCliente;
-    private javax.swing.JTextField txtConfirmacion;
-    private javax.swing.JTextField txtConfirmacionAgenda;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtCorreoCliente;
     private javax.swing.JTextField txtDireccion;
@@ -2114,8 +2341,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtEncargadoNegocio;
     private javax.swing.JTextField txtFactura;
     private javax.swing.JTextField txtGestionLlamada;
-    private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtHoraAgenda;
     private javax.swing.JTextField txtLlamadaCalidad;
     private javax.swing.JTextField txtMunicipioNegocio;
     private javax.swing.JTextField txtNit;
@@ -2133,6 +2358,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtServicio;
     private javax.swing.JTextField txtTecnico;
     private javax.swing.JTextField txtTecnico1;
+    private javax.swing.JTextField txtTelefonoEncargado;
     private javax.swing.JTextField txtTiempoServicio;
     private javax.swing.JTextField txtTipoCliente;
     private javax.swing.JTextField txtValor;
