@@ -13,13 +13,13 @@ public class DtoServicio {
 
     String codigo, tipo, nombre, apellido, celular, correo, nombreNegocio, direccion,
             nit, encargado, ciudad, municipio, nroFactura, tipoServicio, refuerzo, tecnico, fecha,
-            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, afecha,
+            periocidad, proxFecha, pago, valor, vendedor, observacion, ahora, afecha, aObservacion, 
             calidadLlamada, tiempoServicio, gestionLlamada, celEncargado;
 
     public DtoServicio() {
     }
 
-    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String afecha, String calidadLlamada, String tiempoServicio, String gestionLlamada, String celEncargado) {
+    public DtoServicio(String codigo, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String ciudad, String municipio, String nroFactura, String tipoServicio, String refuerzo, String tecnico, String fecha, String periocidad, String proxFecha, String pago, String valor, String vendedor, String observacion, String ahora, String afecha, String aObservacion, String calidadLlamada, String tiempoServicio, String gestionLlamada, String celEncargado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -45,6 +45,7 @@ public class DtoServicio {
         this.observacion = observacion;
         this.ahora = ahora;
         this.afecha = afecha;
+        this.aObservacion = aObservacion;
         this.calidadLlamada = calidadLlamada;
         this.tiempoServicio = tiempoServicio;
         this.gestionLlamada = gestionLlamada;
@@ -251,6 +252,14 @@ public class DtoServicio {
         this.afecha = afecha;
     }
 
+    public String getaObservacion() {
+        return aObservacion;
+    }
+
+    public void setaObservacion(String aObservacion) {
+        this.aObservacion = aObservacion;
+    }
+
     public String getCalidadLlamada() {
         return calidadLlamada;
     }
@@ -282,5 +291,7 @@ public class DtoServicio {
     public void setCelEncargado(String celEncargado) {
         this.celEncargado = celEncargado;
     }
+
+
 
 }

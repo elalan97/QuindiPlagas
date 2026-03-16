@@ -328,6 +328,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             txtCorreoCliente.setText(dtoServicio.getCorreo());
             txtCelularCliente.setText(dtoServicio.getCelular());
 
+            codigoViejo = dtoServicio.getNroFactura();
             txtServicio.setText(dtoServicio.getNroFactura());
             cbTipoServicio1.setSelectedItem(dtoServicio.getTipoServicio());
             cbRefuerzo1.setSelectedItem(dtoServicio.getRefuerzo());
@@ -335,6 +336,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             cbPago1.setSelectedItem(dtoServicio.getPago());
             txtValor.setText(dtoServicio.getValor());
             txtObservacion.setText(dtoServicio.getObservacion());
+            txtObsevacionAgenda.setText(dtoServicio.getaObservacion());
             txtTecnico.setText(dtoServicio.getTecnico());
             txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
             txtGestionLlamada.setText(dtoServicio.getGestionLlamada());
@@ -1685,8 +1687,40 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     txtNombreNegocio1.setText(dtoAgenda.getlNombreNegocio());
                     txtObservacion1.setText(dtoAgenda.getsObservacion());
                     txtTipoCliente.setText(dtoAgenda.getcTipo());
-                    //txtHoraAgenda.setText(dtoAgenda.getaHora());
                     txtObservacionesAgenda.setText(dtoAgenda.getaObservacion());
+
+                    String[] separarTodo = dtoAgenda.getaHora().split(":");
+
+                    if (separarTodo.length > 1) {
+                        String letra1, letra2, formato;
+                        letra1 = separarTodo[0];
+                        letra2 = separarTodo[1];
+
+                        int hora, min;
+
+                        hora = Integer.parseInt(letra1);
+
+                        jsHora.setValue(hora);
+
+                        String[] separar = letra2.split(" ");
+
+                        if (separar.length > 1) {
+
+                            min = Integer.parseInt(separar[0]);
+                            formato = separar[1];
+
+                            jsMinutos.setValue(min);
+                            jcFormato12.setSelectedItem(formato);
+
+                        } else {
+                            System.out.println("nada");
+                        }
+
+                    } else {
+
+                        System.out.println("nada");
+
+                    }
 
                     fecha1 = dtoAgenda.getsFecha();
                     fecha = format.parse(fecha1);
@@ -2012,9 +2046,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         calidadLlamada = txtLlamadaCalidad.getText();
         tiempoServicio = txtTiempoServicio.getText();
         gestionLlamada = txtGestionLlamada.getText();
-        h = (int) jsHora.getValue();
-        m = (int) jsMinutos.getValue();
-        formato = (String) jcFormato12.getSelectedItem();
+        h = (int) jsHora1.getValue();
+        m = (int) jsMinutos1.getValue();
+        formato = (String) jcFormato13.getSelectedItem();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
@@ -2099,6 +2133,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtProximaFecha.setText(dtoServicio.getProxFecha());
         cbPago1.setSelectedItem(dtoServicio.getPago());
         txtObservacion.setText(dtoServicio.getObservacion());
+        txtObsevacionAgenda.setText(dtoServicio.getaObservacion());
         txtTecnico.setText(dtoServicio.getTecnico());
         txtTiempoServicio.setText(dtoServicio.getTiempoServicio());
         txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
