@@ -341,6 +341,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             txtLlamadaCalidad.setText(dtoServicio.getCalidadLlamada());
             txtGestionLlamada.setText(dtoServicio.getGestionLlamada());
             cbPeriocidad1.setSelectedItem(dtoServicio.getPeriocidad());
+            txtTiempoServicio.setText(dtoServicio.getTiempoServicio());
 
             fecha = dtoServicio.getFecha();
             try {

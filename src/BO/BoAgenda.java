@@ -189,4 +189,8 @@ public class BoAgenda {
         daoReportesJasper.reporteAgenda(fecha);
     }
 
+    public void reporteAgendaExcel(String fecha) throws JRException{
+        daoReportesJasper.reporteAgendaExcel(fecha);
+    }
+
 }

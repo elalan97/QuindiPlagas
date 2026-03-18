@@ -7,6 +7,7 @@ package Controlador;
 import BO.BoReportes;
 import DTO.DtoServicio;
 import java.util.ArrayList;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -28,20 +29,25 @@ public class CtlReportes {
 
     public ArrayList<DtoServicio> listaServicioDepartamentoCiudad(String columna, String departamento, String ciudad) {
 
-        return null;
+        return boReportes.listaServicioDepartamentoCiudad(columna, departamento, ciudad);
 
     }
 
     public ArrayList<DtoServicio> listaServicioDepartamentoCiudadFecha(String columna, String departamento, String ciudad, String fecha) {
 
-        return null;
+        return boReportes.listaServicioDepartamentoCiudadFecha(columna, departamento, ciudad, fecha);
 
     }
 
     public ArrayList<DtoServicio> listaServicioFiltro(String columna, String departamento, String ciudad, String fecha, String dato) {
 
-        return boReportes.listaServicioDepartamentoCiudadFecha(columna, departamento, ciudad, fecha);
+        return boReportes.listaServicioDepartamentoCiudadFecha(columna, departamento, ciudad, fecha, dato);
 
     }
 
-}
+    public void reporte(String columna, String departamento, String ciudad,
+            String fecha, String dato) throws JRException {
+        boReportes.reporte(columna, departamento, ciudad, fecha, dato);
+    }
+
+    }

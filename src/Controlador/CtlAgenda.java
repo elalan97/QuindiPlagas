@@ -53,6 +53,10 @@ public class CtlAgenda {
     public void reporteAgenda(String fecha) throws JRException {
         boAgenda.reporteAgenda(fecha);
     }
+    
+    public void reporteAgendaExcel(String fecha) throws JRException{
+        boAgenda.reporteAgendaExcel(fecha);
+    }
 
     public DtoAgenda buscarServicioAgenda(String nroFactura) {
         return boAgenda.buscarServicioAgenda(nroFactura);
