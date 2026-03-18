@@ -1795,8 +1795,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, observaciones, fechaRefuerzo);
 
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
+                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
+                    
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();
                     generarCodigo();
@@ -1814,8 +1815,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     Agenda agenda = new Agenda(0, 0,
                             hora, observaciones, fecha);
 
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
+                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
+                    
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();
                     generarCodigo();
@@ -2073,8 +2075,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             Agenda agenda = new Agenda(0, 0,
                     hora, observaciones, fecha);
 
-            ctlServicio.editarServicioHistorial(servicio, codigoViejo);
             ctlAgenda.edtarAgenda(agenda, nroFactura);
+            ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+            
             JOptionPane.showMessageDialog(null, "se ha editado correctamente");
             limpiarCamposServicio();
             generarCodigo();
