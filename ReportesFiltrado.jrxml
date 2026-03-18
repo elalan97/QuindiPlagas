@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportesFiltrado" pageWidth="980" pageHeight="595" orientation="Landscape" columnWidth="940" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21990088-8cfb-4089-b715-328e4c1f0f10">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportesFiltrado" pageWidth="1070" pageHeight="595" orientation="Landscape" columnWidth="1030" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21990088-8cfb-4089-b715-328e4c1f0f10">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="QuindiPlagas"/>
 	<parameter name="Filtro" class="java.lang.String"/>
@@ -181,7 +181,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[fecha]]></text>
 			</staticText>
@@ -191,7 +191,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[tecnico]]></text>
 			</staticText>
@@ -201,7 +201,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[hora]]></text>
 			</staticText>
@@ -211,7 +211,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[tipoServicio]]></text>
 			</staticText>
@@ -220,7 +220,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="53a7eb68-912e-4ead-b538-62bbd1360152"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Razon social]]></text>
 			</staticText>
@@ -230,7 +230,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[nombre]]></text>
 			</staticText>
@@ -240,7 +240,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[apellido]]></text>
 			</staticText>
@@ -249,7 +249,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ba59be0-72d2-4d97-9a4c-6d32a062ee93"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[direccion]]></text>
 			</staticText>
@@ -259,7 +259,7 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[celular]]></text>
 			</staticText>
@@ -269,38 +269,47 @@ $P!{Filtro}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[pago]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="750" y="39" width="60" height="30" uuid="c161611b-8500-46a6-8b89-2b94608168cf">
+				<reportElement x="830" y="39" width="60" height="30" uuid="c161611b-8500-46a6-8b89-2b94608168cf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f5e0246-7fd2-460c-850d-f4fd5aa9d6df"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[vendedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="810" y="39" width="70" height="30" uuid="4aecbd52-d6d8-46b7-864d-26c3f62f942f">
+				<reportElement x="890" y="39" width="80" height="30" uuid="4aecbd52-d6d8-46b7-864d-26c3f62f942f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd2c111a-2c5c-4e31-91e3-1434ed923ea1"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Departamento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="880" y="39" width="60" height="30" uuid="2b3da25f-9f87-44cc-b0df-95af2eff5463">
+				<reportElement x="970" y="39" width="60" height="30" uuid="2b3da25f-9f87-44cc-b0df-95af2eff5463">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26bb6d8b-d257-4c3c-8a9f-11ac223616e5"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ciudad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="39" width="80" height="30" uuid="65f4c1dd-1e96-4898-b30b-92f12ca751d9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -405,7 +414,7 @@ $P!{Filtro}]]>
 				<textFieldExpression><![CDATA[$F{pago}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="750" y="0" width="60" height="45" uuid="ce6a5f29-c6c4-4794-a3c1-f7f105dd6646">
+				<reportElement x="830" y="0" width="60" height="45" uuid="ce6a5f29-c6c4-4794-a3c1-f7f105dd6646">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f5e0246-7fd2-460c-850d-f4fd5aa9d6df"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -414,7 +423,7 @@ $P!{Filtro}]]>
 				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="810" y="0" width="70" height="45" uuid="2c0057e5-c0c8-49f0-8d39-0dab5ee084df">
+				<reportElement x="890" y="0" width="80" height="45" uuid="2c0057e5-c0c8-49f0-8d39-0dab5ee084df">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd2c111a-2c5c-4e31-91e3-1434ed923ea1"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -423,7 +432,7 @@ $P!{Filtro}]]>
 				<textFieldExpression><![CDATA[$F{COLUMN_13}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="880" y="0" width="60" height="45" uuid="e54d11b8-2e21-482c-8414-38f2bba9b721">
+				<reportElement x="970" y="0" width="60" height="45" uuid="e54d11b8-2e21-482c-8414-38f2bba9b721">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26bb6d8b-d257-4c3c-8a9f-11ac223616e5"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -431,6 +440,15 @@ $P!{Filtro}]]>
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{COLUMN_12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="0" width="80" height="45" uuid="843f1d8d-28ee-45ca-9da2-30f336c1ca5a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

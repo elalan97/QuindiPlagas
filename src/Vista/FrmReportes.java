@@ -438,7 +438,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                     String fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
                     
                     ctlReportes.reporte(columna, departamento, ciudad, fecha, dato);
-                    JOptionPane.showMessageDialog(null, "se exporto");
+                    JOptionPane.showMessageDialog(null, "se ha generado el reporte");
 
                 }
                 
