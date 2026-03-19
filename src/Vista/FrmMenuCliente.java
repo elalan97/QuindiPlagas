@@ -909,7 +909,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel4.add(cbPago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 170, -1));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel52.setText("Observacion(Agenda)");
+        jLabel52.setText("Nro Factura");
         jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 373, -1, -1));
         jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 170, -1));
 
@@ -1135,7 +1135,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel5.add(txtObservacionesAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 70, 160, -1));
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel50.setText("Observaciones");
+        jLabel50.setText("Nro Factura");
         jPanel5.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 73, -1, -1));
 
         jcRefuerzo.setDateFormatString("yyyy-MM-dd");
@@ -1486,9 +1486,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
 
+        //nro Factura  = observacion agenda
         int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, observaciones, codigo,
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, observacionAgenda, codigo,
                 formato;
 
         valorCadena = txtValor1.getText();
@@ -1503,7 +1504,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         observacion = txtObservacion1.getText();
         direccion = txtDireccionNegocio.getText();
         ciudad = txtCiudadNegocio.getText();
-        observaciones = txtObservacionesAgenda.getText();
+        observacionAgenda = txtObservacionesAgenda.getText();
         codigo = txtCodigoCliente.getText();
         fechaRefuerzo = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
         h = (int) jsHora.getValue();
@@ -1533,14 +1534,44 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, observaciones, fecha);
-
-                    Agenda agendaRefuerzo = new Agenda(0, 0,
-                            hora, observacion, fechaRefuerzo);
+                            hora, observacionAgenda, fecha);
 
                     ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
-                    ctlAgenda.guardarAgenda(agendaRefuerzo, nroFactura);
+
+
+                    int consecutivo;
+                    String letra1, numero, codigoCadena = null;
+
+                    String[] separarTodo = nroFactura.split("S");
+
+                    if (separarTodo.length > 1) {
+
+                        letra1 = separarTodo[0];
+                        numero = separarTodo[1];
+
+                        consecutivo = Integer.parseInt(numero) + 1;
+
+                        codigoCadena = "S" + consecutivo;
+                        
+
+                    } else {
+
+                        System.out.println("nada");
+
+                    }
+
+                    Servicio servicioRefuerzo = new Servicio(0, 0, 0, codigoCadena, 
+                            "Refuerzo", "No", "NA", fechaRefuerzo, 
+                            "Unica vez", fechaRefuerzo, "Pendiente", vendedor, "NA",
+                            "NA", "NA", "NA");
+
+                    Agenda agendaRefuerzo = new Agenda(0, 0,
+                            "8:0 AM", "NA", fechaRefuerzo);
+                    
+                    ctlServicio.guardarServicio(servicioRefuerzo, direccion, ciudad, codigo);
+                    ctlAgenda.guardarAgenda(agendaRefuerzo, codigoCadena);
+
                     JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                     limpiarCamposServicio();
                     generarCodigo();
@@ -1556,7 +1587,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, observaciones, fecha);
+                            hora, observacionAgenda, fecha);
 
                     ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
@@ -1748,9 +1779,10 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
 
+        //nro Factura  = observacion agenda
         int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, observaciones, codigo,
+                observacion, valorCadena, direccion, ciudad, fechaRefuerzo, hora, observacionAgenda, codigo,
                 formato;
 
         valorCadena = txtValor1.getText();
@@ -1765,7 +1797,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         observacion = txtObservacion1.getText();
         direccion = txtDireccionNegocio.getText();
         ciudad = txtCiudadNegocio.getText();
-        observaciones = txtObservacionesAgenda.getText();
+        observacionAgenda = txtObservacionesAgenda.getText();
         fechaRefuerzo = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
         codigo = txtCodigoCliente.getText();
         h = (int) jsHora.getValue();
@@ -1784,8 +1816,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             try {
 
-                if (refuerzo.equals("Si")) {
-
                     hora = h + ":" + m + " " + formato;
                     String num = valorCadena.replace(".", "");
                     valor = Integer.parseInt(num);
@@ -1795,27 +1825,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                             "NA", "NA", "NA");
 
                     Agenda agenda = new Agenda(0, 0,
-                            hora, observaciones, fechaRefuerzo);
-
-                    ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
-
-                    JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-                    limpiarCamposServicio();
-                    generarCodigo();
-
-                } else {
-
-                    hora = h + ":" + m + " " + formato;
-                    String num = valorCadena.replace(".", "");
-                    valor = Integer.parseInt(num);
-
-                    Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                            "NA", "NA", "NA");
-
-                    Agenda agenda = new Agenda(0, 0,
-                            hora, observaciones, fecha);
+                            hora, observacionAgenda, fecha);
 
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
@@ -1823,7 +1833,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();
                     generarCodigo();
-                }
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -2032,9 +2041,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
 
+        
+        //nro Factura  = observacion agenda
         int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
-                observacion, valorCadena, hora, observaciones, calidadLlamada,
+                observacion, valorCadena, hora, observacioneAgenda, calidadLlamada,
                 tiempoServicio, gestionLlamada, formato;
 
         valorCadena = txtValor.getText();
@@ -2047,7 +2058,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         proxFecha = txtProximaFecha.getText();
         pago = (String) cbPago1.getSelectedItem();
         observacion = txtObservacion.getText();
-        observaciones = txtObsevacionAgenda.getText();
+        observacioneAgenda = txtObsevacionAgenda.getText();
         calidadLlamada = txtLlamadaCalidad.getText();
         tiempoServicio = txtTiempoServicio.getText();
         gestionLlamada = txtGestionLlamada.getText();
@@ -2059,7 +2070,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
                 || periocidad.equals("Selecione") || proxFecha.isEmpty()
                 || pago.equals("Seleccione") || observacion.isEmpty()
-                || observaciones.isEmpty() || calidadLlamada.isEmpty()
+                || observacioneAgenda.isEmpty() || calidadLlamada.isEmpty()
                 || tiempoServicio.isEmpty() || gestionLlamada.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "por favor llene los campos");
@@ -2075,7 +2086,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     calidadLlamada, tiempoServicio, gestionLlamada);
 
             Agenda agenda = new Agenda(0, 0,
-                    hora, observaciones, fecha);
+                    hora, observacioneAgenda, fecha);
 
             ctlAgenda.edtarAgenda(agenda, nroFactura);
             ctlServicio.editarServicioHistorial(servicio, codigoViejo);

@@ -137,7 +137,7 @@
                 <Column editable="true" title="Encargado" type="java.lang.Object"/>
                 <Column editable="true" title="Telefono Encargado" type="java.lang.Object"/>
                 <Column editable="true" title="Valor" type="java.lang.Object"/>
-                <Column editable="true" title="Observacion" type="java.lang.Object"/>
+                <Column editable="true" title="# Factura" type="java.lang.Object"/>
                 <Column editable="true" title="Nro Servicio" type="java.lang.Object"/>
                 <Column editable="true" title="Refuerzo" type="java.lang.Object"/>
                 <Column editable="true" title="Periocidad" type="java.lang.Object"/>
