@@ -277,7 +277,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     public void cargarCampos() {
 
         int valor = 0;
-        String codigo, ventanaEjecutada, fecha;
+        String codigo, ventanaEjecutada, fecha, fechaAgenda;
         Miles miles = new Miles();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -343,7 +343,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             cbPeriocidad1.setSelectedItem(dtoServicio.getPeriocidad());
             txtTiempoServicio.setText(dtoServicio.getTiempoServicio());
 
-            fecha = dtoServicio.getFecha();
+            fecha = dtoServicio.getAfecha();
             try {
                 jcFechaRealizo1.setDate(format.parse(fecha));
             } catch (ParseException ex) {
@@ -515,6 +515,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jsHora1 = new javax.swing.JSpinner();
         jsMinutos1 = new javax.swing.JSpinner();
         jcFormato13 = new javax.swing.JComboBox<>();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -861,7 +862,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel4.add(txtProximaFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 170, -1));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel29.setText("Hora");
+        jLabel29.setText("Hora Agenda");
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 523, -1, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -943,6 +944,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jcFormato13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
         jPanel4.add(jcFormato13, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, -1, -1));
+        jPanel4.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1860, 170, 150, -1));
 
         jTabbedPane1.addTab("", jPanel4);
 
@@ -1797,7 +1799,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                     ctlAgenda.edtarAgendaRefuerzo(agenda, nroFactura, fechaRefuerzoVieja);
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
-                    
+
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();
                     generarCodigo();
@@ -1817,7 +1819,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                     ctlAgenda.edtarAgenda(agenda, nroFactura);
                     ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
-                    
+
                     JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                     limpiarCamposServicio();
                     generarCodigo();
@@ -2077,7 +2079,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             ctlAgenda.edtarAgenda(agenda, nroFactura);
             ctlServicio.editarServicioHistorial(servicio, codigoViejo);
-            
+
             JOptionPane.showMessageDialog(null, "se ha editado correctamente");
             limpiarCamposServicio();
             generarCodigo();
@@ -2144,7 +2146,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtGestionLlamada.setText(dtoServicio.getGestionLlamada());
         txtCelularCliente.setText(dtoServicio.getCelEncargado());
 
-        fecha1 = dtoServicio.getFecha();
+        fecha1 = dtoServicio.getAfecha();
         try {
             jcFechaRealizo1.setDate(format.parse(fecha1));
         } catch (ParseException ex) {
@@ -2222,10 +2224,33 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
     private void jsHora1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsHora1StateChanged
         // TODO add your handling code here:
+
+        int valor = (int) jsHora1.getValue();
+
+        if (valor < 1) {
+            jsHora1.setValue(1);
+
+        }
+
+        if (valor > 12) {
+            jsHora1.setValue(12);
+
+        }
     }//GEN-LAST:event_jsHora1StateChanged
 
     private void jsMinutos1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsMinutos1StateChanged
         // TODO add your handling code here:
+        int valor = (int) jsMinutos1.getValue();
+
+        if (valor < 0) {
+            jsMinutos1.setValue(0);
+
+        }
+
+        if (valor > 59) {
+            jsMinutos1.setValue(59);
+
+        }
     }//GEN-LAST:event_jsMinutos1StateChanged
 
     /**
@@ -2285,6 +2310,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
