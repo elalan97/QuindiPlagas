@@ -108,7 +108,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nombre Del Negocio"/>
+        <Property name="text" type="java.lang.String" value="Razon Social"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -471,7 +471,7 @@
                 <Column editable="true" title="Apellido" type="java.lang.Object"/>
                 <Column editable="true" title="Celular" type="java.lang.Object"/>
                 <Column editable="true" title="Correo" type="java.lang.Object"/>
-                <Column editable="true" title="Nombre del Negocio" type="java.lang.Object"/>
+                <Column editable="true" title="Razon Social" type="java.lang.Object"/>
                 <Column editable="true" title="Direccion" type="java.lang.Object"/>
               </Table>
             </Property>

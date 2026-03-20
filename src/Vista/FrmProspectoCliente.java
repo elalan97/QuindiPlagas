@@ -207,7 +207,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 73, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Nombre Del Negocio");
+        jLabel7.setText("Razon Social");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 73, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -322,7 +322,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Nombre del Negocio", "Direccion"
+                "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Razon Social", "Direccion"
             }
         ));
         tbProspectoCliente.addMouseListener(new java.awt.event.MouseAdapter() {

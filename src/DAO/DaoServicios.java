@@ -243,7 +243,7 @@ public class DaoServicios extends Conexion {
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha, a.observacion "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -281,6 +281,7 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
@@ -301,7 +302,7 @@ public class DaoServicios extends Conexion {
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha, a.observacion "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -339,6 +340,7 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
@@ -358,7 +360,7 @@ public class DaoServicios extends Conexion {
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha "
+                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha, a.observacion "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -398,6 +400,7 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setObservacion(resultadoDB.getString("s.observacion"));
                 dtoServicio.setAfecha(resultadoDB.getString("a.fecha"));
                 dtoServicio.setAhora(resultadoDB.getString("a.hora"));
+                dtoServicio.setaObservacion(resultadoDB.getString("a.observacion"));
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setTiempoServicio(resultadoDB.getString("s.tiempoServicio"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
