@@ -883,7 +883,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         });
         jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 320, -1, -1));
 
-        cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo" }));
+        cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo", "Instalcion de Lampara UV", "Laminas de Lampara UV" }));
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 170, -1));
 
         cbRefuerzo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
@@ -1051,7 +1051,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel39.setText("Tipo de Servicio");
         jPanel5.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
 
-        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo" }));
+        cbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo", "Instalcion de Lampara UV", "Laminas de Lampara UV" }));
         jPanel5.add(cbTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 160, -1));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
