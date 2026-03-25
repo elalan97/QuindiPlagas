@@ -133,6 +133,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         cbTipoServicio.addItem("Inmunizacion");
         cbTipoServicio.addItem("Termonebulizacion");
         cbTipoServicio.addItem("Control + Termo");
+        cbTipoServicio.addItem("Instalcion de Lampara UV");
+        cbTipoServicio.addItem("Laminas de Lampara UV");
+
 
     }
 
