@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
@@ -34,7 +34,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
     public FrmListaServicios() {
         initComponents();
-        this.setSize(new Dimension(1620, 650));
+        this.setSize(new Dimension(1720, 650));
         this.setTitle("Lista Servicios");
         ctlServicio = new CtlServicio();
         ctlUsuario = new CtlUsuario();
@@ -72,7 +72,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{dtoServicio.getAfecha(),
                 dtoServicio.getTecnico(), dtoServicio.getAhora(),
                 dtoServicio.getTipoServicio(), dtoServicio.getNombreNegocio(), dtoServicio.getNombre(),
-                dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getCelular(),
+                dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getMunicipio(),
+                dtoServicio.getCiudad(), dtoServicio.getCelular(),
                 dtoServicio.getEncargado(), dtoServicio.getCelEncargado(), dtoServicio.getValor(),
                 dtoServicio.getaObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                 dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(), dtoServicio.getPago(),
@@ -139,13 +140,13 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         tbServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Razon Social", "Nombre", "Apellido", "Direccion", "Telefono", "Encargado", "Telefono Encargado", "Valor", "# Factura", "Nro Servicio", "Refuerzo", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Tiempo del servicio", "Llamada de Calidad", "Gestion de Llamada"
+                "Fecha Agenda", "Tecnico", "Hora", "Tipo de Servicio", "Razon Social", "Nombre", "Apellido", "Direccion", "Departamento", "Ciudad", "Telefono", "Encargado", "Telefono Encargado", "Valor", "# Factura", "Nro Servicio", "Refuerzo", "Periocidad", "Proxima Fecha", "Pago", "Vendedor", "Tiempo del servicio", "Llamada de Calidad", "Gestion de Llamada"
             }
         ));
         tbServicios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,9 +157,10 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tbServicios);
         if (tbServicios.getColumnModel().getColumnCount() > 0) {
             tbServicios.getColumnModel().getColumn(6).setResizable(false);
+            tbServicios.getColumnModel().getColumn(9).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1570, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1670, 480));
 
         btnFiltrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnFiltrar.setText("Filtrar");
@@ -233,7 +235,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                         modelo.addRow(new Object[]{dtoServicio.getAfecha(),
                             dtoServicio.getTecnico(), dtoServicio.getAhora(),
                             dtoServicio.getTipoServicio(), dtoServicio.getNombreNegocio(), dtoServicio.getNombre(),
-                            dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getCelular(),
+                            dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getMunicipio(),
+                            dtoServicio.getCiudad(), dtoServicio.getCelular(),
                             dtoServicio.getEncargado(), dtoServicio.getCelEncargado(), dtoServicio.getValor(),
                             dtoServicio.getaObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                             dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(), dtoServicio.getPago(),
@@ -260,7 +263,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             modelo.addRow(new Object[]{dtoServicio.getAfecha(),
                                 dtoServicio.getTecnico(), dtoServicio.getAhora(),
                                 dtoServicio.getTipoServicio(), dtoServicio.getNombreNegocio(), dtoServicio.getNombre(),
-                                dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getCelular(),
+                                dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getMunicipio(),
+                                dtoServicio.getCiudad(), dtoServicio.getCelular(),
                                 dtoServicio.getEncargado(), dtoServicio.getCelEncargado(), dtoServicio.getValor(),
                                 dtoServicio.getaObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                                 dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(), dtoServicio.getPago(),
@@ -281,7 +285,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                             modelo.addRow(new Object[]{dtoServicio.getAfecha(),
                                 dtoServicio.getTecnico(), dtoServicio.getAhora(),
                                 dtoServicio.getTipoServicio(), dtoServicio.getNombreNegocio(), dtoServicio.getNombre(),
-                                dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getCelular(),
+                                dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getMunicipio(),
+                                dtoServicio.getCiudad(), dtoServicio.getCelular(),
                                 dtoServicio.getEncargado(), dtoServicio.getCelEncargado(), dtoServicio.getValor(),
                                 dtoServicio.getaObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                                 dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(), dtoServicio.getPago(),
@@ -304,7 +309,8 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
                         modelo.addRow(new Object[]{dtoServicio.getAfecha(),
                             dtoServicio.getTecnico(), dtoServicio.getAhora(),
                             dtoServicio.getTipoServicio(), dtoServicio.getNombreNegocio(), dtoServicio.getNombre(),
-                            dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getCelular(),
+                            dtoServicio.getApellido(), dtoServicio.getDireccion(), dtoServicio.getMunicipio(),
+                            dtoServicio.getCiudad(), dtoServicio.getCelular(),
                             dtoServicio.getEncargado(), dtoServicio.getCelEncargado(), dtoServicio.getValor(),
                             dtoServicio.getaObservacion(), dtoServicio.getNroFactura(), dtoServicio.getRefuerzo(),
                             dtoServicio.getPeriocidad(), dtoServicio.getProxFecha(), dtoServicio.getPago(),

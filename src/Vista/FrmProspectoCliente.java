@@ -127,6 +127,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         cbEstado.setSelectedItem("Seleccione");
         cbTipo.setSelectedItem("Seleccione");
         jcDepartamento.setSelectedItem("Seleccione");
+        txtTelefonoEncargado.setText("");
     }
 
     /**
