@@ -349,7 +349,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
 
         seleccionar = tbServicios.rowAtPoint(evt.getPoint());
 
-        factura = String.valueOf(tbServicios.getValueAt(seleccionar, 13));
+        factura = String.valueOf(tbServicios.getValueAt(seleccionar, 15));
 
         ctlServicio.almacenarDatos1(factura, "servicio");
 
