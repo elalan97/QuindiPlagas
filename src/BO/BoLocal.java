@@ -115,41 +115,9 @@ public class BoLocal {
     public ArrayList<DtoClienteLocal> listaClienteLocalporFiltro(String columna, String dato) {
 
         switch (columna) {
-            case "Codigo":
+            case "Otro":
 
-                return daoLocal.listaClienteLocalporFiltro("c.codigo", dato);
-
-            case "Tipo":
-
-                return daoLocal.listaClienteLocalporFiltro("c.tipo", dato);
-
-            case "Nombre":
-
-                return daoLocal.listaClienteLocalporFiltro("c.nombre", dato);
-
-            case "Apellido":
-
-                return daoLocal.listaClienteLocalporFiltro("c.apellido", dato);
-
-            case "Telefono":
-
-                return daoLocal.listaClienteLocalporFiltro("c.celular", dato);
-                
-            case "Razon Social":
-
-                return daoLocal.listaClienteLocalporFiltro("l.nombreNegocio", dato);
-
-            case "Direccion":
-
-                return daoLocal.listaClienteLocalporFiltro("l.direccion", dato);
-
-            case "Nit":
-
-                return daoLocal.listaClienteLocalporFiltro("l.nit", dato);
-
-            case "Encargado":
-
-                return daoLocal.listaClienteLocalporFiltro("l.encargado", dato);
+                return daoLocal.listaUniversal(dato);
 
             case "Departamento":
 

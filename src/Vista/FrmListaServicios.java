@@ -119,7 +119,7 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
         jLabel2.setText("Lista Servicios");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
-        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre", "Apellido", "Razon Social", "Direccion", "Nro Factura", "TipoServicio", "Tecnico", "Telefono", "Telefono Encargado", "Periocidad", "Proxima Fecha", "Pago", "Vendedor y Fecha", "Observacion", "Fecha Agenda" }));
+        cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Vendedor y Fecha", "Fecha Agenda", "Otro" }));
         cbColumna.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbColumnaItemStateChanged(evt);

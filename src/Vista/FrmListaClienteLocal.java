@@ -84,7 +84,7 @@ public class FrmListaClienteLocal extends javax.swing.JInternalFrame {
         jLabel2.setText("Columna");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 73, -1, -1));
 
-        jcColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Codigo", "Tipo", "Nombre", "Apellido", "Telefono", "Razon Social", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad" }));
+        jcColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Departamento", "Ciudad", "Otro" }));
         getContentPane().add(jcColumna, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 150, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

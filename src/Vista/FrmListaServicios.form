@@ -54,23 +54,11 @@
     <Component class="javax.swing.JComboBox" name="cbColumna">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="16">
+          <StringArray count="4">
             <StringItem index="0" value="Seleccione"/>
-            <StringItem index="1" value="Nombre"/>
-            <StringItem index="2" value="Apellido"/>
-            <StringItem index="3" value="Razon Social"/>
-            <StringItem index="4" value="Direccion"/>
-            <StringItem index="5" value="Nro Factura"/>
-            <StringItem index="6" value="TipoServicio"/>
-            <StringItem index="7" value="Tecnico"/>
-            <StringItem index="8" value="Telefono"/>
-            <StringItem index="9" value="Telefono Encargado"/>
-            <StringItem index="10" value="Periocidad"/>
-            <StringItem index="11" value="Proxima Fecha"/>
-            <StringItem index="12" value="Pago"/>
-            <StringItem index="13" value="Vendedor y Fecha"/>
-            <StringItem index="14" value="Observacion"/>
-            <StringItem index="15" value="Fecha Agenda"/>
+            <StringItem index="1" value="Vendedor y Fecha"/>
+            <StringItem index="2" value="Fecha Agenda"/>
+            <StringItem index="3" value="Otro"/>
           </StringArray>
         </Property>
       </Properties>

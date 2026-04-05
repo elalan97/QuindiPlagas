@@ -274,61 +274,13 @@ public class BoServicio {
     public ArrayList<DtoServicio> listarServiciosPorFiltro(String columna, String dato) {
 
         switch (columna) {
-            case "Razon Social":
-
-                return daoServicios.listarServiciosPorFiltro("l.nombreNegocio", dato);
-
-            case "Direccion":
-
-                return daoServicios.listarServiciosPorFiltro("l.direccion", dato);
-
-            case "Nro Factura":
-
-                return daoServicios.listarServiciosPorFiltro("s.nroFactura", dato);
-
-            case "TipoServicio":
-
-                return daoServicios.listarServiciosPorFiltro("s.tipoServicio", dato);
-
-            case "Tecnico":
-
-                return daoServicios.listarServiciosPorFiltro("s.tecnico", dato);
-
-            case "Telefono":
-
-                return daoServicios.listarServiciosPorFiltro("c.celular", dato);
-
-            case "Periocidad":
-
-                return daoServicios.listarServiciosPorFiltro("s.periocidad", dato);
-
-            case "Proxima Fecha":
-
-                return daoServicios.listarServiciosPorFiltro("s.proxFecha", dato);
-
-            case "Pago":
-
-                return daoServicios.listarServiciosPorFiltro("s.pago", dato);
-
-            case "Observacion":
-
-                return daoServicios.listarServiciosPorFiltro("s.observacion", dato);
-
-            case "Nombre":
-
-                return daoServicios.listarServiciosPorFiltro("c.nombre", dato);
-
-            case "Apellido":
-
-                return daoServicios.listarServiciosPorFiltro("c.apellido", dato);
-
             case "Fecha Agenda":
 
                 return daoServicios.listarServiciosPorFiltro("a.fecha", dato);
 
-            case "Telefono Encargado":
+            case "Otro":
 
-                return daoServicios.listarServiciosPorFiltro("l.telefonoEncargado", dato);
+                return daoServicios.listarUniversal(dato);
 
         }
 

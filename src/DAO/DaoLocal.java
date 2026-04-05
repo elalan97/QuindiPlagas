@@ -116,7 +116,7 @@ public class DaoLocal extends Conexion {
                 + "VALUES ('" + local.getNombreNegocio() + "', '" + local.getDireccion() + "', '"
                 + local.getNit() + "', '" + local.getEncargado() + "', '"
                 + local.getCiudadFk() + "', '" + local.getClienteFk() + "', '"
-                + local.getCelEncargado()+ "' "
+                + local.getCelEncargado() + "' "
                 + ");";
         return super.ejecutar(consulta);
 
@@ -313,4 +313,50 @@ public class DaoLocal extends Conexion {
         return dtoLocal;
 
     }
+
+    public ArrayList<DtoClienteLocal> listaUniversal(String dato) {
+        ArrayList<DtoClienteLocal> lista = new ArrayList<>();
+        String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, "
+                + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, l.encargado, "
+                + "l.telefonoEncargado, mu.nombre, ci.nombre, "
+                + "(match(c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo) "
+                + "against('" + dato + "') + "
+                + "match(l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado) "
+                + "against('" + dato + "')) as relevancia "
+                + "from Locales l "
+                + "join Cliente c on l.clienteFk = c.idCliente "
+                + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
+                + "where match(c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo) "
+                + "against('" + dato + "') "
+                + "or match(l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado) "
+                + "against('" + dato + "');";
+
+        super.ejecutarRetorno(consulta);
+        try {
+            while (resultadoDB.next()) {
+                DtoClienteLocal dtoClienteLocal = new DtoClienteLocal();
+                dtoClienteLocal.setCodigo(resultadoDB.getString("c.codigo"));
+                dtoClienteLocal.setTipo(resultadoDB.getString("c.tipo"));
+                dtoClienteLocal.setNombre(resultadoDB.getString("c.nombre"));
+                dtoClienteLocal.setApellido(resultadoDB.getString("c.apellido"));
+                dtoClienteLocal.setCelular(resultadoDB.getString("c.celular"));
+                dtoClienteLocal.setCorreo(resultadoDB.getString("c.correo"));
+                dtoClienteLocal.setNombreNegocio(resultadoDB.getString("l.nombreNegocio"));
+                dtoClienteLocal.setDireccion(resultadoDB.getString("l.direccion"));
+                dtoClienteLocal.setNit(resultadoDB.getString("l.nit"));
+                dtoClienteLocal.setEncargado(resultadoDB.getString("l.encargado"));
+                dtoClienteLocal.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
+                dtoClienteLocal.setMunicipio(resultadoDB.getString("mu.nombre"));
+                dtoClienteLocal.setCiudad(resultadoDB.getString("ci.nombre"));
+                lista.add(dtoClienteLocal);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return lista;
+
+    }
+
 }
