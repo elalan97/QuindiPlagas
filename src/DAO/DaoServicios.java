@@ -302,7 +302,8 @@ public class DaoServicios extends Conexion {
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
                 + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
-                + "s.pago, s.valor, s.vendedor, s.observacion, a.hora, a.fecha, a.observacion "
+                + "s.pago, s.valor, s.vendedor, s.observacion, STR_TO_DATE (a.hora, '%h:%i %p') as hora_orden, "
+                + "a.fecha, a.observacion, a.hora "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -310,7 +311,7 @@ public class DaoServicios extends Conexion {
                 + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where " + columna + " LIKE '" + dato + "%' order by s.fecha desc, "
-                + "STR_TO_DATE(a.hora,'%h:%i %p') DESC;";
+                + "hora_orden DESC;";
         //System.out.println(consulta);
         super.ejecutarRetorno(consulta);
         try {
