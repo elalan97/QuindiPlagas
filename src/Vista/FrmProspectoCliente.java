@@ -127,7 +127,6 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         cbEstado.setSelectedItem("Seleccione");
         cbTipo.setSelectedItem("Seleccione");
         jcDepartamento.setSelectedItem("Seleccione");
-        txtTelefonoEncargado.setText("");
     }
 
     /**
@@ -176,8 +175,6 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProspectoCliente = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        txtTelefonoEncargado = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -243,11 +240,11 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Departamento");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 323, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 273, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Ciudad");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 373, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 323, -1, -1));
 
         jcDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcDepartamento.addItemListener(new java.awt.event.ItemListener() {
@@ -255,7 +252,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jcDepartamentoItemStateChanged(evt);
             }
         });
-        getContentPane().add(jcDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 150, -1));
+        getContentPane().add(jcDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 150, -1));
 
         jcCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcCiudad.addItemListener(new java.awt.event.ItemListener() {
@@ -263,7 +260,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jcCiudadItemStateChanged(evt);
             }
         });
-        getContentPane().add(jcCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 150, -1));
+        getContentPane().add(jcCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 150, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Guardar");
@@ -272,7 +269,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Editar");
@@ -281,7 +278,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 170, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 120, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setText("Eliminar");
@@ -290,7 +287,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 170, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 120, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Fecha");
@@ -301,19 +298,19 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Servicio que se ofrecio");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 73, -1, -1));
-        getContentPane().add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 70, 150, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 373, -1, -1));
+        getContentPane().add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 150, -1));
 
         txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtValorKeyReleased(evt);
             }
         });
-        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 120, 150, -1));
+        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 70, 150, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("Valor");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 123, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 73, -1, -1));
 
         tbProspectoCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -342,12 +339,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Telefono Encargado");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 273, -1, -1));
-        getContentPane().add(txtTelefonoEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 150, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 120, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -383,7 +375,6 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         ciudad = (String) jcCiudad.getSelectedItem();
         servicioOfrecido = txtServicio.getText();
         valor = txtValor.getText();
-        celEncargado = txtTelefonoEncargado.getText();
 
         if (estado.equals("Seleccione") || fecha.isEmpty() || tipo.equals("Seleccione")
                 || nombre.isEmpty() || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()
@@ -427,7 +418,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                             tipo, nombre, apellido, celular, correo);
                     ctlCliente.guardarCliente(nuevoCliente);
 
-                    Local l = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, celEncargado);
+                    Local l = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, "NA");
                     ctlLocal.guardarLocal(l, ciudad, nuevoCliente.getCodigo());
 
                     ctlProspectoCliente.editarProspectoCliente(pc, ciudad, direccionAnterior);
@@ -667,7 +658,6 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -690,7 +680,6 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreNegocio;
     private javax.swing.JTextField txtServicio;
-    private javax.swing.JTextField txtTelefonoEncargado;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

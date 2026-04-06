@@ -8,7 +8,10 @@ import Controlador.CtlProspectoCliente;
 import DTO.DtoProspectoCliente;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -118,6 +121,11 @@ public class FrmListaProspectoCliente extends javax.swing.JInternalFrame {
                 "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Telefono", "Correo", "Razon Social", "Direccion", "Nit", "Encargado", "Vendedor", "Servicio Ofrecido", "Valor", "Departamento", "Ciudad"
             }
         ));
+        tbProspectoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbProspectoClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbProspectoCliente);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1410, 440));
@@ -197,8 +205,8 @@ public class FrmListaProspectoCliente extends javax.swing.JInternalFrame {
                             dtoProspectoCliente.getCelular(), dtoProspectoCliente.getCorreo(),
                             dtoProspectoCliente.getNombreNegocio(), dtoProspectoCliente.getDireccion(),
                             dtoProspectoCliente.getNit(), dtoProspectoCliente.getEncargado(),
-                            dtoProspectoCliente.getVendedor(), dtoProspectoCliente.getServicioOfrecido(), 
-                            dtoProspectoCliente.getValor(), dtoProspectoCliente.getMunicipio(), 
+                            dtoProspectoCliente.getVendedor(), dtoProspectoCliente.getServicioOfrecido(),
+                            dtoProspectoCliente.getValor(), dtoProspectoCliente.getMunicipio(),
                             dtoProspectoCliente.getCiudad()});
 
                     }
@@ -231,6 +239,27 @@ public class FrmListaProspectoCliente extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbProspectoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProspectoClienteMouseClicked
+        // TODO add your handling code here:
+
+        String nombreNegocio;
+        int seleccionar;
+
+        seleccionar = tbProspectoCliente.rowAtPoint(evt.getPoint());
+
+        nombreNegocio = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 7));
+
+        ctlProspectoCliente.alamecenarDatos(nombreNegocio);
+
+        FrmProspecto frmProspecto = null;
+        try {
+            frmProspecto = new FrmProspecto();
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmListaProspectoCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        frmProspecto.setVisible(true);
+    }//GEN-LAST:event_tbProspectoClienteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

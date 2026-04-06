@@ -101,6 +101,12 @@ public class BoProspectoCliente {
 
     }
 
+    public ProspectoCliente verificar(String nombre) {
+        
+        return daoProspectoCliente.verificarProspectoCliente(nombre);
+
+    }
+
     public ArrayList<DtoProspectoCliente> listarProspectoCliente() {
         return daoProspectoCliente.listarProspectoCliente();
     }

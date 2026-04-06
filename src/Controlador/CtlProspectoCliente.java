@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class CtlProspectoCliente {
 
     BoProspectoCliente boProspectoCliente;
+    public static String nombreNegocio;
 
     public CtlProspectoCliente() {
         boProspectoCliente = new BoProspectoCliente();
@@ -47,6 +48,16 @@ public class CtlProspectoCliente {
 
     public ArrayList<DtoProspectoCliente> listaProspectoCliente(String fecha) {
         return boProspectoCliente.listaProspectoCliente(fecha);
+    }
+    
+    public ProspectoCliente verificar(String nombre){
+        return boProspectoCliente.verificar(nombre);
+    }
+    
+    public void alamecenarDatos(String nombreNegocio1){
+        
+        nombreNegocio = nombreNegocio1;
+        
     }
 
 }
