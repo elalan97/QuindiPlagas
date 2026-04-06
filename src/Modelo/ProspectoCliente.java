@@ -12,12 +12,12 @@ public class ProspectoCliente {
 
     int idProspecto, ciudadFk, valor;
     String estado, fecha, tipo, nombre, apellido, celular, correo, nombreNegocio,
-            direccion, nit, encargado, servicioOfrecido, vendedor;
+            direccion, nit, encargado, telefonoEncargado, servicioOfrecido, vendedor;
 
     public ProspectoCliente() {
     }
 
-    public ProspectoCliente(int idProspecto, int ciudadFk, int valor, String estado, String fecha, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String servicioOfrecido, String vendedor) {
+    public ProspectoCliente(int idProspecto, int ciudadFk, int valor, String estado, String fecha, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String telefonoEncargado, String servicioOfrecido, String vendedor) {
         this.idProspecto = idProspecto;
         this.ciudadFk = ciudadFk;
         this.valor = valor;
@@ -32,6 +32,7 @@ public class ProspectoCliente {
         this.direccion = direccion;
         this.nit = nit;
         this.encargado = encargado;
+        this.telefonoEncargado = telefonoEncargado;
         this.servicioOfrecido = servicioOfrecido;
         this.vendedor = vendedor;
     }
@@ -148,6 +149,14 @@ public class ProspectoCliente {
         this.encargado = encargado;
     }
 
+    public String getTelefonoEncargado() {
+        return telefonoEncargado;
+    }
+
+    public void setTelefonoEncargado(String telefonoEncargado) {
+        this.telefonoEncargado = telefonoEncargado;
+    }
+
     public String getServicioOfrecido() {
         return servicioOfrecido;
     }
@@ -163,5 +172,7 @@ public class ProspectoCliente {
     public void setVendedor(String vendedor) {
         this.vendedor = vendedor;
     }
+
+
 
 }

@@ -107,7 +107,8 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 dtoProspectoCliente.getFecha(), dtoProspectoCliente.getTipo(),
                 dtoProspectoCliente.getNombre(), dtoProspectoCliente.getApellido(),
                 dtoProspectoCliente.getCelular(), dtoProspectoCliente.getCorreo(),
-                dtoProspectoCliente.getNombreNegocio(), dtoProspectoCliente.getDireccion()});
+                dtoProspectoCliente.getNombreNegocio(), dtoProspectoCliente.getDireccion(), 
+                dtoProspectoCliente.getMunicipio(), dtoProspectoCliente.getCiudad()});
 
         }
     }
@@ -175,6 +176,8 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProspectoCliente = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        txtTelefonoEncargado = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -240,11 +243,11 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Departamento");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 273, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 323, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Ciudad");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 323, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 373, -1, -1));
 
         jcDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcDepartamento.addItemListener(new java.awt.event.ItemListener() {
@@ -252,7 +255,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jcDepartamentoItemStateChanged(evt);
             }
         });
-        getContentPane().add(jcDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 150, -1));
+        getContentPane().add(jcDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 150, -1));
 
         jcCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcCiudad.addItemListener(new java.awt.event.ItemListener() {
@@ -260,7 +263,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jcCiudadItemStateChanged(evt);
             }
         });
-        getContentPane().add(jcCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 150, -1));
+        getContentPane().add(jcCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 150, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Guardar");
@@ -269,7 +272,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Editar");
@@ -278,7 +281,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 120, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 170, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setText("Eliminar");
@@ -287,7 +290,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 120, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 170, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Fecha");
@@ -298,29 +301,29 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Servicio que se ofrecio");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 373, -1, -1));
-        getContentPane().add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 150, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 73, -1, -1));
+        getContentPane().add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 70, 150, -1));
 
         txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtValorKeyReleased(evt);
             }
         });
-        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 70, 150, -1));
+        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 120, 150, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("Valor");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 73, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 123, -1, -1));
 
         tbProspectoCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Razon Social", "Direccion"
+                "Estado", "Fecha", "Tipo", "Nombre", "Apellido", "Celular", "Correo", "Razon Social", "Direccion", "Departamento", "Ciudad"
             }
         ));
         tbProspectoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -339,7 +342,12 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 120, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Telefono Encargado");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 273, -1, -1));
+        getContentPane().add(txtTelefonoEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 150, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -358,7 +366,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
         String estado, fecha, tipo, nombre, apellido, celular, correo, nombreNegocio,
                 direccion, nit, encargado, municipio, ciudad, servicioOfrecido, valor, 
-                celEncargado;
+                telefonoEncargado;
 
         estado = (String) cbEstado.getSelectedItem();
         fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
@@ -375,6 +383,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         ciudad = (String) jcCiudad.getSelectedItem();
         servicioOfrecido = txtServicio.getText();
         valor = txtValor.getText();
+        telefonoEncargado = txtTelefonoEncargado.getText();
 
         if (estado.equals("Seleccione") || fecha.isEmpty() || tipo.equals("Seleccione")
                 || nombre.isEmpty() || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()
@@ -393,7 +402,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                     precio = Integer.parseInt(num);
                     ProspectoCliente pc = new ProspectoCliente(0, 0,
                             precio, estado, fecha, tipo, nombre, apellido, celular, correo, nombreNegocio,
-                            direccion, nit, encargado, servicioOfrecido, vendedor);
+                            direccion, nit, encargado, telefonoEncargado, servicioOfrecido, vendedor);
 
                     Cliente cliente = ctlCliente.buscarUltimoRegistroCliente();
 
@@ -418,7 +427,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                             tipo, nombre, apellido, celular, correo);
                     ctlCliente.guardarCliente(nuevoCliente);
 
-                    Local l = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, "NA");
+                    Local l = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, telefonoEncargado);
                     ctlLocal.guardarLocal(l, ciudad, nuevoCliente.getCodigo());
 
                     ctlProspectoCliente.editarProspectoCliente(pc, ciudad, direccionAnterior);
@@ -432,7 +441,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                     precio = Integer.parseInt(num);
                     ProspectoCliente pc = new ProspectoCliente(0, 0,
                             precio, estado, fecha, tipo, nombre, apellido, celular, correo, nombreNegocio,
-                            direccion, nit, encargado, servicioOfrecido, vendedor);
+                            direccion, nit, encargado, telefonoEncargado, servicioOfrecido, vendedor);
 
                     ctlProspectoCliente.editarProspectoCliente(pc, ciudad, direccionAnterior);
                     JOptionPane.showMessageDialog(null, "Se ha editado Correctamente");
@@ -482,7 +491,8 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
         int precio;
         String estado, fecha, tipo, nombre, apellido, celular, correo, nombreNegocio,
-                direccion, nit, encargado, municipio, ciudad, servicioOfrecido, valor;
+                direccion, nit, encargado, teledonoEncargado, 
+                municipio, ciudad, servicioOfrecido, valor;
 
         estado = (String) cbEstado.getSelectedItem();
         fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
@@ -495,14 +505,16 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         direccion = txtDireccionNegocio.getText();
         nit = txtNitNegocio.getText();
         encargado = txtEncargardoNegocio.getText();
+        teledonoEncargado = txtTelefonoEncargado.getText();
         municipio = (String) jcDepartamento.getSelectedItem();
         ciudad = (String) jcCiudad.getSelectedItem();
         servicioOfrecido = txtServicio.getText();
         valor = txtValor.getText();
 
         if (estado.equals("Seleccione") || fecha.isEmpty() || tipo.equals("Seleccione")
-                || nombre.isEmpty() || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()
-                || nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty() || encargado.isEmpty()
+                || nombre.isEmpty() || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty() 
+                || nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty() 
+                || encargado.isEmpty() || teledonoEncargado.isEmpty()
                 || municipio.equals("Seleccione") || ciudad.equals("Seleccione")
                 || servicioOfrecido.isEmpty() || valor.isEmpty()) {
 
@@ -519,7 +531,8 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
 
                 ProspectoCliente pc = new ProspectoCliente(0, 0,
                         precio, estado, fecha, tipo, nombre, apellido, celular, correo, nombreLimpio,
-                        direccion, nit, encargado, servicioOfrecido, vendedor);
+                        direccion, nit, encargado, teledonoEncargado, 
+                        servicioOfrecido, vendedor);
 
                 ctlProspectoCliente.guardarProspectoCliente(pc, ciudad);
                 JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente");
@@ -582,16 +595,18 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         int seleccionar, valor1;
-        String nombreBuscar, valor;
+        String direccion, valor, ciudad;
 
         seleccionar = tbProspectoCliente.rowAtPoint(evt.getPoint());
 
-        nombreBuscar = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 8));
+        direccion = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 8));
+        ciudad = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 10));
+        
 
         try {
 
             Miles miles = new Miles();
-            DtoProspectoCliente cliente = ctlProspectoCliente.buscarProspectoCliente(nombreBuscar);
+            DtoProspectoCliente cliente = ctlProspectoCliente.buscarProspectoCliente(direccion, ciudad);
 
             txtApellidoCliente.setText(cliente.getApellido());
             txtCelularCliente.setText(cliente.getCelular());
@@ -602,6 +617,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
             txtNombreCliente.setText(cliente.getNombre());
             txtNombreNegocio.setText(cliente.getNombreNegocio());
             txtServicio.setText(cliente.getServicioOfrecido());
+            txtTelefonoEncargado.setText(cliente.getTelefonoEncargado());
 
             valor1 = Integer.parseInt(cliente.getValor());
             valor = miles.separarMiles(valor1);
@@ -637,7 +653,8 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                 dtoProspectoCliente.getFecha(), dtoProspectoCliente.getTipo(),
                 dtoProspectoCliente.getNombre(), dtoProspectoCliente.getApellido(),
                 dtoProspectoCliente.getCelular(), dtoProspectoCliente.getCorreo(),
-                dtoProspectoCliente.getNombreNegocio(), dtoProspectoCliente.getDireccion()});
+                dtoProspectoCliente.getNombreNegocio(), dtoProspectoCliente.getDireccion(), 
+                dtoProspectoCliente.getMunicipio(), dtoProspectoCliente.getCiudad()});
 
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -658,6 +675,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -680,6 +698,7 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreNegocio;
     private javax.swing.JTextField txtServicio;
+    private javax.swing.JTextField txtTelefonoEncargado;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

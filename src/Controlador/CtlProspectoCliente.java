@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CtlProspectoCliente {
 
     BoProspectoCliente boProspectoCliente;
-    public static String nombreNegocio;
+    public static String direccion, ciudad;
 
     public CtlProspectoCliente() {
         boProspectoCliente = new BoProspectoCliente();
@@ -26,8 +26,8 @@ public class CtlProspectoCliente {
         boProspectoCliente.guardarProspectoCliente(prospectoCliente, ciudad);
     }
 
-    public DtoProspectoCliente buscarProspectoCliente(String direccion) {
-        return boProspectoCliente.buscarProspectoCliente(direccion);
+    public DtoProspectoCliente buscarProspectoCliente(String direccion, String cidudad) {
+        return boProspectoCliente.buscarProspectoCliente(direccion, cidudad);
     }
 
     public void editarProspectoCliente(ProspectoCliente prospectoCliente, String ciudad, String direccion) {
@@ -54,9 +54,10 @@ public class CtlProspectoCliente {
         return boProspectoCliente.verificar(nombre);
     }
     
-    public void alamecenarDatos(String nombreNegocio1){
+    public void alamecenarDatos(String direccion1, String ciudad1){
         
-        nombreNegocio = nombreNegocio1;
+        direccion = direccion1;
+        ciudad = ciudad1;
         
     }
 

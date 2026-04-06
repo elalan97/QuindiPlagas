@@ -22,7 +22,7 @@ public class DaoProspectoCliente extends Conexion {
     public boolean guardarProspectoCliente(ProspectoCliente prospectoCliente) {
         String consulta = "INSERT INTO ProspectoCliente (estado, fecha, tipo, "
                 + "nombre, apellido, celular, correo, nombreNegocio, direccion, "
-                + "nit, encargado, ciudadFk, servicioOfrecido, valor, vendedor)"
+                + "nit, encargado, ciudadFk, servicioOfrecido, valor, vendedor, telefonoEncargado)"
                 + "VALUES ('" + prospectoCliente.getEstado() + "', '"
                 + prospectoCliente.getFecha() + "', '" + prospectoCliente.getTipo() + "', '"
                 + prospectoCliente.getNombre() + "', '" + prospectoCliente.getApellido() + "', '"
@@ -30,7 +30,8 @@ public class DaoProspectoCliente extends Conexion {
                 + prospectoCliente.getNombreNegocio() + "', '" + prospectoCliente.getDireccion() + "', '"
                 + prospectoCliente.getNit() + "', '" + prospectoCliente.getEncargado() + "', '"
                 + prospectoCliente.getCiudadFk() + "', '" + prospectoCliente.getServicioOfrecido() + "', '"
-                + prospectoCliente.getValor() + "', '" + prospectoCliente.getVendedor() + "' "
+                + prospectoCliente.getValor() + "', '" + prospectoCliente.getVendedor() + "', '"
+                + prospectoCliente.getTelefonoEncargado() + "' "
                 + ");";
         return super.ejecutar(consulta);
 
@@ -75,8 +76,9 @@ public class DaoProspectoCliente extends Conexion {
     public ProspectoCliente buscarProspectoCliente(String direccion) {
         String consulta = "select idProspecto, estado, fecha, tipo, nombre, apellido, "
                 + "celular, correo, celular, correo, nombreNegocio, direccion, "
-                + "nit, encargado, ciudadFk, servicioOfrecido, valor, vendedor "
-                + "from ProspectoCliente where direccion ='" + direccion + "';";
+                + "nit, encargado, ciudadFk, servicioOfrecido, valor, vendedor, telefonoEncargado "
+                + "from ProspectoCliente "
+                + "where direccion ='" + direccion + "';";
         ProspectoCliente cliente = new ProspectoCliente();
         System.out.println(consulta);
         super.ejecutarRetorno(consulta);
@@ -99,6 +101,7 @@ public class DaoProspectoCliente extends Conexion {
                 cliente.setServicioOfrecido(resultadoDB.getString("servicioOfrecido"));
                 cliente.setValor(resultadoDB.getInt("valor"));
                 cliente.setVendedor(resultadoDB.getString("vendedor"));
+                cliente.setTelefonoEncargado(resultadoDB.getString("telefonoEncargado"));
 
             }
         } catch (SQLException ex) {
@@ -108,15 +111,16 @@ public class DaoProspectoCliente extends Conexion {
         return cliente;
     }
 
-    public DtoProspectoCliente buscarProspectoCliente1(String direccion) {
+    public DtoProspectoCliente buscarProspectoCliente1(String direccion, String ciudad) {
         String consulta = "select pc.estado, pc.fecha, pc.tipo, pc.nombre, pc.apellido, "
                 + "pc.celular, pc.correo, pc.nombreNegocio, pc.direccion, "
-                + "pc.nit, pc.encargado, pc.servicioOfrecido, pc.valor, pc.vendedor, "
+                + "pc.nit, pc.encargado, pc.servicioOfrecido, pc.valor, pc.vendedor, pc.telefonoEncargado, "
                 + "mu.nombre, ci.nombre "
                 + "from ProspectoCliente pc "
                 + "join Ciudad ci on pc.ciudadFk = ci.idCiudad "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
-                + "where pc.direccion = '" + direccion + "';";
+                + "where pc.direccion = '" + direccion + "' "
+                + "and ci.nombre = '" + ciudad + "';";
         DtoProspectoCliente cliente = new DtoProspectoCliente();
         super.ejecutarRetorno(consulta);
         try {
@@ -138,6 +142,7 @@ public class DaoProspectoCliente extends Conexion {
                 cliente.setServicioOfrecido(resultadoDB.getString("pc.servicioOfrecido"));
                 cliente.setValor(resultadoDB.getString("pc.valor"));
                 cliente.setVendedor(resultadoDB.getString("pc.vendedor"));
+                cliente.setTelefonoEncargado(resultadoDB.getString("pc.telefonoEncargado"));
 
             }
         } catch (SQLException ex) {
@@ -162,7 +167,8 @@ public class DaoProspectoCliente extends Conexion {
                 + " servicioOfrecido='" + prospectoCliente.getServicioOfrecido() + "', "
                 + " valor='" + prospectoCliente.getValor() + "', "
                 + " vendedor='" + prospectoCliente.getVendedor() + "', "
-                + " ciudadFk='" + prospectoCliente.getCiudadFk() + "' "
+                + " ciudadFk='" + prospectoCliente.getCiudadFk() + "', "
+                + " telefonoEncargado='" + prospectoCliente.getTelefonoEncargado() + "' "
                 + " WHERE idProspecto='" + prospectoCliente.getIdProspecto() + "'";
         return super.ejecutar(consulta);
 
@@ -256,7 +262,7 @@ public class DaoProspectoCliente extends Conexion {
         ArrayList<DtoProspectoCliente> lista = new ArrayList<>();
         String consulta = "select pc.estado, pc.fecha, pc.tipo, pc.nombre, pc.apellido, "
                 + "pc.celular, pc.correo, pc.nombreNegocio, pc.direccion, "
-                + "pc.nit, pc.encargado, pc.servicioOfrecido, pc.valor, pc.vendedor, "
+                + "pc.nit, pc.encargado, pc.servicioOfrecido, pc.valor, pc.vendedor, pc.telefonoEncargado, "
                 + "mu.nombre, ci.nombre "
                 + "from ProspectoCliente pc "
                 + "join Ciudad ci on pc.ciudadFk = ci.idCiudad "
@@ -283,6 +289,7 @@ public class DaoProspectoCliente extends Conexion {
                 cliente.setServicioOfrecido(resultadoDB.getString("pc.servicioOfrecido"));
                 cliente.setValor(resultadoDB.getString("pc.valor"));
                 cliente.setVendedor(resultadoDB.getString("pc.vendedor"));
+                cliente.setTelefonoEncargado(resultadoDB.getString("pc.telefonoEncargado"));
                 lista.add(cliente);
             }
         } catch (SQLException ex) {

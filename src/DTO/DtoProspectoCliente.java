@@ -11,12 +11,13 @@ package DTO;
 public class DtoProspectoCliente {
 
     String estado, fecha, tipo, nombre, apellido, celular, correo, nombreNegocio,
-            direccion, nit, encargado, municipio, ciudad, servicioOfrecido, valor, vendedor;
+            direccion, nit, encargado, telefonoEncargado, 
+            municipio, ciudad, servicioOfrecido, valor, vendedor;
 
     public DtoProspectoCliente() {
     }
 
-    public DtoProspectoCliente(String estado, String fecha, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String municipio, String ciudad, String servicioOfrecido, String valor, String vendedor) {
+    public DtoProspectoCliente(String estado, String fecha, String tipo, String nombre, String apellido, String celular, String correo, String nombreNegocio, String direccion, String nit, String encargado, String telefonoEncargado, String municipio, String ciudad, String servicioOfrecido, String valor, String vendedor) {
         this.estado = estado;
         this.fecha = fecha;
         this.tipo = tipo;
@@ -28,6 +29,7 @@ public class DtoProspectoCliente {
         this.direccion = direccion;
         this.nit = nit;
         this.encargado = encargado;
+        this.telefonoEncargado = telefonoEncargado;
         this.municipio = municipio;
         this.ciudad = ciudad;
         this.servicioOfrecido = servicioOfrecido;
@@ -123,6 +125,14 @@ public class DtoProspectoCliente {
         this.encargado = encargado;
     }
 
+    public String getTelefonoEncargado() {
+        return telefonoEncargado;
+    }
+
+    public void setTelefonoEncargado(String telefonoEncargado) {
+        this.telefonoEncargado = telefonoEncargado;
+    }
+
     public String getMunicipio() {
         return municipio;
     }
@@ -162,5 +172,6 @@ public class DtoProspectoCliente {
     public void setVendedor(String vendedor) {
         this.vendedor = vendedor;
     }
+
 
 }

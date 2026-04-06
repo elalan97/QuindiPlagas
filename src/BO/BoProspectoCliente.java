@@ -33,7 +33,8 @@ public class BoProspectoCliente {
 
     public void guardarProspectoCliente(ProspectoCliente prospectoCliente, String ciudad) {
 
-        ProspectoCliente pc = daoProspectoCliente.verificarProspectoCliente(prospectoCliente.getNombreNegocio());
+        DtoProspectoCliente pc = daoProspectoCliente.buscarProspectoCliente1(prospectoCliente.getDireccion(), 
+                ciudad);
 
         if (pc.getNombreNegocio() == null) {
 
@@ -50,9 +51,9 @@ public class BoProspectoCliente {
 
     }
 
-    public DtoProspectoCliente buscarProspectoCliente(String direccion) {
+    public DtoProspectoCliente buscarProspectoCliente(String direccion, String ciudad) {
 
-        DtoProspectoCliente cliente = daoProspectoCliente.buscarProspectoCliente1(direccion);
+        DtoProspectoCliente cliente = daoProspectoCliente.buscarProspectoCliente1(direccion, ciudad);
 
         if (cliente.getDireccion() == null) {
 
@@ -68,7 +69,9 @@ public class BoProspectoCliente {
 
     public void editarProspectoCliente(ProspectoCliente prospectoCliente, String ciudad, String direccion) {
 
-        ProspectoCliente pc = daoProspectoCliente.buscarProspectoCliente(direccion);
+        DtoProspectoCliente dtoProspectoCliente = daoProspectoCliente.buscarProspectoCliente1(prospectoCliente.getDireccion(), 
+                ciudad);
+        ProspectoCliente pc = daoProspectoCliente.buscarProspectoCliente(dtoProspectoCliente.getDireccion());
         Ciudad c = daoLocal.buscarCiudad(ciudad);
 
         if (pc.getDireccion() == null || c.getNombre() == null) {

@@ -243,14 +243,15 @@ public class FrmListaProspectoCliente extends javax.swing.JInternalFrame {
     private void tbProspectoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProspectoClienteMouseClicked
         // TODO add your handling code here:
 
-        String nombreNegocio;
+        String direccion, ciudad;
         int seleccionar;
 
         seleccionar = tbProspectoCliente.rowAtPoint(evt.getPoint());
 
-        nombreNegocio = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 7));
+        direccion = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 8));
+        ciudad = String.valueOf(tbProspectoCliente.getValueAt(seleccionar, 15));
 
-        ctlProspectoCliente.alamecenarDatos(nombreNegocio);
+        ctlProspectoCliente.alamecenarDatos(direccion, ciudad);
 
         FrmProspecto frmProspecto = null;
         try {
