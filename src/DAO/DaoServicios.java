@@ -311,7 +311,7 @@ public class DaoServicios extends Conexion {
                 + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where " + columna + " LIKE '" + dato + "%' order by s.fecha desc, "
-                + "hora_orden DESC;";
+                + "hora_orden asc;";
         //System.out.println(consulta);
         super.ejecutarRetorno(consulta);
         try {
@@ -516,11 +516,11 @@ public class DaoServicios extends Conexion {
                 + "s.gestionLlamada, s.pago, s.valor, s.vendedor, s.observacion, a.hora, "
                 + "a.fecha, a.observacion, "
                 + "(match(c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo) "
-                + "against('" + dato + "') + "
+                + "against('" + dato + "*' in boolean mode) + "
                 + "match(l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado) "
-                + "against('" + dato + "') + "
+                + "against('" + dato + "*' in boolean mode) + "
                 + "match(s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.periocidad, s.pago) "
-                + "against('" + dato + "')) as relevancia "
+                + "against('" + dato + "*' in boolean mode)) as relevancia "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -528,11 +528,11 @@ public class DaoServicios extends Conexion {
                 + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where match(c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo) "
-                + "against('" + dato + "') "
+                + "against('" + dato + "*' in boolean mode) "
                 + "or match(l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado) "
-                + "against('" + dato + "') "
+                + "against('" + dato + "*' in boolean mode) "
                 + "or match(s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.periocidad, s.pago) "
-                + "against('" + dato + "') "
+                + "against('" + dato + "*' in boolean mode) "
                 + "ORDER BY relevancia DESC;";
         System.out.println(consulta);
         super.ejecutarRetorno(consulta);

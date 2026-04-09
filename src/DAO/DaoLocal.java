@@ -320,17 +320,17 @@ public class DaoLocal extends Conexion {
                 + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, l.encargado, "
                 + "l.telefonoEncargado, mu.nombre, ci.nombre, "
                 + "(match(c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo) "
-                + "against('" + dato + "') + "
+                + "against('" + dato + "*' in boolean mode) + "
                 + "match(l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado) "
-                + "against('" + dato + "')) as relevancia "
+                + "against('" + dato + "*' in boolean mode)) as relevancia "
                 + "from Locales l "
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where match(c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo) "
-                + "against('" + dato + "') "
+                + "against('" + dato + "*' in boolean mode) "
                 + "or match(l.nombreNegocio, l.direccion, l.nit, l.encargado, l.telefonoEncargado) "
-                + "against('" + dato + "');";
+                + "against('" + dato + "*' in boolean mode);";
 
         super.ejecutarRetorno(consulta);
         try {
