@@ -99,6 +99,11 @@ public class DaoAgenda extends Conexion {
         return super.ejecutar(consulta);
     }
 
+    public boolean eliminarAgendaPorFk(int id) {
+        String consulta = "DELETE FROM Agenda where servicioFk = " + id + ";";
+        return super.ejecutar(consulta);
+    }
+
     public ArrayList<DtoAgenda> listarAgenda() {
         ArrayList<DtoAgenda> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
@@ -150,7 +155,7 @@ public class DaoAgenda extends Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<DtoAgenda> listarAgendaPorFiltro(String fecha) {
         ArrayList<DtoAgenda> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
@@ -204,7 +209,7 @@ public class DaoAgenda extends Conexion {
         }
         return lista;
     }
-    
+
     public DtoAgenda buscarServicioAgenda(String nroFactura) {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
@@ -257,7 +262,7 @@ public class DaoAgenda extends Conexion {
         }
         return dtoAgenda;
     }
-    
+
     public DtoAgenda buscarServicioAgendaRefuerzo(String nroFactura) {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "

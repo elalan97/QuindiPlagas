@@ -93,5 +93,9 @@ public class CtlServicio {
     public Servicio buscarUltimoRegistroServicio() {
         return boServicio.buscarUltimoRegistroServicio();
     }
+    
+    public void eliminarTodoCliente(String codigoCliente, String nroServicio) {
+        boServicio.eliminarTodoCliente(codigoCliente, nroServicio);
+    }
 
 }

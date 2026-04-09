@@ -4,6 +4,8 @@
  */
 package BO;
 
+import DAO.DaoAgenda;
+import DAO.DaoCliente;
 import DAO.DaoLocal;
 import DAO.DaoServicios;
 import DTO.DTOLocal;
@@ -14,12 +16,14 @@ import Exepciones.NoExisteLocal;
 import Exepciones.NoExisteServicio;
 import Exepciones.YaExisteServicio;
 import Modelo.Ciudad;
+import Modelo.Cliente;
 import Modelo.Local;
 import Modelo.Servicio;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,11 +33,15 @@ public class BoServicio {
 
     DaoServicios daoServicios;
     DaoLocal daoLocal;
+    DaoCliente daoCliente;
+    DaoAgenda daoAgenda;
 
     public BoServicio() {
 
         daoServicios = new DaoServicios();
         daoLocal = new DaoLocal();
+        daoCliente = new DaoCliente();
+        daoAgenda = new DaoAgenda();
 
     }
 
@@ -287,4 +295,31 @@ public class BoServicio {
         return null;
     }
 
+    public void eliminarTodoCliente(String codigoCliente, String nroServicio) {
+
+        Cliente cliente = daoCliente.buscarCliente(codigoCliente);
+        Servicio servicio = daoServicios.buscarServicio(nroServicio);
+
+        if (cliente.getCodigo() == null || servicio.getNroFactura() == null) {
+
+            throw new NoExisteCliente();
+
+        } else {
+
+            ArrayList<DTOLocal> listaLocales = daoLocal.listarLocalPorCliente(codigoCliente);
+
+            for (DTOLocal listaLocale : listaLocales) {
+
+                ArrayList<Servicio> listaServicio = daoServicios.listarServiciosParaEliminar("where s.localFk"
+                        + "='" + listaLocale.getIdLocal() + "';");
+
+                for (Servicio servicio1 : listaServicio) {
+                    daoAgenda.eliminarAgendaPorFk(servicio1.getIdServicio());
+                    daoServicios.eliminarServicio(servicio1.getIdServicio());
+                }
+                daoLocal.eliminarLocal(cliente.getIdCliente());
+            }
+            daoCliente.eliminarCliente(cliente.getIdCliente());
+        }
+    }
 }

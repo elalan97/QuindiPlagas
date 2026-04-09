@@ -149,7 +149,7 @@ public class DaoLocal extends Conexion {
 
     public ArrayList<DTOLocal> listarLocalPorCliente(String codigo) {
         ArrayList<DTOLocal> lista = new ArrayList<>();
-        String consulta = "select l.nombreNegocio, l.direccion, l.nit, "
+        String consulta = "select l.idLocales, l.nombreNegocio, l.direccion, l.nit, "
                 + "l.encargado, l.telefonoEncargado, mu.nombre, ci.nombre "
                 + "from Locales l "
                 + "join Cliente c on l.clienteFk = c.idCliente "
@@ -161,6 +161,7 @@ public class DaoLocal extends Conexion {
         try {
             while (resultadoDB.next()) {
                 DTOLocal dtoLocal = new DTOLocal();
+                dtoLocal.setIdLocal(resultadoDB.getInt("l.idLocales"));
                 dtoLocal.setNombreNegocio(resultadoDB.getString("l.nombreNegocio"));
                 dtoLocal.setDireccion(resultadoDB.getString("l.direccion"));
                 dtoLocal.setNit(resultadoDB.getString("l.nit"));

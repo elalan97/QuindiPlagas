@@ -507,6 +507,31 @@ public class DaoServicios extends Conexion {
         return lista;
     }
 
+    public ArrayList<Servicio> listarServiciosParaEliminar(String filtro) {
+        ArrayList<Servicio> lista = new ArrayList<>();
+        String consulta = "select s.idServicio "
+                + "from Servicios s "
+                + "join Locales l on s.localFk = l.idLocales "
+                + "join Cliente c on l.clienteFk = c.idCliente "
+                + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Agenda a on s.idServicio = a.servicioFk "
+                + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
+                + filtro;
+        System.out.println(consulta);
+        super.ejecutarRetorno(consulta);
+        try {
+            while (resultadoDB.next()) {
+                Servicio servicio = new Servicio();
+                servicio.setIdServicio(resultadoDB.getInt("s.idServicio"));
+                lista.add(servicio);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return lista;
+    }
+
     public ArrayList<DtoServicio> listarUniversal(String dato) {
         ArrayList<DtoServicio> lista = new ArrayList<>();
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "

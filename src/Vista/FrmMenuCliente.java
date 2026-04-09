@@ -136,7 +136,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         cbTipoServicio.addItem("Instalcion de Lampara UV");
         cbTipoServicio.addItem("Laminas de Lampara UV");
 
-
     }
 
     public void llenarCombo2() {
@@ -1550,7 +1549,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                     ctlServicio.guardarServicio(servicio, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agenda, nroFactura);
 
-
                     int consecutivo;
                     String letra1, numero, codigoCadena = null;
 
@@ -1564,7 +1562,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                         consecutivo = Integer.parseInt(numero) + 1;
 
                         codigoCadena = "S" + consecutivo;
-                        
 
                     } else {
 
@@ -1572,14 +1569,14 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
                     }
 
-                    Servicio servicioRefuerzo = new Servicio(0, 0, 0, codigoCadena, 
-                            "Refuerzo", "No", "NA", fechaRefuerzo, 
+                    Servicio servicioRefuerzo = new Servicio(0, 0, 0, codigoCadena,
+                            "Refuerzo", "No", "NA", fechaRefuerzo,
                             "Unica vez", fechaRefuerzo, "Pendiente", vendedor, "NA",
                             "NA", tiempoServicio, "NA");
 
                     Agenda agendaRefuerzo = new Agenda(0, 0,
                             "8:0 AM", "NA", fechaRefuerzo);
-                    
+
                     ctlServicio.guardarServicio(servicioRefuerzo, direccion, ciudad, codigo);
                     ctlAgenda.guardarAgenda(agendaRefuerzo, codigoCadena);
 
@@ -1828,23 +1825,23 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             try {
 
-                    hora = h + ":" + m + " " + formato;
-                    String num = valorCadena.replace(".", "");
-                    valor = Integer.parseInt(num);
+                hora = h + ":" + m + " " + formato;
+                String num = valorCadena.replace(".", "");
+                valor = Integer.parseInt(num);
 
-                    Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                            refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                            "NA", tiempoServicio, "NA");
+                Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
+                        refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                        "NA", tiempoServicio, "NA");
 
-                    Agenda agenda = new Agenda(0, 0,
-                            hora, observacionAgenda, fecha);
+                Agenda agenda = new Agenda(0, 0,
+                        hora, observacionAgenda, fecha);
 
-                    ctlAgenda.edtarAgenda(agenda, nroFactura);
-                    ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
+                ctlAgenda.edtarAgenda(agenda, nroFactura);
+                ctlServicio.editarServicio(servicio, direccion, ciudad, codigoEditar, codigo);
 
-                    JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-                    limpiarCamposServicio();
-                    generarCodigo();
+                JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+                limpiarCamposServicio();
+                generarCodigo();
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -1856,7 +1853,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
 
-        String nroFactura, refuerzo;
+        String nroFactura, refuerzo, codigoCliente;
 
         nroFactura = txtFactura.getText();
         refuerzo = (String) cbRefuerzo.getSelectedItem();
@@ -1870,24 +1867,40 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             try {
 
-                if (refuerzo.equals("Si")) {
+                String[] opciones = {"Cliente", "Servicio", "Cancelar"};
+                int opcion = JOptionPane.showOptionDialog(null,
+                        "Que vas Elminar " + "\n" + "- Si seleccionas el Cliente se borrara su registro y a todo "
+                        + "los servicios que se le hicieron mas sus locales o propiedades"
+                        + "\n" + "- Si es el Servicio solo elminara el servicio que has digitado",
+                        "Eliminar", 0, JOptionPane.QUESTION_MESSAGE,
+                        null, opciones, "Cancelar");
 
-                    String fecha = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
-                    ctlAgenda.eliminarAgenda(nroFactura, fecha);
-                    ctlServicio.eliminarServicio(nroFactura);
-                    JOptionPane.showMessageDialog(null, "se ha eliminado correctamente");
-                    limpiarCamposServicio();
+                if (opcion == 0) {
 
-                } else {
+                    codigoCliente = txtCodigoCliente.getText();
+                    ctlServicio.eliminarTodoCliente(codigoCliente, nroFactura);
+                    JOptionPane.showMessageDialog(null, "se ha eliminado el cliente");
+                    
+                } else if (opcion == 1) {
 
-                    String fecha = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
-                    ctlAgenda.eliminarAgenda(nroFactura, fecha);
-                    ctlServicio.eliminarServicio(nroFactura);
-                    JOptionPane.showMessageDialog(null, "se ha eliminado correctamente");
-                    limpiarCamposServicio();
+                    if (refuerzo.equals("Si")) {
 
+                        String fecha = ((JTextField) jcRefuerzo.getDateEditor().getUiComponent()).getText();
+                        ctlAgenda.eliminarAgenda(nroFactura, fecha);
+                        ctlServicio.eliminarServicio(nroFactura);
+                        JOptionPane.showMessageDialog(null, "se ha eliminado correctamente");
+                        limpiarCamposServicio();
+
+                    } else {
+
+                        String fecha = ((JTextField) jcFechaRealizo.getDateEditor().getUiComponent()).getText();
+                        ctlAgenda.eliminarAgenda(nroFactura, fecha);
+                        ctlServicio.eliminarServicio(nroFactura);
+                        JOptionPane.showMessageDialog(null, "se ha eliminado correctamente");
+                        limpiarCamposServicio();
+
+                    }
                 }
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
@@ -2053,7 +2066,6 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
 
-        
         //nro Factura  = observacion agenda
         int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
