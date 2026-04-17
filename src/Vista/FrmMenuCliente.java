@@ -401,7 +401,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             modelo.addRow(new Object[]{dTOLocal.getNombreNegocio(), dTOLocal.getDireccion(),
                 dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getCelEncargado(),
-                dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
+                dTOLocal.getMunicipio(), dTOLocal.getCiudad(), dTOLocal.getNota()});
 
         }
 
@@ -424,7 +424,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         for (DTOLocal dTOLocal : lista) {
 
             modelo2.addRow(new Object[]{dTOLocal.getNombreNegocio(), dTOLocal.getDireccion(),
-                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
+                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(), 
+                dTOLocal.getCiudad(), dTOLocal.getNota()});
 
         }
 
@@ -479,6 +480,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jLabel56 = new javax.swing.JLabel();
         txtTelefonoEncargado = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        txtNota = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbServicios = new javax.swing.JTable();
@@ -580,6 +583,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jcFormato12 = new javax.swing.JComboBox<>();
         jLabel49 = new javax.swing.JLabel();
         txtTiempoServicio1 = new javax.swing.JTextField();
+        jLabel58 = new javax.swing.JLabel();
+        txtNota1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -731,17 +736,17 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 130, -1));
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 130, -1));
 
         tbLocal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Razon Social", "Direccion", "Nit", "Encargado", "Telefono Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Telefono Encargado", "Municipio", "Ciudad", "Nota"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -760,7 +765,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, -1, -1));
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton6.setText("Editar Local");
@@ -769,7 +774,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 120, -1, -1));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 170, -1, -1));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton7.setText("Eliminar Local");
@@ -778,12 +783,17 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 120, -1, -1));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 170, -1, -1));
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel56.setText("Telefono Encargado");
         jPanel3.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 223, -1, -1));
         jPanel3.add(txtTelefonoEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, -1));
+
+        jLabel57.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel57.setText("Nota");
+        jPanel3.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 73, -1, -1));
+        jPanel3.add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(765, 70, 150, -1));
 
         jTabbedPane1.addTab("", jPanel3);
 
@@ -1022,13 +1032,13 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         tbLocal2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Razon Social", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Departamento", "Ciudad", "Nota"
             }
         ));
         tbLocal2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1038,7 +1048,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tbLocal2);
 
-        jPanel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 630, 110));
+        jPanel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 630, 110));
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel38.setText("Nro Servicio");
@@ -1207,6 +1217,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel5.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 173, 100, -1));
         jPanel5.add(txtTiempoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 170, 160, -1));
 
+        jLabel58.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel58.setText("Nota");
+        jPanel5.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 323, -1, -1));
+        jPanel5.add(txtNota1, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 320, 150, -1));
+
         jTabbedPane1.addTab("", jPanel5);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1327,12 +1342,13 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jcDepartamento.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 5)));
         jcCiudad.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 6)));
+        txtNota.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 7)));
     }//GEN-LAST:event_tbLocalMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
 
-        String nombreNegocio, direccion, nit, encargado, codigo, ciudad, celEncargado;
+        String nombreNegocio, direccion, nit, encargado, codigo, ciudad, celEncargado, nota;
 
         nombreNegocio = txtNombreNegocio.getText();
         direccion = txtDireccion.getText();
@@ -1341,10 +1357,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         codigo = txtCodigo.getText();
         ciudad = (String) jcCiudad.getSelectedItem();
         celEncargado = txtTelefonoEncargado.getText();
+        nota = txtNota.getText();
 
         if (nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
                 || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")
-                || celEncargado.isEmpty()) {
+                || celEncargado.isEmpty() || nota.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "porfavor llenar los "
                     + "datos del local que quiere registrar");
@@ -1353,7 +1370,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             try {
 
                 Local local = new Local(0, 0, 0, nombreNegocio,
-                        direccion, nit, encargado, celEncargado);
+                        direccion, nit, encargado, celEncargado, nota);
                 ctlLocal.guardarLocal(local, ciudad, codigo);
                 JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                 listaLocales(codigo);
@@ -1368,7 +1385,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
-        String nombreNegocio, direccion, nit, encargado, codigo, ciudad, celEncargado;
+        String nombreNegocio, direccion, nit, encargado, codigo, ciudad, celEncargado, nota;
 
         nombreNegocio = txtNombreNegocio.getText();
         direccion = txtDireccion.getText();
@@ -1377,6 +1394,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         codigo = txtCodigo.getText();
         ciudad = (String) jcCiudad.getSelectedItem();
         celEncargado = txtTelefonoEncargado.getText();
+        nota = txtNota.getText();
 
         if (nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
                 || encargado.isEmpty() || codigo.isEmpty() || ciudad.equals("Seleccione")) {
@@ -1388,7 +1406,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             try {
 
                 Local local = new Local(0, 0, 0, nombreNegocio, direccion,
-                        nit, encargado, celEncargado);
+                        nit, encargado, celEncargado, nota);
                 ctlLocal.editarLocal(local, ciudad, codigo, ciudadEditar, direccionActual);
                 JOptionPane.showMessageDialog(null, "se ha editado correctamente");
                 listaLocales(codigo);
@@ -1439,6 +1457,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         txtEncargadoNegocio.setText(String.valueOf(tbLocal2.getValueAt(seleccionar, 3)));
         txtMunicipioNegocio.setText(String.valueOf(tbLocal2.getValueAt(seleccionar, 4)));
         txtCiudadNegocio.setText(String.valueOf(tbLocal2.getValueAt(seleccionar, 5)));
+        txtNota1.setText(String.valueOf(tbLocal2.getValueAt(seleccionar, 6)));
     }//GEN-LAST:event_tbLocal2MouseClicked
 
     private void txtFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFacturaKeyTyped
@@ -2398,6 +2417,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2450,6 +2471,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreNegocio;
     private javax.swing.JTextField txtNombreNegocio1;
+    private javax.swing.JTextField txtNota;
+    private javax.swing.JTextField txtNota1;
     private javax.swing.JTextField txtObservacion;
     private javax.swing.JTextField txtObservacion1;
     private javax.swing.JTextField txtObservacionesAgenda;

@@ -427,7 +427,8 @@ public class FrmProspectoCliente extends javax.swing.JInternalFrame {
                             tipo, nombre, apellido, celular, correo);
                     ctlCliente.guardarCliente(nuevoCliente);
 
-                    Local l = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, telefonoEncargado);
+                    Local l = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, 
+                            telefonoEncargado, "NA");
                     ctlLocal.guardarLocal(l, ciudad, nuevoCliente.getCodigo());
 
                     ctlProspectoCliente.editarProspectoCliente(pc, ciudad, direccionAnterior);

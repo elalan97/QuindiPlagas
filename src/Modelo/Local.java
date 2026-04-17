@@ -11,12 +11,12 @@ package Modelo;
 public class Local {
 
     int idLocales, ciudadFk, clienteFk;
-    String nombreNegocio, direccion, nit, encargado, celEncargado;
+    String nombreNegocio, direccion, nit, encargado, celEncargado, nota;
 
     public Local() {
     }
 
-    public Local(int idLocales, int ciudadFk, int clienteFk, String nombreNegocio, String direccion, String nit, String encargado, String celEncargado) {
+    public Local(int idLocales, int ciudadFk, int clienteFk, String nombreNegocio, String direccion, String nit, String encargado, String celEncargado, String nota) {
         this.idLocales = idLocales;
         this.ciudadFk = ciudadFk;
         this.clienteFk = clienteFk;
@@ -25,6 +25,7 @@ public class Local {
         this.nit = nit;
         this.encargado = encargado;
         this.celEncargado = celEncargado;
+        this.nota = nota;
     }
 
     public int getIdLocales() {
@@ -91,6 +92,12 @@ public class Local {
         this.celEncargado = celEncargado;
     }
 
+    public String getNota() {
+        return nota;
+    }
 
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
 
 }

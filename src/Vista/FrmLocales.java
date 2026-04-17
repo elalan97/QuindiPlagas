@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.CtlCliente;
 import Controlador.CtlLocal;
+import Controlador.CtlServicio;
 import DTO.DTOLocal;
 import Modelo.Ciudad;
 import Modelo.Cliente;
@@ -32,6 +33,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     String ciudadEditar, direccionActual;
     CtlLocal ctlLocal;
     CtlCliente ctlCliente;
+    CtlServicio ctlServicio;
 
     public FrmLocales() {
         initComponents();
@@ -39,6 +41,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         this.setTitle("Gestionar Cliente");
         ctlLocal = new CtlLocal();
         ctlCliente = new CtlCliente();
+        ctlServicio = new CtlServicio();
         llenarComboMunicipio();
         cargarCombo();
         buscarUltimoCodigo();
@@ -101,7 +104,8 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         for (DTOLocal dTOLocal : lista) {
 
             modelo.addRow(new Object[]{dTOLocal.getNombreNegocio(), dTOLocal.getDireccion(),
-                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(), dTOLocal.getCiudad()});
+                dTOLocal.getNit(), dTOLocal.getEncargado(), dTOLocal.getMunicipio(),
+                dTOLocal.getCiudad(), dTOLocal.getNota()});
 
         }
 
@@ -176,6 +180,8 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jButton6 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtTelefonoEncargado = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtNota = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -270,13 +276,13 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
         tbLocal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad"
+                "Razon Social", "Direccion", "Nit", "Encargado", "Municipio", "Ciudad", "Nota"
             }
         ));
         tbLocal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -322,6 +328,11 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jLabel14.setText("Telefono Encargado");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 273, -1, -1));
         getContentPane().add(txtTelefonoEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 150, -1));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setText("Nota");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 423, -1, -1));
+        getContentPane().add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 150, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -404,6 +415,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
         jcDepartamento.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 4)));
         jcCiudad.setSelectedItem(String.valueOf(tbLocal.getValueAt(seleccionar, 5)));
+        txtNota.setText(String.valueOf(tbLocal.getValueAt(seleccionar, 6)));
     }//GEN-LAST:event_tbLocalMouseClicked
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
@@ -421,8 +433,9 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        String codigo, tipo, nombre, apellido, celular, correo, 
-                nombreNegocio, direccion, nit, encargado, ciudad, celEncargado;
+        String codigo, tipo, nombre, apellido, celular, correo,
+                nombreNegocio, direccion, nit, encargado, ciudad,
+                celEncargado, nota;
 
         codigo = txtCodigo.getText();
         tipo = (String) cbTipo.getSelectedItem();
@@ -436,11 +449,13 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         encargado = txtEncargado.getText();
         ciudad = (String) jcCiudad.getSelectedItem();
         celEncargado = txtTelefonoEncargado.getText();
+        nota = txtNota.getText();
 
         if (codigo.isEmpty() || tipo.equals("Seleccione") || nombre.isEmpty()
                 || apellido.isEmpty() || celular.isEmpty() || correo.isEmpty()
                 || nombreNegocio.isEmpty() || direccion.isEmpty() || nit.isEmpty()
-                || encargado.isEmpty() || ciudad.equals("Seleccione") || celEncargado.isEmpty()) {
+                || encargado.isEmpty() || ciudad.equals("Seleccione")
+                || celEncargado.isEmpty() || nota.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "por favor llenar los datos");
 
@@ -450,16 +465,33 @@ public class FrmLocales extends javax.swing.JInternalFrame {
 
                 Cliente cliente = new Cliente(0, codigo, tipo, nombre, apellido, celular, correo);
                 ctlCliente.guardarCliente(cliente);
-                
-                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit, encargado, celEncargado);
+
+                Local local = new Local(0, 0, 0, nombreNegocio, direccion, nit,
+                        encargado, celEncargado, nota);
                 ctlLocal.guardarLocal(local, ciudad, codigo);
                 JOptionPane.showMessageDialog(null, "se ha guardado correctamente");
                 listaLocales(codigo);
+
+                String[] opciones = {"Si", "No"};
+                int opcion = JOptionPane.showOptionDialog(null,
+                        "¿Deseas Ingresar al Menu del Cliente con el Cliente que Ingreso?",
+                        "Ingreso", 0, JOptionPane.QUESTION_MESSAGE,
+                        null, opciones, "No");
+
+                if (opcion == 0) {
+
+                    ctlServicio.almacenarDatos(codigo, direccion, "cliente");
+
+                    FrmMenuCliente informe = new FrmMenuCliente();
+                    informe.setVisible(true);
+
+                }
                 limpiarCampos();
                 buscarUltimoCodigo();
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
+                buscarUltimoCodigo();
             }
 
         }
@@ -532,6 +564,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -553,6 +586,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreNegocio;
+    private javax.swing.JTextField txtNota;
     private javax.swing.JTextField txtTelefonoEncargado;
     // End of variables declaration//GEN-END:variables
 }

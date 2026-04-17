@@ -112,11 +112,11 @@ public class DaoLocal extends Conexion {
 
     public boolean guardarLocal(Local local) {
         String consulta = "INSERT INTO Locales (nombreNegocio, direccion, nit, "
-                + "encargado, ciudadFk, clienteFk, telefonoEncargado)"
+                + "encargado, ciudadFk, clienteFk, telefonoEncargado, nota)"
                 + "VALUES ('" + local.getNombreNegocio() + "', '" + local.getDireccion() + "', '"
                 + local.getNit() + "', '" + local.getEncargado() + "', '"
                 + local.getCiudadFk() + "', '" + local.getClienteFk() + "', '"
-                + local.getCelEncargado() + "' "
+                + local.getCelEncargado() + "', '" + local.getNota() + "' "
                 + ");";
         return super.ejecutar(consulta);
 
@@ -129,7 +129,8 @@ public class DaoLocal extends Conexion {
                 + "encargado='" + local.getEncargado() + "', "
                 + "ciudadFk='" + local.getCiudadFk() + "', "
                 + "ciudadFk='" + local.getCiudadFk() + "', "
-                + "telefonoEncargado='" + local.getCelEncargado() + "' "
+                + "telefonoEncargado='" + local.getCelEncargado() + "', "
+                + "nota='" + local.getNota() + " ' "
                 + "WHERE idLocales='" + local.getIdLocales() + "' "
                 + "AND clienteFk='" + local.getClienteFk() + "';";
         System.out.println(consulta);
@@ -150,7 +151,7 @@ public class DaoLocal extends Conexion {
     public ArrayList<DTOLocal> listarLocalPorCliente(String codigo) {
         ArrayList<DTOLocal> lista = new ArrayList<>();
         String consulta = "select l.idLocales, l.nombreNegocio, l.direccion, l.nit, "
-                + "l.encargado, l.telefonoEncargado, mu.nombre, ci.nombre "
+                + "l.encargado, l.telefonoEncargado, l.nota, mu.nombre, ci.nombre "
                 + "from Locales l "
                 + "join Cliente c on l.clienteFk = c.idCliente "
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
@@ -169,6 +170,7 @@ public class DaoLocal extends Conexion {
                 dtoLocal.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
                 dtoLocal.setMunicipio(resultadoDB.getString("mu.nombre"));
                 dtoLocal.setCiudad(resultadoDB.getString("ci.nombre"));
+                dtoLocal.setNota(resultadoDB.getString("l.nota"));
                 lista.add(dtoLocal);
             }
         } catch (SQLException ex) {
