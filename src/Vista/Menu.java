@@ -4,9 +4,12 @@
  */
 package Vista;
 
+import Controlador.CtlNotificacion;
+import Modelo.Notificacion;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.time.LocalDate;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -21,6 +24,7 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public static JDesktopPane jDesktopPane;
+    CtlNotificacion ctlNotificacion;
 
     public Menu() {
         initComponents();
@@ -31,12 +35,14 @@ public class Menu extends javax.swing.JFrame {
         this.setLayout(null);
         setIconImage(getIconImage());
 
+        ctlNotificacion = new CtlNotificacion();
         jDesktopPane = new JDesktopPane();
 
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
         this.jDesktopPane.setBounds(0, 0, ancho, (alto - 110));
         this.add(jDesktopPane);
+        notificacion();
     }
 
     @Override
@@ -53,6 +59,19 @@ public class Menu extends javax.swing.JFrame {
         if (internalFrame.isShowing()) {
             internalFrame.setLocation(x, y);
         }
+
+    }
+
+    public void notificacion() {
+
+        LocalDate hoy = LocalDate.now();
+        String hoyCadena = hoy + "";
+
+        Notificacion n = new Notificacion(1, hoyCadena, false);
+
+        ctlNotificacion.actualizarNotificacion(n);
+
+        ctlNotificacion.verificarNotificacion(n);
 
     }
 
@@ -74,6 +93,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -152,6 +172,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem10);
+
+        jMenuItem7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuItem7.setText("Pendientes");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem7);
 
         jMenuBar1.add(jMenu5);
 
@@ -375,6 +404,15 @@ public class Menu extends javax.swing.JFrame {
         centrarVentana(frmReportes);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+
+        FrmServicioPendiente frmServicioPendiente = new FrmServicioPendiente();
+        jDesktopPane.add(frmServicioPendiente);
+        frmServicioPendiente.setVisible(true);
+        centrarVentana(frmServicioPendiente);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,5 +470,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }

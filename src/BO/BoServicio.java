@@ -184,7 +184,62 @@ public class BoServicio {
     }
 
     public ArrayList<DtoServicio> listarServicios1() {
-        return daoServicios.listarServicios1();
+        String fecha;
+        LocalDate hoy = LocalDate.now(), fecha1;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        ArrayList<DtoServicio> comparar = daoServicios.listarServicios1();
+        ArrayList<DtoServicio> lista = new ArrayList<>();
+        for (DtoServicio dtoServicio : comparar) {
+
+            fecha = dtoServicio.getAfecha();
+            fecha1 = LocalDate.parse(fecha, format);
+
+            if (fecha1.isAfter(hoy)) {
+
+            } else {
+
+                lista.add(dtoServicio);
+
+            }
+
+        }
+
+        return lista;
+    }
+
+    public ArrayList<DtoServicio> listarServiciosPendiente() {
+
+        String fecha, fechaprox;
+        LocalDate hoy = LocalDate.now(), fecha1, fecha2;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        ArrayList<DtoServicio> comparar = daoServicios.listarServicios1();
+        ArrayList<DtoServicio> lista = new ArrayList<>();
+        for (DtoServicio dtoServicio : comparar) {
+
+            fecha = dtoServicio.getAfecha();
+
+            fechaprox = dtoServicio.getProxFecha();
+
+            if (fecha.equals("") || fechaprox.equals("")) {
+
+            } else {
+
+                fecha1 = LocalDate.parse(fecha, format);
+                fecha2 = LocalDate.parse(fechaprox, format);
+
+                if (fecha1.isEqual(hoy) || fecha2.isEqual(hoy)) {
+
+                    lista.add(dtoServicio);
+
+                }
+
+            }
+
+        }
+
+        return lista;
     }
 
     public Servicio buscarUltimoRegistroServicio() {

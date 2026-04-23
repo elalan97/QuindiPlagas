@@ -81,6 +81,10 @@ public class CtlServicio {
     public ArrayList<DtoServicio> listarServicios1() {
         return boServicio.listarServicios1();
     }
+    
+    public ArrayList<DtoServicio> listarServiciosPendiente() {
+        return boServicio.listarServiciosPendiente();
+    }
 
     public ArrayList<DtoServicio> listarServiciosPorFiltro(String columna, String dato) {
         return boServicio.listarServiciosPorFiltro(columna, dato);
