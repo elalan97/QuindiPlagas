@@ -1014,7 +1014,7 @@
                 <Component class="javax.swing.JComboBox" name="cbTipoServicio1">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="17">
+                      <StringArray count="18">
                         <StringItem index="0" value="Seleccione"/>
                         <StringItem index="1" value="Control Integral"/>
                         <StringItem index="2" value="Desratizacion"/>
@@ -1032,6 +1032,7 @@
                         <StringItem index="14" value="Control + Termo"/>
                         <StringItem index="15" value="Instalcion de Lampara UV"/>
                         <StringItem index="16" value="Laminas de Lampara UV"/>
+                        <StringItem index="17" value="Estaciones de cebado"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -1620,7 +1621,7 @@
                 <Component class="javax.swing.JComboBox" name="cbTipoServicio">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="17">
+                      <StringArray count="18">
                         <StringItem index="0" value="Seleccione"/>
                         <StringItem index="1" value="Control Integral"/>
                         <StringItem index="2" value="Desratizacion"/>
@@ -1638,6 +1639,7 @@
                         <StringItem index="14" value="Control + Termo"/>
                         <StringItem index="15" value="Instalcion de Lampara UV"/>
                         <StringItem index="16" value="Laminas de Lampara UV"/>
+                        <StringItem index="17" value="Estaciones de cebado"/>
                       </StringArray>
                     </Property>
                   </Properties>
