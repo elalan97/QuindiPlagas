@@ -311,7 +311,7 @@ public class DaoServicios extends Conexion {
                 + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
                 + "where " + columna + " LIKE '" + dato + "%' order by s.fecha asc, "
-                + "hora_orden asc;";
+                + "hora_orden desc;";
         //System.out.println(consulta);
         super.ejecutarRetorno(consulta);
         try {

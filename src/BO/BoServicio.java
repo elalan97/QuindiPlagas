@@ -193,14 +193,20 @@ public class BoServicio {
         for (DtoServicio dtoServicio : comparar) {
 
             fecha = dtoServicio.getAfecha();
-            fecha1 = LocalDate.parse(fecha, format);
 
-            if (fecha1.isAfter(hoy)) {
+            try {
+                fecha1 = LocalDate.parse(fecha, format);
 
-            } else {
+                if (fecha1.isAfter(hoy)) {
 
-                lista.add(dtoServicio);
+                } else {
 
+                    lista.add(dtoServicio);
+
+                }
+            } catch (Exception e) {
+
+                System.out.println(fecha);
             }
 
         }
