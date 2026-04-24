@@ -59,7 +59,9 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     CtlUsuario ctlUsuario;
 
     public String usuarioIniciado;
-    String vendedor, codigoEditar, fechaRefuerzoVieja, codigoViejo, fechaRealizoPeriocidad;
+    //RM = Refuerzo o Mantenimiento
+    String vendedor, codigoEditar, fechaRefuerzoVieja, codigoViejo, fechaRealizoPeriocidad,
+            direccionParaRM, ciudadRM;
 
     public FrmMenuCliente() {
         initComponents();
@@ -195,6 +197,32 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         } else {
 
             System.out.println("nada");
+
+        }
+    }
+
+    public String generarCodigoRM() {
+
+        int consecutivo;
+        String letra1, numero, codigoCadena;
+
+        Servicio servicio = ctlServicio.buscarUltimoRegistroServicio();
+
+        String[] separarTodo = servicio.getNroFactura().split("S");
+
+        if (separarTodo.length > 1) {
+
+            letra1 = separarTodo[0];
+            numero = separarTodo[1];
+
+            consecutivo = Integer.parseInt(numero) + 1;
+
+            codigoCadena = "S" + consecutivo;
+            return codigoCadena;
+
+        } else {
+
+            return null;
 
         }
     }
@@ -386,10 +414,19 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             }
 
+            if (dtoServicio.getTipoServicio().equals("Mantenimiento de cebaderos")) {
+
+                cbMantenimiento1.setSelectedItem("Si");
+
+            } else {
+                cbMantenimiento1.setSelectedItem("No");
+            }
+
         }
 
         jLabel60.setText("<html>Mantenimiento de <br>cebaderos</html>");
         jLabel51.setText("<html>Fecha refuerzo o <br>Mantenimiento de <br>cebaderos</html>");
+        jLabel61.setText("<html>Mantenimiento de <br>cebaderos</html>");
 
     }
 
@@ -525,6 +562,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jsMinutos1 = new javax.swing.JSpinner();
         jcFormato13 = new javax.swing.JComboBox<>();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jLabel61 = new javax.swing.JLabel();
+        cbMantenimiento1 = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -844,7 +883,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tbLocal1);
 
         jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1340, 110));
-        jPanel4.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 170, -1));
+        jPanel4.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 470, 170, -1));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setText("Refuerzo");
@@ -852,15 +891,15 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Observacion");
-        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 473, -1, -1));
+        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 523, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel22.setText("Pago");
-        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 373, -1, -1));
+        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 423, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("Proxima Fecha");
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 323, -1, -1));
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 373, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Nro Servicio");
@@ -869,29 +908,29 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setText("Tipo De Servicio");
         jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 373, -1, -1));
-        jPanel4.add(txtTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 170, -1));
-        jPanel4.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 470, 170, -1));
+        jPanel4.add(txtTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 170, -1));
+        jPanel4.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 170, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setText("Valor");
-        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 423, -1, -1));
+        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 473, -1, -1));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setText("Tecnico");
-        jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 323, -1, -1));
-        jPanel4.add(txtProximaFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 170, -1));
+        jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 373, -1, -1));
+        jPanel4.add(txtProximaFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 170, -1));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Hora Agenda");
-        jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 523, -1, -1));
+        jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 323, -1, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel30.setText("Fecha de Realizo");
-        jPanel4.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 473, -1, -1));
+        jPanel4.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 523, -1, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel32.setText("Periocidad");
-        jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 523, -1, -1));
+        jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 323, -1, -1));
         jPanel4.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 170, -1));
 
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -901,7 +940,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 320, -1, -1));
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, -1, -1));
 
         cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo", "Instalcion de Lampara UV", "Laminas de Lampara UV", "Estaciones de cebado" }));
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 170, -1));
@@ -915,7 +954,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jcFechaRealizo1PropertyChange(evt);
             }
         });
-        jPanel4.add(jcFechaRealizo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, -1));
+        jPanel4.add(jcFechaRealizo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 170, -1));
 
         cbPeriocidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Quincenal", "Mensual", "Bimensual", "Trimestral", "Cuatrimestral", "Quinquemestral", "Semestral", "Anual", "Unica vez" }));
         cbPeriocidad1.addItemListener(new java.awt.event.ItemListener() {
@@ -923,48 +962,55 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 cbPeriocidad1ItemStateChanged(evt);
             }
         });
-        jPanel4.add(cbPeriocidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 170, -1));
+        jPanel4.add(cbPeriocidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 170, -1));
 
         cbPago1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Pago", "Pendiente" }));
-        jPanel4.add(cbPago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 170, -1));
+        jPanel4.add(cbPago1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 170, -1));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel52.setText("Nro Factura");
-        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 373, -1, -1));
-        jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 170, -1));
+        jPanel4.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 423, -1, -1));
+        jPanel4.add(txtObsevacionAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 170, -1));
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel53.setText("Llamada de calidad");
-        jPanel4.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 423, -1, -1));
+        jPanel4.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 473, -1, -1));
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel54.setText("Tiempo de Servicio");
-        jPanel4.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 473, -1, -1));
-        jPanel4.add(txtLlamadaCalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 170, -1));
-        jPanel4.add(txtTiempoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 170, -1));
+        jPanel4.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 523, -1, -1));
+        jPanel4.add(txtLlamadaCalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 470, 170, -1));
+        jPanel4.add(txtTiempoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, 170, -1));
 
         jLabel55.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel55.setText("Gestion Llamada");
-        jPanel4.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 523, -1, -1));
-        jPanel4.add(txtGestionLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, 170, -1));
+        jPanel4.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 323, -1, -1));
+        jPanel4.add(txtGestionLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 320, 170, -1));
 
         jsHora1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jsHora1StateChanged(evt);
             }
         });
-        jPanel4.add(jsHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 50, -1));
+        jPanel4.add(jsHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, 50, -1));
 
         jsMinutos1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jsMinutos1StateChanged(evt);
             }
         });
-        jPanel4.add(jsMinutos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 520, 50, -1));
+        jPanel4.add(jsMinutos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 320, 50, -1));
 
         jcFormato13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
-        jPanel4.add(jcFormato13, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, -1, -1));
+        jPanel4.add(jcFormato13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1015, 320, -1, -1));
         jPanel4.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1860, 170, 150, -1));
+
+        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel61.setText("jLabel60");
+        jPanel4.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+
+        cbMantenimiento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
+        jPanel4.add(cbMantenimiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, -1));
 
         jTabbedPane1.addTab("", jPanel4);
 
@@ -2181,7 +2227,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         int valor, h, m;
         String nroFactura, tipoServicio, refuerzo, tecnico, fecha, periocidad, proxFecha, pago,
                 observacion, valorCadena, hora, observacioneAgenda, calidadLlamada,
-                tiempoServicio, gestionLlamada, formato;
+                tiempoServicio, gestionLlamada, formato, mantenimiento;
 
         valorCadena = txtValor.getText();
         nroFactura = txtServicio.getText();
@@ -2200,35 +2246,81 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         h = (int) jsHora1.getValue();
         m = (int) jsMinutos1.getValue();
         formato = (String) jcFormato13.getSelectedItem();
+        mantenimiento = (String) cbMantenimiento1.getSelectedItem();
 
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || refuerzo.equals("Seleccione") || tecnico.isEmpty() || fecha.isEmpty()
                 || periocidad.equals("Selecione") || proxFecha.isEmpty()
                 || pago.equals("Seleccione") || observacion.isEmpty()
                 || observacioneAgenda.isEmpty() || calidadLlamada.isEmpty()
-                || tiempoServicio.isEmpty() || gestionLlamada.isEmpty()) {
+                || tiempoServicio.isEmpty() || gestionLlamada.isEmpty()
+                || mantenimiento.equals("Seleccione")) {
 
             JOptionPane.showMessageDialog(null, "por favor llene los campos");
 
         } else {
 
-            hora = h + ":" + m + " " + formato;
-            String num = valorCadena.replace(".", "");
-            valor = Integer.parseInt(num);
+            if (refuerzo.equals("Si") && !tipoServicio.equals("Refuerzo")) {
 
-            Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
-                    refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
-                    calidadLlamada, tiempoServicio, gestionLlamada);
+                hora = h + ":" + m + " " + formato;
+                String num = valorCadena.replace(".", "");
+                valor = Integer.parseInt(num);
+                String nroServicioNuevo = generarCodigoRM();
 
-            Agenda agenda = new Agenda(0, 0,
-                    hora, observacioneAgenda, fecha);
+                Servicio servicio = new Servicio(0, 0, valor, nroServicioNuevo, "Refuerzo",
+                        refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                        calidadLlamada, tiempoServicio, gestionLlamada);
 
-            ctlAgenda.edtarAgenda(agenda, nroFactura);
-            ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+                Agenda agenda = new Agenda(0, 0,
+                        hora, observacioneAgenda, fecha);
 
-            JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-            limpiarCamposServicio();
-            generarCodigo();
+                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM, 
+                        txtCodigo.getText());
+                ctlAgenda.guardarAgenda(agenda, nroServicioNuevo);
+
+                JOptionPane.showMessageDialog(null, "se ha creado el Refuerzo");
+
+            } else if (mantenimiento.equals("Si") && !tipoServicio.equals("Mantenimiento de cebaderos")) {
+
+                hora = h + ":" + m + " " + formato;
+                String num = valorCadena.replace(".", "");
+                valor = Integer.parseInt(num);
+                String nroServicioNuevo = generarCodigoRM();
+
+                Servicio servicio = new Servicio(0, 0, valor, nroServicioNuevo,
+                        "Mantenimiento de cebaderos",
+                        refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                        calidadLlamada, tiempoServicio, gestionLlamada);
+
+                Agenda agenda = new Agenda(0, 0,
+                        hora, observacioneAgenda, fecha);
+
+                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM, 
+                        txtCodigo.getText());
+                ctlAgenda.guardarAgenda(agenda, nroServicioNuevo);
+
+                JOptionPane.showMessageDialog(null, "se ha creado el Mantenimiento");
+
+            } else {
+
+                hora = h + ":" + m + " " + formato;
+                String num = valorCadena.replace(".", "");
+                valor = Integer.parseInt(num);
+
+                Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
+                        refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
+                        calidadLlamada, tiempoServicio, gestionLlamada);
+
+                Agenda agenda = new Agenda(0, 0,
+                        hora, observacioneAgenda, fecha);
+
+                ctlAgenda.edtarAgenda(agenda, nroFactura);
+                ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+
+                JOptionPane.showMessageDialog(null, "se ha editado correctamente");
+                limpiarCamposServicio();
+                generarCodigo();
+            }
 
         }
 
@@ -2244,6 +2336,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         seleccionar = tbLocal.rowAtPoint(evt.getPoint());
 
         direccion = String.valueOf(tbLocal1.getValueAt(seleccionar, 1));
+        direccionParaRM = String.valueOf(tbLocal1.getValueAt(seleccionar, 1));
+        ciudadRM = String.valueOf(tbLocal1.getValueAt(seleccionar, 6));
 
         ArrayList<DtoServicio> servicios = ctlServicio.listarServicios(txtCodigo.getText(), direccion);
 
@@ -2333,6 +2427,14 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             System.out.println("nada");
 
+        }
+
+        if (dtoServicio.getTipoServicio().equals("Mantenimiento de cebaderos")) {
+
+            cbMantenimiento1.setSelectedItem("Si");
+
+        } else {
+            cbMantenimiento1.setSelectedItem("No");
         }
     }//GEN-LAST:event_tbServiciosMouseClicked
 
@@ -2437,6 +2539,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JComboBox<String> cbMantenimiento;
+    private javax.swing.JComboBox<String> cbMantenimiento1;
     private javax.swing.JComboBox<String> cbPago;
     private javax.swing.JComboBox<String> cbPago1;
     private javax.swing.JComboBox<String> cbPeriocidad;
@@ -2514,6 +2617,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
