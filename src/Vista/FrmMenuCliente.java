@@ -946,6 +946,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 170, -1));
 
         cbRefuerzo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
+        cbRefuerzo1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbRefuerzo1ItemStateChanged(evt);
+            }
+        });
         jPanel4.add(cbRefuerzo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 170, -1));
 
         jcFechaRealizo1.setDateFormatString("yyyy-MM-dd");
@@ -1010,6 +1015,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel4.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         cbMantenimiento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
+        cbMantenimiento1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMantenimiento1ItemStateChanged(evt);
+            }
+        });
         jPanel4.add(cbMantenimiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, -1));
 
         jTabbedPane1.addTab("", jPanel4);
@@ -1130,6 +1140,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel5.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
 
         cbRefuerzo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
+        cbRefuerzo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbRefuerzoItemStateChanged(evt);
+            }
+        });
         jPanel5.add(cbRefuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 170, 160, -1));
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1279,7 +1294,12 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jPanel5.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, -1, -1));
 
         cbMantenimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Si", "No" }));
-        jPanel5.add(cbMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 150, -1));
+        cbMantenimiento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMantenimientoItemStateChanged(evt);
+            }
+        });
+        jPanel5.add(cbMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 160, -1));
 
         jTabbedPane1.addTab("", jPanel5);
 
@@ -2274,7 +2294,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 Agenda agenda = new Agenda(0, 0,
                         hora, observacioneAgenda, fecha);
 
-                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM, 
+                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM,
                         txtCodigo.getText());
                 ctlAgenda.guardarAgenda(agenda, nroServicioNuevo);
 
@@ -2295,7 +2315,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 Agenda agenda = new Agenda(0, 0,
                         hora, observacioneAgenda, fecha);
 
-                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM, 
+                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM,
                         txtCodigo.getText());
                 ctlAgenda.guardarAgenda(agenda, nroServicioNuevo);
 
@@ -2436,6 +2456,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         } else {
             cbMantenimiento1.setSelectedItem("No");
         }
+        
     }//GEN-LAST:event_tbServiciosMouseClicked
 
     private void jsHoraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsHoraStateChanged
@@ -2500,6 +2521,59 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jsMinutos1StateChanged
+
+    private void cbRefuerzoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRefuerzoItemStateChanged
+        // TODO add your handling code here:
+
+        String datoSeleccionado;
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            datoSeleccionado = (String) evt.getItem();
+
+            if (datoSeleccionado.equals("Si")) {
+
+                cbMantenimiento.setSelectedItem("No");
+                cbMantenimiento.setEnabled(false);
+
+            } else if (datoSeleccionado.equals("No")) {
+                cbMantenimiento.setEnabled(true);
+
+            }
+        }
+    }//GEN-LAST:event_cbRefuerzoItemStateChanged
+
+    private void cbMantenimientoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMantenimientoItemStateChanged
+        // TODO add your handling code here:
+
+        String datoSeleccionado;
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            datoSeleccionado = (String) evt.getItem();
+
+            if (datoSeleccionado.equals("Si")) {
+
+                cbRefuerzo.setSelectedItem("No");
+                cbRefuerzo.setEnabled(false);
+
+            } else if (datoSeleccionado.equals("No")) {
+
+                cbRefuerzo.setEnabled(true);
+
+            }
+        }
+    }//GEN-LAST:event_cbMantenimientoItemStateChanged
+
+    private void cbRefuerzo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRefuerzo1ItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbRefuerzo1ItemStateChanged
+
+    private void cbMantenimiento1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMantenimiento1ItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbMantenimiento1ItemStateChanged
 
     /**
      * @param args the command line arguments
