@@ -155,10 +155,6 @@ public class FrmListaServicios extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tbServicios);
-        if (tbServicios.getColumnModel().getColumnCount() > 0) {
-            tbServicios.getColumnModel().getColumn(6).setResizable(false);
-            tbServicios.getColumnModel().getColumn(9).setResizable(false);
-        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1670, 480));
 

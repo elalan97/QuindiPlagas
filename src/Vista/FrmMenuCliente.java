@@ -61,7 +61,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     public String usuarioIniciado;
     //RM = Refuerzo o Mantenimiento
     String vendedor, codigoEditar, fechaRefuerzoVieja, codigoViejo, fechaRealizoPeriocidad,
-            direccionParaRM, ciudadRM;
+            direccionParaRM, ciudadRM, confirmacionR, confirmacionM;
 
     public FrmMenuCliente() {
         initComponents();
@@ -138,6 +138,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         cbTipoServicio.addItem("Control + Termo");
         cbTipoServicio.addItem("Instalcion de Lampara UV");
         cbTipoServicio.addItem("Laminas de Lampara UV");
+        cbTipoServicio.addItem("Estaciones de cebado");
 
     }
 
@@ -414,9 +415,12 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
             }
 
-            if (dtoServicio.getTipoServicio().equals("Mantenimiento de cebaderos")) {
+            confirmacionR = dtoServicio.getRefuerzo();
+
+            if (dtoServicio.getTipoServicio().equals("Estaciones de cebado")) {
 
                 cbMantenimiento1.setSelectedItem("Si");
+                confirmacionM = "Si";
 
             } else {
                 cbMantenimiento1.setSelectedItem("No");
@@ -427,6 +431,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel60.setText("<html>Mantenimiento de <br>cebaderos</html>");
         jLabel51.setText("<html>Fecha refuerzo o <br>Mantenimiento de <br>cebaderos</html>");
         jLabel61.setText("<html>Mantenimiento de <br>cebaderos</html>");
+        jLabel59.setText("<html>Fecha refuerzo o <br>Mantenimiento <br>de cebaderos</html>");
 
     }
 
@@ -564,6 +569,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel61 = new javax.swing.JLabel();
         cbMantenimiento1 = new javax.swing.JComboBox<>();
+        jLabel59 = new javax.swing.JLabel();
+        jcRefuerzo1 = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodigoCliente = new javax.swing.JTextField();
@@ -940,7 +947,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, -1, -1));
+        jPanel4.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 520, -1, -1));
 
         cbTipoServicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Control Integral", "Desratizacion", "Lavado de Tanques", "Mantenimiento de cebaderos", "Refuerzo", "Garantia", "Seguimiento", "Trampa pegante", "Trampa de grasa", "Estaciones de Cebado", "Desinfeccion", "Inmunizacion", "Termonebulizacion", "Control + Termo", "Instalcion de Lampara UV", "Laminas de Lampara UV", "Estaciones de cebado" }));
         jPanel4.add(cbTipoServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 170, -1));
@@ -990,7 +997,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         jLabel55.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel55.setText("Gestion Llamada");
         jPanel4.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 323, -1, -1));
-        jPanel4.add(txtGestionLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 320, 170, -1));
+        jPanel4.add(txtGestionLlamada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 320, 160, -1));
 
         jsHora1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1021,6 +1028,13 @@ public class FrmMenuCliente extends javax.swing.JFrame {
             }
         });
         jPanel4.add(cbMantenimiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, -1));
+
+        jLabel59.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel59.setText("Fecha refuerzo");
+        jPanel4.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, -1, -1));
+
+        jcRefuerzo1.setDateFormatString("yyyy-MM-dd");
+        jPanel4.add(jcRefuerzo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 370, 160, -1));
 
         jTabbedPane1.addTab("", jPanel4);
 
@@ -1616,7 +1630,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
                 || proxFecha.isEmpty() || pago.isEmpty() || observacion.isEmpty() || direccion.isEmpty()
-                || ciudad.isEmpty() || refuerzo.equals("Seleccione") || tiempoServicio.isEmpty()) {
+                || ciudad.isEmpty() || refuerzo.equals("Seleccione") || tiempoServicio.isEmpty()
+                || h == 0) {
 
             JOptionPane.showMessageDialog(null, "porfavor llenar los "
                     + "datos del servicio que quiere registrar");
@@ -1960,7 +1975,8 @@ public class FrmMenuCliente extends javax.swing.JFrame {
         if (valorCadena.isEmpty() || nroFactura.isEmpty() || tipoServicio.equals("Seleccione")
                 || tecnico.isEmpty() || fecha.isEmpty() || periocidad.equals("Seleccione")
                 || proxFecha.isEmpty() || pago.isEmpty() || observacion.isEmpty() || direccion.isEmpty()
-                || ciudad.isEmpty() || refuerzo.equals("Seleccione") || tiempoServicio.isEmpty()) {
+                || ciudad.isEmpty() || refuerzo.equals("Seleccione") || tiempoServicio.isEmpty()
+                || h == 0) {
 
             JOptionPane.showMessageDialog(null, "porfavor llenar los "
                     + "datos del servicio que quiere registrar");
@@ -2274,50 +2290,75 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 || pago.equals("Seleccione") || observacion.isEmpty()
                 || observacioneAgenda.isEmpty() || calidadLlamada.isEmpty()
                 || tiempoServicio.isEmpty() || gestionLlamada.isEmpty()
-                || mantenimiento.equals("Seleccione")) {
+                || mantenimiento.equals("Seleccione") || h == 0) {
 
             JOptionPane.showMessageDialog(null, "por favor llene los campos");
 
         } else {
 
-            if (refuerzo.equals("Si") && !tipoServicio.equals("Refuerzo")) {
+            if (refuerzo.equals("Si") && !tipoServicio.equals("Refuerzo")
+                    && !confirmacionR.equals("Si")) {
 
                 hora = h + ":" + m + " " + formato;
                 String num = valorCadena.replace(".", "");
                 valor = Integer.parseInt(num);
-                String nroServicioNuevo = generarCodigoRM();
 
-                Servicio servicio = new Servicio(0, 0, valor, nroServicioNuevo, "Refuerzo",
+                Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                         refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
                         calidadLlamada, tiempoServicio, gestionLlamada);
 
                 Agenda agenda = new Agenda(0, 0,
                         hora, observacioneAgenda, fecha);
 
-                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM,
+                ctlAgenda.edtarAgenda(agenda, nroFactura);
+                ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+
+                String nroServicioNuevo = generarCodigoRM();
+                String fechaRefuerzo = ((JTextField) jcRefuerzo1.getDateEditor().getUiComponent()).getText();
+                Servicio servicioRefuerzo = new Servicio(0, 0, 0, nroServicioNuevo,
+                        "Refuerzo", "No", "NA", fechaRefuerzo,
+                        "Unica vez", fechaRefuerzo, "Pendiente", vendedor, "NA",
+                        "NA", tiempoServicio, "NA");
+
+                Agenda agendaRefuerzo = new Agenda(0, 0,
+                        "8:0 AM", "NA", fechaRefuerzo);
+
+                ctlServicio.guardarServicio(servicioRefuerzo, direccionParaRM, ciudadRM,
                         txtCodigo.getText());
-                ctlAgenda.guardarAgenda(agenda, nroServicioNuevo);
+                ctlAgenda.guardarAgenda(agendaRefuerzo, nroServicioNuevo);
 
                 JOptionPane.showMessageDialog(null, "se ha creado el Refuerzo");
 
-            } else if (mantenimiento.equals("Si") && !tipoServicio.equals("Mantenimiento de cebaderos")) {
+            } else if (mantenimiento.equals("Si") && !tipoServicio.equals("Mantenimiento de cebaderos")
+                    && !confirmacionM.equals("Si")) {
 
                 hora = h + ":" + m + " " + formato;
                 String num = valorCadena.replace(".", "");
                 valor = Integer.parseInt(num);
-                String nroServicioNuevo = generarCodigoRM();
 
-                Servicio servicio = new Servicio(0, 0, valor, nroServicioNuevo,
-                        "Mantenimiento de cebaderos",
+                Servicio servicio = new Servicio(0, 0, valor, nroFactura, tipoServicio,
                         refuerzo, tecnico, fecha, periocidad, proxFecha, pago, vendedor, observacion,
                         calidadLlamada, tiempoServicio, gestionLlamada);
 
                 Agenda agenda = new Agenda(0, 0,
                         hora, observacioneAgenda, fecha);
 
-                ctlServicio.guardarServicio(servicio, direccionParaRM, ciudadRM,
+                ctlAgenda.edtarAgenda(agenda, nroFactura);
+                ctlServicio.editarServicioHistorial(servicio, codigoViejo);
+
+                String nroServicioNuevo = generarCodigoRM();
+                String fechaRefuerzo = ((JTextField) jcRefuerzo1.getDateEditor().getUiComponent()).getText();
+                Servicio servicioMantenimiento = new Servicio(0, 0, 0, nroServicioNuevo,
+                        "Mantenimiento de cebaderos", "No", "NA", fechaRefuerzo,
+                        "Unica vez", fechaRefuerzo, "Pendiente", vendedor, "NA",
+                        "NA", tiempoServicio, "NA");
+
+                Agenda agendaMantenimiento = new Agenda(0, 0,
+                        "8:0 AM", "NA", fechaRefuerzo);
+
+                ctlServicio.guardarServicio(servicioMantenimiento, direccionParaRM, ciudadRM,
                         txtCodigo.getText());
-                ctlAgenda.guardarAgenda(agenda, nroServicioNuevo);
+                ctlAgenda.guardarAgenda(agendaMantenimiento, nroServicioNuevo);
 
                 JOptionPane.showMessageDialog(null, "se ha creado el Mantenimiento");
 
@@ -2338,11 +2379,11 @@ public class FrmMenuCliente extends javax.swing.JFrame {
                 ctlServicio.editarServicioHistorial(servicio, codigoViejo);
 
                 JOptionPane.showMessageDialog(null, "se ha editado correctamente");
-                limpiarCamposServicio();
-                generarCodigo();
             }
 
         }
+        limpiarCamposServicio();
+        generarCodigo();
 
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -2449,14 +2490,17 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
         }
 
-        if (dtoServicio.getTipoServicio().equals("Mantenimiento de cebaderos")) {
+        confirmacionR = dtoServicio.getRefuerzo();
+
+        if (dtoServicio.getTipoServicio().equals("Estaciones de cebado")) {
 
             cbMantenimiento1.setSelectedItem("Si");
+            confirmacionM = "Si";
 
         } else {
             cbMantenimiento1.setSelectedItem("No");
         }
-        
+
     }//GEN-LAST:event_tbServiciosMouseClicked
 
     private void jsHoraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsHoraStateChanged
@@ -2567,11 +2611,82 @@ public class FrmMenuCliente extends javax.swing.JFrame {
 
     private void cbRefuerzo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRefuerzo1ItemStateChanged
         // TODO add your handling code here:
+        LocalDate fecha_I;
+        String datoSeleccionado, fecha = null, refuerzo;
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            datoSeleccionado = (String) evt.getItem();
+
+            if (datoSeleccionado.equals("Si")) {
+
+                fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+                DateTimeFormatter format = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toFormatter();
+
+                if (fecha.equals("")) {
+
+                } else {
+
+                    fecha_I = LocalDate.parse(fecha, format);
+
+                    fecha_I = fecha_I.plusDays(20);
+
+                    refuerzo = fecha_I + "";
+
+                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        jcRefuerzo1.setDate(format1.parse(refuerzo));
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+
+                    }
+
+                }
+
+            }
+        }
+
 
     }//GEN-LAST:event_cbRefuerzo1ItemStateChanged
 
     private void cbMantenimiento1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMantenimiento1ItemStateChanged
         // TODO add your handling code here:
+
+        String datoSeleccionado, fecha, refuerzo;
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            datoSeleccionado = (String) evt.getItem();
+
+            if (datoSeleccionado.equals("Si")) {
+
+                fecha = ((JTextField) jcFechaRealizo1.getDateEditor().getUiComponent()).getText();
+
+                DateTimeFormatter format = new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toFormatter();
+
+                if (fecha.equals("")) {
+
+                } else {
+
+                    LocalDate fecha_I = LocalDate.parse(fecha, format);
+
+                    fecha_I = fecha_I.plusDays(30);
+
+                    refuerzo = fecha_I + "";
+
+                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        jcRefuerzo1.setDate(format1.parse(refuerzo));
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                }
+
+            }
+
+        }
 
     }//GEN-LAST:event_cbMantenimiento1ItemStateChanged
 
@@ -2689,6 +2804,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
@@ -2712,6 +2828,7 @@ public class FrmMenuCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcFormato12;
     private javax.swing.JComboBox<String> jcFormato13;
     private com.toedter.calendar.JDateChooser jcRefuerzo;
+    private com.toedter.calendar.JDateChooser jcRefuerzo1;
     private javax.swing.JSpinner jsHora;
     private javax.swing.JSpinner jsHora1;
     private javax.swing.JSpinner jsMinutos;
