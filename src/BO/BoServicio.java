@@ -126,7 +126,6 @@ public class BoServicio {
 
         if (s.getNroFactura() != null) {
 
-            servicio.setVendedor(s.getVendedor());
             servicio.setLocalFk(s.getLocalFk());
             servicio.setIdServicio(s.getIdServicio());
 

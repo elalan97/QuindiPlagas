@@ -5,7 +5,10 @@
 package Vista;
 
 import Controlador.CtlInventario;
+import Controlador.CtlUsuario;
 import DTO.DtoInventarioEntradas;
+import DTO.DtoInventarioSalidas;
+import Modelo.Usuario;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -23,30 +26,62 @@ public class FrmListaInventarioEntradas extends javax.swing.JInternalFrame {
      * Creates new form FrmListaInventarioEntradas
      */
     CtlInventario ctlInventario;
+    CtlUsuario ctlUsuario;
+    public String usuario;
 
     public FrmListaInventarioEntradas() {
         initComponents();
         this.setSize(new Dimension(1000, 500));
         this.setTitle("Lista Inventario de Entradas");
         ctlInventario = new CtlInventario();
-        listar();
+        ctlUsuario = new CtlUsuario();
+        Inicio usuarioInicio = new Inicio();
+        usuario = usuarioInicio.usuarioIniciado;
+        boolean estado = verificar(usuario);
+        botonesInabilitar(estado);
+        listar(estado);
     }
 
-    public void listar() {
+    public void listar(boolean estado) {
 
-        ArrayList<DtoInventarioEntradas> lista = ctlInventario.listaInventarioEntradas();
+        if (estado == true) {
 
-        DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
-        modelo.setRowCount(0);
+            ArrayList<DtoInventarioEntradas> lista = ctlInventario.listaInventarioEntradas();
 
-        for (DtoInventarioEntradas dtoInventarioEntradas : lista) {
+            DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
+            modelo.setRowCount(0);
 
-            modelo.addRow(new Object[]{dtoInventarioEntradas.getNroLote(),
-                dtoInventarioEntradas.getNombreProducto(), dtoInventarioEntradas.getFechaVencimiento(),
-                dtoInventarioEntradas.getDescripcion(), dtoInventarioEntradas.getFecha(),
-                dtoInventarioEntradas.getCantidad(), dtoInventarioEntradas.getTotalValor()});
+            for (DtoInventarioEntradas dtoInventarioEntradas : lista) {
+
+                modelo.addRow(new Object[]{dtoInventarioEntradas.getNroLote(),
+                    dtoInventarioEntradas.getNombreProducto(), dtoInventarioEntradas.getFechaVencimiento(),
+                    dtoInventarioEntradas.getDescripcion(), dtoInventarioEntradas.getFecha(),
+                    dtoInventarioEntradas.getCantidad(), dtoInventarioEntradas.getTotalValor()});
+
+            }
 
         }
+
+    }
+
+    public void botonesInabilitar(boolean estado) {
+
+        jButton1.setEnabled(estado);
+        jButton2.setEnabled(estado);
+
+    }
+
+    public Boolean verificar(String usuario) {
+
+        Usuario usu = ctlUsuario.tipoUsuario(usuario);
+
+        if (usu.getTipo_Usuario().equals("Empleado")) {
+
+            JOptionPane.showMessageDialog(null, "usted no es administrador");
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -243,20 +278,20 @@ public class FrmListaInventarioEntradas extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         String fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
-        
+
         if (fecha.isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(null, "si desea exportar busque por fecha");
-            
-        }else{
-            
+
+        } else {
+
             try {
-                
+
                 ctlInventario.reporteInventarioEntradas(fecha);
                 JOptionPane.showMessageDialog(null, "inventario de las entradas generado");
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }

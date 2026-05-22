@@ -214,8 +214,8 @@ public class DaoAgenda extends Conexion {
         String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, c.celular, c.correo, "
                 + "l.nombreNegocio, l.direccion, l.nit, l.encargado, ci.nombre, mu.nombre, "
                 + "s.nroFactura, s.tipoServicio, s.refuerzo, s.tecnico, s.fecha, s.periocidad, s.proxFecha, "
-                + "s.pago, s.valor, s.observacion, a.idAgenda, a.hora, a.observacion, "
-                + "a.fecha "
+                + "s.pago, s.valor, s.observacion, s.vendedor, a.idAgenda, a.hora, "
+                + "a.observacion, a.fecha "
                 + "from Agenda a "
                 + "join Servicios s on a.servicioFk = s.idServicio "
                 + "join Locales l on s.localFk = l.idLocales "
@@ -250,6 +250,7 @@ public class DaoAgenda extends Conexion {
                 dtoAgenda.setsPago(resultadoDB.getString("s.pago"));
                 dtoAgenda.setsValor(resultadoDB.getString("s.valor"));
                 dtoAgenda.setsObservacion(resultadoDB.getString("s.observacion"));
+                dtoAgenda.setsVendedor(resultadoDB.getString("s.vendedor"));
                 dtoAgenda.setaIdAgenda(resultadoDB.getInt("a.idAgenda"));
                 dtoAgenda.setaHora(resultadoDB.getString("a.hora"));
                 dtoAgenda.setaObservacion(resultadoDB.getString("a.observacion"));

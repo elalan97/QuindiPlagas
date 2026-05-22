@@ -62,4 +62,8 @@ public class CtlLocal {
         return boLocal.listaClienteLocalporFiltro(columna, dato);
     }
     
+    public DtoClienteLocal buscarClienteLocalExistente(String direccion, String ciudad) {
+        return boLocal.buscarClienteLocalExistente(direccion, ciudad);
+    }
+    
 }

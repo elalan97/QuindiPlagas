@@ -5,7 +5,9 @@
 package Vista;
 
 import Controlador.CtlInventario;
+import Controlador.CtlUsuario;
 import Modelo.Inventario;
+import Modelo.Usuario;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -23,29 +25,59 @@ public class FrmListaInventario extends javax.swing.JInternalFrame {
      * Creates new form FrmListaInventario
      */
     CtlInventario ctlInventario;
+    CtlUsuario ctlUsuario;
+    public String usuario;
 
     public FrmListaInventario() {
         initComponents();
         this.setSize(new Dimension(900, 500));
         this.setTitle("Lista de Inventarios");
         ctlInventario = new CtlInventario();
-        listar();
+        ctlUsuario = new CtlUsuario();
+        Inicio usuarioInicio = new Inicio();
+        usuario = usuarioInicio.usuarioIniciado;
+        boolean estado = verificar(usuario);
+        botonesInabilitar(estado);
+        listar(estado);
     }
 
-    public void listar() {
+    public void listar(boolean estado) {
 
-        ArrayList<Inventario> lista = ctlInventario.listaInventario();
+        if (estado == true) {
+            ArrayList<Inventario> lista = ctlInventario.listaInventario();
 
-        DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
-        modelo.setRowCount(0);
+            DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
+            modelo.setRowCount(0);
 
-        for (Inventario inventario : lista) {
+            for (Inventario inventario : lista) {
 
-            modelo.addRow(new Object[]{inventario.getNroLote(),
-                inventario.getNombreProducto(), inventario.getFechaVencimiento(),
-                inventario.getCantidad(), inventario.getValor()});
+                modelo.addRow(new Object[]{inventario.getNroLote(),
+                    inventario.getNombreProducto(), inventario.getFechaVencimiento(),
+                    inventario.getCantidad(), inventario.getValor()});
+
+            }
 
         }
+
+    }
+
+    public void botonesInabilitar(boolean estado) {
+
+        jButton1.setEnabled(estado);
+
+    }
+
+    public Boolean verificar(String usuario) {
+
+        Usuario usu = ctlUsuario.tipoUsuario(usuario);
+
+        if (usu.getTipo_Usuario().equals("Empleado")) {
+
+            JOptionPane.showMessageDialog(null, "usted no es administrador");
+            return false;
+        }
+
+        return true;
     }
 
     /**

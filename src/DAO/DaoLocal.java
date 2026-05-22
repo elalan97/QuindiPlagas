@@ -362,4 +362,36 @@ public class DaoLocal extends Conexion {
 
     }
 
+    public DtoClienteLocal buscarClienteLocalExistente(String direccion, String ciudad) {
+        String consulta = "select c.codigo, c.tipo, c.nombre, c.apellido, "
+                + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, "
+                + "l.encargado, l.telefonoEncargado, mu.nombre, ci.nombre "
+                + "from Locales l "
+                + "join Cliente c on l.clienteFk = c.idCliente "
+                + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
+                + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
+                + "Where l.direccion = '" + direccion + "' and ci.nombre = '" + ciudad + "';";
+        DtoClienteLocal dtoClienteLocal = new DtoClienteLocal();
+        super.ejecutarRetorno(consulta);
+        try {
+            if (resultadoDB.next()) {
+
+                dtoClienteLocal.setCodigo(resultadoDB.getString("c.codigo"));
+                dtoClienteLocal.setTipo(resultadoDB.getString("c.tipo"));
+                dtoClienteLocal.setNombre(resultadoDB.getString("c.nombre"));
+                dtoClienteLocal.setApellido(resultadoDB.getString("c.apellido"));
+                dtoClienteLocal.setCelular(resultadoDB.getString("c.celular"));
+                dtoClienteLocal.setCorreo(resultadoDB.getString("c.correo"));
+                dtoClienteLocal.setNombreNegocio(resultadoDB.getString("l.nombreNegocio"));
+                dtoClienteLocal.setMunicipio(resultadoDB.getString("mu.nombre"));
+                dtoClienteLocal.setMunicipio(resultadoDB.getString("ci.nombre"));
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Fallo al consultar");
+            return null;
+        }
+        return dtoClienteLocal;
+    }
+
 }

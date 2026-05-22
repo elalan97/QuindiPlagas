@@ -8,6 +8,7 @@ import Controlador.CtlCliente;
 import Controlador.CtlLocal;
 import Controlador.CtlServicio;
 import DTO.DTOLocal;
+import DTO.DtoClienteLocal;
 import Modelo.Ciudad;
 import Modelo.Cliente;
 import Modelo.Local;
@@ -182,6 +183,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         txtTelefonoEncargado = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtNota = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -292,7 +294,7 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbLocal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 640, 135));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 640, 135));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 120, 150, -1));
@@ -333,6 +335,15 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         jLabel15.setText("Nota");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 423, -1, -1));
         getContentPane().add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 150, -1));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setText("Limpiar campos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -490,8 +501,24 @@ public class FrmLocales extends javax.swing.JInternalFrame {
                 buscarUltimoCodigo();
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-                buscarUltimoCodigo();
+
+                if (e.getMessage().equals("ya existe el local registrado")) {
+
+                    ctlCliente.eliminarCliente(codigo);
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    DtoClienteLocal dtoClienteLocal = ctlLocal.buscarClienteLocalExistente(direccion, ciudad);
+                    ctlServicio.almacenarDatos(dtoClienteLocal.getCodigo(),
+                            dtoClienteLocal.getDireccion(), "cliente");
+
+                    FrmMenuCliente informe = new FrmMenuCliente();
+                    informe.setVisible(true);
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    buscarUltimoCodigo();
+
+                }
             }
 
         }
@@ -551,11 +578,31 @@ public class FrmLocales extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        txtApellido.setText("");
+        txtCelular.setText("");
+        txtCodigo.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        txtEncargado.setText("");
+        txtNit.setText("");
+        txtNombre.setText("");
+        txtNombreNegocio.setText("");
+        txtNota.setText("");
+        txtTelefonoEncargado.setText("");
+        buscarUltimoCodigo();
+        llenarComboMunicipio();
+        cbTipo.setSelectedItem("Seleccione");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

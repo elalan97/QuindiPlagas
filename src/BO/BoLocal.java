@@ -107,6 +107,12 @@ public class BoLocal {
         }
 
     }
+    
+    public DtoClienteLocal buscarClienteLocalExistente(String direccion, String ciudad) {
+        
+        return daoLocal.buscarClienteLocalExistente(direccion, ciudad);
+        
+    }
 
     public ArrayList<DtoClienteLocal> listaClienteLocal() {
         return daoLocal.listaClienteLocal();

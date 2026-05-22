@@ -5,7 +5,9 @@
 package Vista;
 
 import Controlador.CtlInventario;
+import Controlador.CtlUsuario;
 import DTO.DtoInventarioSalidas;
+import Modelo.Usuario;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -23,30 +25,61 @@ public class FrmInventarioSalidas extends javax.swing.JInternalFrame {
      * Creates new form FrmInventarioSalidas
      */
     CtlInventario ctlInventario;
+    CtlUsuario ctlUsuario;
+    public String usuario;
 
     public FrmInventarioSalidas() {
         initComponents();
         this.setSize(new Dimension(1000, 500));
         this.setTitle("Lista Inventario de Entradas");
         ctlInventario = new CtlInventario();
-        listar();
+        ctlUsuario = new CtlUsuario();
+        Inicio usuarioInicio = new Inicio();
+        usuario = usuarioInicio.usuarioIniciado;
+        boolean estado = verificar(usuario);
+        botonesInabilitar(estado);
+        listar(estado);
     }
 
-    public void listar() {
+    public void listar(boolean estado) {
 
-        ArrayList<DtoInventarioSalidas> lista = ctlInventario.listaInventarioSalidas();
+        if (estado == true) {
+            ArrayList<DtoInventarioSalidas> lista = ctlInventario.listaInventarioSalidas();
 
-        DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
-        modelo.setRowCount(0);
+            DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
+            modelo.setRowCount(0);
 
-        for (DtoInventarioSalidas dtoInventarioSalidas : lista) {
+            for (DtoInventarioSalidas dtoInventarioSalidas : lista) {
 
-            modelo.addRow(new Object[]{dtoInventarioSalidas.getNroLote(),
-                dtoInventarioSalidas.getNombreProducto(), dtoInventarioSalidas.getFechaVencimiento(),
-                dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
-                dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
+                modelo.addRow(new Object[]{dtoInventarioSalidas.getNroLote(),
+                    dtoInventarioSalidas.getNombreProducto(), dtoInventarioSalidas.getFechaVencimiento(),
+                    dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
+                    dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
+
+            }
 
         }
+
+    }
+
+    public void botonesInabilitar(boolean estado) {
+
+        jButton1.setEnabled(estado);
+        jButton2.setEnabled(estado);
+
+    }
+
+    public Boolean verificar(String usuario) {
+
+        Usuario usu = ctlUsuario.tipoUsuario(usuario);
+
+        if (usu.getTipo_Usuario().equals("Empleado")) {
+
+            JOptionPane.showMessageDialog(null, "usted no es administrador");
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -195,49 +228,49 @@ public class FrmInventarioSalidas extends javax.swing.JInternalFrame {
                             dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
                             dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
 
+                    }
+
+                } else if (columna.equals("Fecha")) {
+
+                    fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
+
+                    ArrayList<DtoInventarioSalidas> lista = ctlInventario.listaInventarioSalidasFiltro(columna, fecha);
+
+                    DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
+                    modelo.setRowCount(0);
+
+                    for (DtoInventarioSalidas dtoInventarioSalidas : lista) {
+
+                        modelo.addRow(new Object[]{dtoInventarioSalidas.getNroLote(),
+                            dtoInventarioSalidas.getNombreProducto(), dtoInventarioSalidas.getFechaVencimiento(),
+                            dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
+                            dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
+
+                    }
+
+                } else {
+
+                    dato = txtDato.getText();
+
+                    ArrayList<DtoInventarioSalidas> lista = ctlInventario.listaInventarioSalidasFiltro(columna, dato);
+
+                    DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
+                    modelo.setRowCount(0);
+
+                    for (DtoInventarioSalidas dtoInventarioSalidas : lista) {
+
+                        modelo.addRow(new Object[]{dtoInventarioSalidas.getNroLote(),
+                            dtoInventarioSalidas.getNombreProducto(), dtoInventarioSalidas.getFechaVencimiento(),
+                            dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
+                            dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
+
+                    }
+
                 }
 
-            } else if (columna.equals("Fecha")) {
-
-                fecha = ((JTextField) jcFecha.getDateEditor().getUiComponent()).getText();
-
-                ArrayList<DtoInventarioSalidas> lista = ctlInventario.listaInventarioSalidasFiltro(columna, fecha);
-
-                DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
-                modelo.setRowCount(0);
-
-                for (DtoInventarioSalidas dtoInventarioSalidas : lista) {
-
-                    modelo.addRow(new Object[]{dtoInventarioSalidas.getNroLote(),
-                        dtoInventarioSalidas.getNombreProducto(), dtoInventarioSalidas.getFechaVencimiento(),
-                        dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
-                        dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
-
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
-
-        } else {
-
-            dato = txtDato.getText();
-
-            ArrayList<DtoInventarioSalidas> lista = ctlInventario.listaInventarioSalidasFiltro(columna, dato);
-
-            DefaultTableModel modelo = (DefaultTableModel) tbInventario.getModel();
-            modelo.setRowCount(0);
-
-            for (DtoInventarioSalidas dtoInventarioSalidas : lista) {
-
-                modelo.addRow(new Object[]{dtoInventarioSalidas.getNroLote(),
-                    dtoInventarioSalidas.getNombreProducto(), dtoInventarioSalidas.getFechaVencimiento(),
-                    dtoInventarioSalidas.getDescripcion(), dtoInventarioSalidas.getFecha(),
-                    dtoInventarioSalidas.getCantidad(), dtoInventarioSalidas.getTotalValor()});
-
-        }
-
-        }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -250,7 +283,7 @@ public class FrmInventarioSalidas extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "si desea exportar busque por fecha");
 
-        }else{
+        } else {
 
             try {
 

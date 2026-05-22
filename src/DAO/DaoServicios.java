@@ -99,7 +99,7 @@ public class DaoServicios extends Conexion {
                 + "c.celular, c.correo, l.nombreNegocio, l.direccion, l.nit, "
                 + "l.encargado, l.telefonoEncargado, ci.nombre, mu.nombre, s.nroFactura, s.refuerzo, s.tipoServicio, "
                 + "s.tecnico, s.fecha, s.periocidad, s.proxFecha, s.pago, s.valor, s.observacion, "
-                + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, "
+                + "s.calidadLlamada, s.tiempoServicio, s.gestionLlamada, s.vendedor, "
                 + "a.hora, a.fecha, a.observacion "
                 + "from Servicios s "
                 + "join Locales l on s.localFk = l.idLocales "
@@ -142,6 +142,7 @@ public class DaoServicios extends Conexion {
                 dtoServicio.setCalidadLlamada(resultadoDB.getString("s.calidadLlamada"));
                 dtoServicio.setGestionLlamada(resultadoDB.getString("s.gestionLlamada"));
                 dtoServicio.setCelEncargado(resultadoDB.getString("l.telefonoEncargado"));
+                dtoServicio.setVendedor(resultadoDB.getString("s.vendedor"));
 
             }
         } catch (SQLException ex) {
@@ -310,7 +311,7 @@ public class DaoServicios extends Conexion {
                 + "join Ciudad ci on l.ciudadFk = ci.idCiudad "
                 + "join Agenda a on s.idServicio = a.servicioFk "
                 + "join Municipio mu on ci.municipioFk = mu.idMunicipio "
-                + "where " + columna + " LIKE '" + dato + "%' order by hora_orden desc;";
+                + "where " + columna + " LIKE '" + dato + "%' order by hora_orden asc;";
         //System.out.println(consulta);
         super.ejecutarRetorno(consulta);
         try {

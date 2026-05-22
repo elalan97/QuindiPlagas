@@ -5,8 +5,10 @@
 package Vista;
 
 import Controlador.CtlInventario;
+import Controlador.CtlUsuario;
 import Modelo.Inventario;
 import Modelo.Miles;
+import Modelo.Usuario;
 import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,12 +25,18 @@ public class FrmInventario extends javax.swing.JInternalFrame {
      * Creates new form FrmInventario
      */
     CtlInventario ctlInventario;
+    CtlUsuario ctlUsuario;
+    public String usuarioIniciado;
 
     public FrmInventario() {
         initComponents();
         this.setSize(new Dimension(750, 400));
         this.setTitle("Gestionar Inventario");
         ctlInventario = new CtlInventario();
+        ctlUsuario = new CtlUsuario();
+        Inicio usuarioInicio = new Inicio();
+        usuarioIniciado = usuarioInicio.usuarioIniciado;
+        botonesInabilitar(verificar(usuarioIniciado));
     }
 
     public void vaciarCampos() {
@@ -38,6 +46,26 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         txtNroLote.setText("");
         txtValor.setText("");
         jcFechaVencimiento.setCalendar(null);
+    }
+
+    public void botonesInabilitar(boolean estado) {
+
+        jButton5.setEnabled(estado);
+        jButton6.setEnabled(estado);
+
+    }
+
+    public Boolean verificar(String usuario) {
+
+        Usuario usu = ctlUsuario.tipoUsuario(usuario);
+
+        if (usu.getTipo_Usuario().equals("Empleado")) {
+
+            JOptionPane.showMessageDialog(null, "usted no es administrador");
+            return false;
+        }
+
+        return true;
     }
 
     /**
